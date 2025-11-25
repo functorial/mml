@@ -63,15 +63,29 @@
           <Address>ePSXe.exe+B371E4</Address>
         </CheatEntry>
         <CheatEntry>
-          <ID>112</ID>
+          <ID>258</ID>
           <Description>"Y Pos"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>018D71E8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>259</ID>
+          <Description>"Z Pos"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>018D71E6</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>112</ID>
+          <Description>"Y Pos?"</Description>
           <ShowAsSigned>1</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>016F71E8</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>113</ID>
-          <Description>"Z Pos"</Description>
+          <Description>"Z Pos?"</Description>
           <ShowAsSigned>1</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>016F71F0</Address>
@@ -99,6 +113,13 @@
       <CheatEntries>
         <CheatEntry>
           <ID>18</ID>
+          <Description>"Buster Equip 1 ? Moved"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>ePSXe.exe+B57620</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>275</ID>
           <Description>"Buster Equip 1"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
@@ -109,231 +130,273 @@
           <Description>"Buster Equip 2"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7621</Address>
+          <Address>ePSXe.exe+B37621</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>20</ID>
           <Description>"Buster Inv (1,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7624</Address>
+          <Address>ePSXe.exe+B37624</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>21</ID>
           <Description>"Buster Inv (1,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7625</Address>
+          <Address>ePSXe.exe+B37625</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>22</ID>
           <Description>"Buster Inv (2,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7626</Address>
+          <Address>ePSXe.exe+B37626</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>23</ID>
           <Description>"Buster Inv (2,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7627</Address>
+          <Address>ePSXe.exe+B37627</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>24</ID>
           <Description>"Buster Inv (3,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7628</Address>
+          <Address>ePSXe.exe+B37628</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>25</ID>
           <Description>"Buster Inv (3,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7629</Address>
+          <Address>ePSXe.exe+B37629</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>26</ID>
           <Description>"Buster Inv (4,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F762A</Address>
+          <Address>ePSXe.exe+B3762a</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>27</ID>
           <Description>"Buster Inv (4,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F762B</Address>
+          <Address>ePSXe.exe+B3762b</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>28</ID>
           <Description>"Buster Inv (5,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F762C</Address>
+          <Address>ePSXe.exe+B3762c</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>29</ID>
           <Description>"Buster Inv (5,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F762D</Address>
+          <Address>ePSXe.exe+B3762d</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>30</ID>
           <Description>"Buster Inv (6,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F762E</Address>
+          <Address>ePSXe.exe+B3762e</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>31</ID>
           <Description>"Buster Inv (6,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F762F</Address>
+          <Address>ePSXe.exe+B3762f</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>32</ID>
           <Description>"Buster Inv (7,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7630</Address>
+          <Address>ePSXe.exe+B37630</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>33</ID>
           <Description>"Buster Inv (8,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7631</Address>
+          <Address>ePSXe.exe+B37631</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>35</ID>
           <Description>"Buster Inv (9,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7632</Address>
+          <Address>ePSXe.exe+B37632</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>36</ID>
           <Description>"Buster Inv (9,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7633</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>38</ID>
-          <Description>"Buster Inv (10,2)"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Byte</VariableType>
-          <Address>016F7635</Address>
+          <Address>ePSXe.exe+B37633</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>37</ID>
           <Description>"Buster Inv (10,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7634</Address>
+          <Address>ePSXe.exe+B37634</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"Buster Inv (10,2)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>ePSXe.exe+B37635</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>39</ID>
           <Description>"Buster Inv (11,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7636</Address>
+          <Address>ePSXe.exe+B37636</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>40</ID>
           <Description>"Buster Inv (11,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7637</Address>
+          <Address>ePSXe.exe+B37637</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>41</ID>
           <Description>"Buster Inv (12,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7638</Address>
+          <Address>ePSXe.exe+B37638</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>42</ID>
           <Description>"Buster Inv (12,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7639</Address>
+          <Address>ePSXe.exe+B37639</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>43</ID>
           <Description>"Buster Inv (13,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F763A</Address>
+          <Address>ePSXe.exe+B3763a</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>44</ID>
           <Description>"Buster Inv (13,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F763B</Address>
+          <Address>ePSXe.exe+B3763b</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>45</ID>
           <Description>"Buster Inv (14,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F763C</Address>
+          <Address>ePSXe.exe+B3763c</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>46</ID>
           <Description>"Buster Inv (14,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F763D</Address>
+          <Address>ePSXe.exe+B3763d</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>47</ID>
           <Description>"Buster Inv (15,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F763E</Address>
+          <Address>ePSXe.exe+B3763e</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>48</ID>
           <Description>"Buster Inv (15,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F763F</Address>
+          <Address>ePSXe.exe+B3763f</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>49</ID>
           <Description>"Buster Inv (16,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7640</Address>
+          <Address>ePSXe.exe+B37640</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>50</ID>
           <Description>"Buster Inv (16,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7641</Address>
+          <Address>ePSXe.exe+B37641</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>51</ID>
           <Description>"Buster Inv (17,1)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7642</Address>
+          <Address>ePSXe.exe+B37642</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>52</ID>
           <Description>"Buster Inv (17,2)"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Byte</VariableType>
-          <Address>016F7643</Address>
+          <Address>ePSXe.exe+B37643</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"chestL"</Description>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>146</ID>
+          <Description>"got item"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Binary</VariableType>
+          <BitStart>6</BitStart>
+          <BitLength>1</BitLength>
+          <ShowAsBinary>0</ShowAsBinary>
+          <Address>ePSXe.exe+B40420</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>263</ID>
+          <Description>"item signature"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>2 Bytes</VariableType>
+          <Address>018C14F5</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>274</ID>
+          <Description>"is zenny"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Binary</VariableType>
+          <BitStart>7</BitStart>
+          <BitLength>1</BitLength>
+          <ShowAsBinary>0</ShowAsBinary>
+          <Address>018C14F5</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>261</ID>
+          <Description>"l chest top model"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>12</ByteLength>
+          <Address>018C16F8</Address>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
@@ -350,134 +413,24 @@
           <BitStart>7</BitStart>
           <BitLength>10</BitLength>
           <ShowAsBinary>0</ShowAsBinary>
-          <Address>01700420</Address>
+          <Address>ePSXe.exe+B40420</Address>
         </CheatEntry>
         <CheatEntry>
-          <ID>250</ID>
-          <Description>"chest content?"</Description>
-          <VariableType>4 Bytes</VariableType>
-          <Address>016F7629</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>253</ID>
-          <Description>"No description"</Description>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>Array of byte</VariableType>
-          <ByteLength>4</ByteLength>
-          <Address>ePSXe.exe+B21338</Address>
+          <ID>264</ID>
+          <Description>"item signature"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>2 Bytes</VariableType>
+          <Address>018C1135</Address>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>10</ID>
-      <Description>"chestL"</Description>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>257</ID>
-          <Description>"start?"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Byte</VariableType>
-          <Address>016E14E8</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>146</ID>
-          <Description>"got item? (check if in array)"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Binary</VariableType>
-          <BitStart>6</BitStart>
-          <BitLength>1</BitLength>
-          <ShowAsBinary>0</ShowAsBinary>
-          <Address>ePSXe.exe+B40420</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>140</ID>
-          <Description>"do open animation if 0"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Binary</VariableType>
-          <BitStart>1</BitStart>
-          <BitLength>1</BitLength>
-          <ShowAsBinary>0</ShowAsBinary>
-          <Address>ePSXe.exe+B217F0</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>254</ID>
-          <Description>"zenny in chest"</Description>
-          <VariableType>Byte</VariableType>
-          <Address>ePSXe.exe+B214F6</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>255</ID>
-          <Description>"zenny?1"</Description>
-          <VariableType>Byte</VariableType>
-          <Address>ePSXe.exe+B2182C</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>256</ID>
-          <Description>"zenny?2"</Description>
-          <VariableType>Byte</VariableType>
-          <Address>ePSXe.exe+B21AF4</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>118</ID>
-          <Description>"chest top model"</Description>
-          <GroupHeader>1</GroupHeader>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>119</ID>
-              <Description>"height1"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Byte</VariableType>
-              <Address>"ePSXe.exe"+A82020+0009F6D8</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>3</ID>
-              <Description>"height2"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Byte</VariableType>
-              <Address>ePSXe.exe+B216F9</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>4</ID>
-              <Description>"angle"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>2 Bytes</VariableType>
-              <Address>ePSXe.exe+B216FA</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>0</ID>
-              <Description>"No description"</Description>
-              <VariableType>Byte</VariableType>
-              <Address>ePSXe.exe+B21580</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>1</ID>
-              <Description>"No description"</Description>
-              <VariableType>Byte</VariableType>
-              <Address>ePSXe.exe+B2165D</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2</ID>
-              <Description>"No description"</Description>
-              <VariableType>Byte</VariableType>
-              <Address>ePSXe.exe+B21664</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>5</ID>
-              <Description>"No description"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>2 Bytes</VariableType>
-              <Address>ePSXe.exe+B216FE</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>6</ID>
-              <Description>"No description"</Description>
-              <VariableType>Byte</VariableType>
-              <Address>ePSXe.exe+B21700</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-      </CheatEntries>
+      <ID>260</ID>
+      <Description>"r chest top model"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>12</ByteLength>
+      <Address>018C1338</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>86</ID>
@@ -1233,12 +1186,7 @@
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols>
-    <SymbolEntry>
-      <Name>speedhack_wantedspeed</Name>
-      <Address>B00000</Address>
-    </SymbolEntry>
-  </UserdefinedSymbols>
+  <UserdefinedSymbols/>
   <Comments>Info about this table:
 </Comments>
   <DisassemblerComments>

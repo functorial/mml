@@ -1,10 +1,1 @@
-# README
-
-- Cheat table uses ePSXe version 2.0.5
-- Using Cheat Engine version 7.6
-- mml.CT is the Mega Man Legends cheat table
-
-
-
-i can't wait to look at byte tables for 8 hours a day
-
+https://docs.google.com/spreadsheets/d/1OdxZQ6DzbNaAikwdxnH8S9jJZx4L5_loxPrnsaE8nSU/edit?gid=1618614463#gid=1618614463

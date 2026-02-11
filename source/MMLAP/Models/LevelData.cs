@@ -1,25 +1,27 @@
-﻿using System.Collections.Generic;
-
-namespace MMLAP.Models
+﻿namespace MMLAP.Models
 {
     public class LevelData
     {
-        public required string AreaName { get; set; }
-        public required string RoomName { get; set; }
-        public required byte AreaCode { get; set; }
-        public required byte RoomCode { get; set; }
+        public string AreaName { get; set; }
+        public string RoomName { get; set; }
+        public byte AreaCode { get; set; }
+        public byte RoomCode { get; set; }
+        // Maybe a graph class is in order
+        // public List<LevelData> ConnectedLevels { get; set; } = new List<LevelData>();
 
         public LevelData(
             string areaName,
             string roomName,
             byte areaCode,
             byte roomCode
+            // , List<LevelData>? connectedLevels = null
         )
         {
             AreaName = areaName;
             RoomName = roomName;
             AreaCode = areaCode;
             RoomCode = roomCode;
+            // ConnectedLevels = connectedLevels;
         }
     }
 }

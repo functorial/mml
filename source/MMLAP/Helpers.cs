@@ -1,383 +1,179 @@
-﻿using Archipelago.Core.Models;
-using Archipelago.Core.Util;
-using Archipelago.MultiClient.Net.Models;
-using Avalonia.Logging;
-using MMLAP.Models;
-using Serilog;
-using System;
+﻿using MMLAP.Models
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using static MMLAP.Models.Enums;
-using Location = Archipelago.Core.Models.Location;
 namespace MMLAP
 {
     public class Helpers
     {
-        private static GameStatus lastNonZeroStatus = GameStatus.Spawning;
-        public static string gameVersion = "";
-        public static string OpenEmbeddedResource(string resourceName)
+        public static Dictionary<ushort, LevelData> GetLevelDataDict()
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string jsonFile = reader.ReadToEnd();
-                return jsonFile;
-            }
-        }
-        public static bool IsInDemoMode()
-        {
-            return Memory.ReadByte(Addresses.IsInDemoMode) == 1;
-        }
-        public static bool IsInGame()
-        {
-            var status = GetGameStatus();
-            bool isCorrectGameVersion = IsCorrectVersion();
-            return !IsInDemoMode() &&
-                status != GameStatus.TitleScreen &&
-                status != GameStatus.Loading && // Handle loading into and out of demo mode.
-                isCorrectGameVersion &&
-                Memory.ReadInt(Addresses.ResetCheckAddress) != 0; // Handle status being 0 on console reset.
-        }
-        public static bool IsCorrectVersion()
-        {
-            // Handle case where user resets Duckstation or loads a new ROM.
-            // Certain versions of the BIOS are incompatible with Addresses.ResetCheckAddress.
-            /*if (gameVersion == "NTSC-U")
-            {
-                return true;
-            }*/
-            if (Memory.ReadString(Addresses.GuidebookText, 9) == "Guidebook")
-            {
-                gameVersion = "NTSC-U";
-                return true;
-            } // TODO: Check for PAL, NTSC-J.
-            return false;
-        }
-        public static GameStatus GetGameStatus()
-        {
-            var status = Memory.ReadByte(Addresses.GameStatus);
-            var result = (GameStatus)status;
-            if (result != GameStatus.InGame)
-            {
-                lastNonZeroStatus = result;
-            }
-            return result;
-        }
-        public static List<ILocation> BuildLocationList(bool easyFracture=false, bool includeGemsanity=false, List<int> gemsanityIDs = null)
-        {
-            if (gemsanityIDs == null)
-            {
-                gemsanityIDs = new List<int>();
-            }
-            int baseId = 1230000;
-            int levelOffset = 1000;
-            int processedSkillPoints = 0;
-            List<ILocation> locations = new List<ILocation>();
-            var currentTalismanAddress = Addresses.TalismanStartAddress;
-            var currentOrbAddress = Addresses.OrbStartAddress;
-            var currentGemAddress = Addresses.LevelGemsAddress;
-            List<LevelData> levels = GetLevelData();
-            foreach (var level in levels)
-            {
-                int locationOffset = 0;
-                if (level.HasTalisman)
-                {
-                    Location location = new Location()
-                    {
-                        Name = $"{level.Name} Talisman",
-                        Id = baseId + levelOffset * level.LevelId + locationOffset,
-                        AddressBit = 0,
-                        CheckType = LocationCheckType.Bit,
-                        Address = currentTalismanAddress,
-                        Category = "Talisman"
-                    };
-                    locations.Add(location);
-                    locationOffset++;
-                }
-                for (int i = 0; i < level.OrbCount; i++)
-                {
-                    Location location = new Location()
-                    {
-                        Name = $"{level.Name} Orb {i + 1}",
-                        Id = baseId + levelOffset * level.LevelId + locationOffset,
-                        AddressBit = i,
-                        CheckType = LocationCheckType.Bit,
-                        Address = currentOrbAddress,
-                        Category = "Orb"
-                    };
-                    locations.Add(location);
-                    locationOffset++;
-                }
-                if (level.IsBoss)
-                {
-                    string bossName = level.Name.Split("'")[0];
-                    Location location = new Location()
-                    {
-                        Name = $"{bossName} Defeated",
-                        Id = baseId + levelOffset * level.LevelId + locationOffset,
-                        AddressBit = 0,
-                        CheckType = LocationCheckType.Bit,
-                        Address = currentTalismanAddress,
-                        Category = "Boss"
-                    };
-                    locations.Add(location);
-                    locationOffset++;
-                }
-                for (int i = 0; i < level.MoneybagsAddresses.Length; i++)
-                {
-                    Location moneybagsLocation = new Location()
-                    {
-                        Name = $"{level.Name}: Moneybags Payment {i}",
-                        Id = baseId + levelOffset * level.LevelId + locationOffset,
-                        Address = level.MoneybagsAddresses[i] + 2,  // First 2 bytes are price.
-                        CheckType = LocationCheckType.Byte,
-                        CompareType = LocationCheckCompareType.GreaterThan,
-                        CheckValue = "0",
-                        Category = "Moneybags"
-                    };
-                    locations.Add(moneybagsLocation);
-                    locationOffset++;
-                }
-                for (int i = 0; i < level.SkillPointAddresses.Length; i++)
-                {
-                    Location skillLocation = new Location()
-                    {
-                        Name = $"{level.Name}: Skill Point {i} (Check)",
-                        Id = baseId + levelOffset * level.LevelId + locationOffset,
-                        Address = level.SkillPointAddresses[i],
-                        CheckType = LocationCheckType.Byte,
-                        CompareType = LocationCheckCompareType.GreaterThan,
-                        CheckValue = "0",
-                        Category = "Skill Point"
-                    };
-                    locations.Add(skillLocation);
-                    locationOffset++;
-
-                    Location skillGoalLocation = new Location()
-                    {
-                        Name = $"{level.Name}: Skill Point {i} (Goal)",
-                        Id = baseId + levelOffset * level.LevelId + locationOffset,
-                        Address = level.SkillPointAddresses[i],
-                        CheckType = LocationCheckType.Byte,
-                        CompareType = LocationCheckCompareType.GreaterThan,
-                        CheckValue = "0",
-                        Category = "Skill Point"
-                    };
-                    locations.Add(skillGoalLocation);
-                    locationOffset++;
-                }
-                for (int i = 0; i < level.LifeBottleAddresses.Length; i++)
-                {
-                    Location lifeBottleLocation = new Location()
-                    {
-                        Name = $"{level.Name}: Life Bottle {i}",
-                        Id = baseId + levelOffset * level.LevelId + locationOffset,
-                        Address = level.LifeBottleAddresses[i][0],
-                        AddressBit = (int)level.LifeBottleAddresses[i][1],
-                        CheckType = LocationCheckType.Bit,
-                        Category = "Life Bottle"
-                    };
-                    locations.Add(lifeBottleLocation);
-                    locationOffset++;
-                }
-                int gemIndex = 1;
-                for (int i = 0; i < level.TotalGemCount + level.GemSkipIndices.Length; i++)
-                {
-                    if (!level.GemSkipIndices.Contains(i + 1))
-                    {
-                        Location gemsLocation = new Location()
-                        {
-                            Name = $"{level.Name}: Gem {gemIndex}",
-                            Id = baseId + levelOffset * level.LevelId + locationOffset,
-                            Address = level.GemMaskAddress + (uint)(i / 8),
-                            AddressBit = i % 8,
-                            CheckType = LocationCheckType.Bit,
-                            Category = "Gemsanity"
-                        };
-                        if (includeGemsanity && (gemsanityIDs.Count == 0 || gemsanityIDs.Contains(baseId + levelOffset * level.LevelId + locationOffset)))
-                        {
-                            locations.Add(gemsLocation);
-                        }
-                        locationOffset++;
-                        gemIndex++;
-                    }
-                }
-                if (level.SpiritParticles > 0)
-                {
-                    if (easyFracture && level.Name == "Fracture Hills")
-                    {
-                        level.SpiritParticles = level.SpiritParticles - 7;
-                    }
-                    List<ILocation> conditionsList = new List<ILocation>();
-                    Location spiritLocation = new Location()
-                    {
-                        Name = $"{level.Name}: All Spirit Particles count check",
-                        Id = -1,
-                        Address = Addresses.SpiritParticlesAddress,
-                        CheckType = LocationCheckType.Byte,
-                        CompareType = LocationCheckCompareType.GreaterThan,
-                        CheckValue = $"{level.SpiritParticles - 1}"
-                    };
-                    Location levelLocation = new Location()
-                    {
-                        Name = $"{level.Name}: All Spirit Particles level check",
-                        Id = -1,
-                        CheckType = LocationCheckType.Byte,
-                        Address = Addresses.CurrentLevelAddress,
-                        CompareType = LocationCheckCompareType.Match,
-                        CheckValue = $"{level.LevelId}",
-                    };
-                    conditionsList.Add(spiritLocation);
-                    conditionsList.Add(levelLocation);
-
-                    CompositeLocation spiritParticlesLocation = new CompositeLocation()
-                    {
-                        Name = $"{level.Name}: All Spirit Particles",
-                        Id = baseId + levelOffset * level.LevelId + locationOffset,
-                        CheckType = LocationCheckType.AND,
-                        Conditions = conditionsList,
-                        Category = "Spirit Particles"
-                    };
-                    locations.Add(spiritParticlesLocation);
-                    locationOffset++;
-                }
-                if (level.Name == "Dragon Shores")
-                {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Location tokenLocation = new Location()
-                        {
-                            Name = $"Dragon Shores Token {i}",
-                            Id = baseId + levelOffset * level.LevelId + i,
-                            Address = Addresses.TokenAddress + (uint)(4 * i),
-                            CheckType = LocationCheckType.Byte,
-                            CompareType = LocationCheckCompareType.GreaterThan,
-                            CheckValue = "0",
-                            Category = "Token"
-                        };
-                        locations.Add(tokenLocation);
-                        locationOffset++;
-                    }
-                }
-                currentTalismanAddress++;
-                currentOrbAddress++;
-            }
-            baseId = 1259000;
-            for (int i = 0; i < 20; i++)
-            {
-                Location totalGemLocation = new Location()
-                {
-                    Name = $"{500 * (i + 1)} Total Gems",
-                    Id = baseId + i,
-                    CheckType = LocationCheckType.Int,
-                    Address = Addresses.TotalGemAddress,
-                    CompareType = LocationCheckCompareType.GreaterThan,
-                    CheckValue = $"{500 * (i + 1) - 1}",
-                    Category = "Total Gems"
-                };
-                locations.Add(totalGemLocation);
-            }
-            int offset = 20;
-            foreach (var level in levels)
-            {
-                if (!level.IsBoss)
-                {
-                    Location gem25Location = new Location()
-                    {
-                        Name = $"{level.Name}: 25% Gems",
-                        Id = baseId + offset,
-                        Address = currentGemAddress,
-                        CheckType = LocationCheckType.Int,
-                        CompareType = LocationCheckCompareType.GreaterThan,
-                        CheckValue = "99",
-                        Category = "Gem25"
-                    };
-                    locations.Add(gem25Location);
-                    offset++;
-
-                    Location gem50Location = new Location()
-                    {
-                        Name = $"{level.Name}: 50% Gems",
-                        Id = baseId + offset,
-                        Address = currentGemAddress,
-                        CheckType = LocationCheckType.Int,
-                        CompareType = LocationCheckCompareType.GreaterThan,
-                        CheckValue = "199",
-                        Category = "Gem50"
-                    };
-                    locations.Add(gem50Location);
-                    offset++;
-
-                    Location gem75Location = new Location()
-                    {
-                        Name = $"{level.Name}: 75% Gems",
-                        Id = baseId + offset,
-                        Address = currentGemAddress,
-                        CheckType = LocationCheckType.Int,
-                        CompareType = LocationCheckCompareType.GreaterThan,
-                        CheckValue = "299",
-                        Category = "Gem75"
-                    };
-                    locations.Add(gem75Location);
-                    offset++;
-
-                    Location gem100Location = new Location()
-                    {
-                        Name = $"{level.Name}: All Gems",
-                        Id = baseId + offset,
-                        Address = currentGemAddress,
-                        CheckType = LocationCheckType.Int,
-                        CompareType = LocationCheckCompareType.GreaterThan,
-                        CheckValue = "399",
-                        Category = "Gem100"
-                    };
-                    locations.Add(gem100Location);
-                    offset++;
-                }
-                currentGemAddress += 4;
-            }
-            return locations;
-        }
-
-        public static List<LevelData> GetLevelData()
-        {
-            List<LevelData> levels = new List<LevelData>()
-            {
-                new LevelData("Summer Forest", (int)LevelInGameIDs.SummerForest, 4, false, false, [Addresses.SwimUnlock, Addresses.WallToAquariaUnlock], [], [Addresses.SummerLifeBottle1Address, Addresses.SummerLifeBottle2Address, Addresses.SummerLifeBottle3Address], 0, Addresses.SummerGemMask, 138, [27, 39, 41, 42, 43, 44, 45, 46, 47, 61, 62, 72, 73, 81, 82, 95, 96, 97, 98, 99, 100, 108, 126, 127, 128]),
-                // Removed Moneybags as a location in Glimmer because it leads to an overly restrictive start.
-                new LevelData("Glimmer", (int)LevelInGameIDs.Glimmer, 3, true, false, [], [], [], 14, Addresses.GlimmerGemMask, 133, [1, 2, 3, 4, 5, 6, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 152]),
-                new LevelData("Idol Springs", (int)LevelInGameIDs.IdolSprings, 2, true, false, [], [Addresses.IdolTikiSkillPoint], [Addresses.IdolLifeBottleAddress], 11, Addresses.IdolGemMask, 149, [63, 88, 90, 122, 127, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145]),
-                new LevelData("Colossus", (int)LevelInGameIDs.Colossus, 3, true, false, [], [Addresses.ColossusHockeySkillPoint], [Addresses.ColossusLifeBottleAddress], 13, Addresses.ColossusGemMask, 137, [1, 2, 3, 4, 5, 6, 7, 25, 32, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 71, 117, 118, 119, 127, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178]),
-                new LevelData("Hurricos", (int)LevelInGameIDs.Hurricos, 3, true, false, [], [Addresses.HurricosWindmillSkillPoint], [Addresses.HurricosLifeBottleAddress], 22, Addresses.HurricosGemMask, 114, [42, 43, 44, 45, 46, 83, 85, 86, 87, 94, 116, 123, 126, 127, 128, 129, 130, 131]),
-                new LevelData("Aquaria Towers", (int)LevelInGameIDs.AquariaTowers, 3, true, false, [Addresses.AquariaSubUnlock], [Addresses.AquariaSeaweedSkillPoint], [Addresses.AquariaLifeBottleAddress], 29, Addresses.AquariaGemMask, 137, [85, 86, 87, 88, 89, 90, 91, 92, 94, 95, 96, 97, 98, 99, 100, 109, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 167]),
-                new LevelData("Sunny Beach", (int)LevelInGameIDs.SunnyBeach, 3, true, false, [], [], [], 17, Addresses.SunnyGemMask, 118, [1, 2, 3, 4, 5, 6, 53, 91, 105, 106, 107, 109]),
-                new LevelData("Ocean Speedway", (int)LevelInGameIDs.OceanSpeedway, 1, false, false, [], [Addresses.OceanTimeAttackSkillPoint], [], 0),
-                new LevelData("Crush's Dungeon", (int)LevelInGameIDs.CrushsDungeon, 0, false, true, [], [Addresses.CrushPerfectSkillPoint], [], 0),
-                new LevelData("Autumn Plains", (int)LevelInGameIDs.AutumnPlains, 2, false, false, [Addresses.ZephyrPortalUnlock, Addresses.ClimbUnlock, Addresses.ShadyPortalUnlock, Addresses.IcyPortalUnlock], [], [Addresses.AutumnLifeBottleAddress], 0, Addresses.AutumnGemMask, 106, [1, 2, 3, 4, 5, 6, 102, 103, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133]),
-                new LevelData("Skelos Badlands", (int)LevelInGameIDs.SkelosBadlands, 3, true, false, [], [Addresses.SkelosCactiSkillPoint, Addresses.SkelosCatbatSkillPoint], [Addresses.SkelosLifeBottleAddress], 28, Addresses.SkelosGemMask, 95, [1, 2, 3, 48, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 138, 139, 140, 141, 142, 143, 144, 155, 156, 157, 158, 159, 160, 161]),
-                new LevelData("Crystal Glacier", (int)LevelInGameIDs.CrystalGlacier, 2, true, false, [Addresses.CrystalBridgeUnlock], [], [Addresses.CrystalLifeBottleAddress], 38, Addresses.CrystalGemMask, 105, [1, 2, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71]),
-                new LevelData("Breeze Harbor", (int)LevelInGameIDs.BreezeHarbor, 2, true, false, [], [], [Addresses.BreezeLifeBottle1Address, Addresses.BreezeLifeBottle2Address], 16, Addresses.BreezeGemMask, 97, [1, 2, 3, 4, 5, 6, 7, 15, 16, 17, 18, 19, 85, 90, 100, 111, 112]),
-                new LevelData("Zephyr", (int)LevelInGameIDs.Zephyr, 4, true, false, [], [], [Addresses.ZephyrLifeBottleAddress], 30, Addresses.ZephyrGemMask, 135, [1, 2, 8, 9, 10, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 105, 107, 117, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 149, 150, 151, 153, 167, 168]),
-                new LevelData("Metro Speedway", (int)LevelInGameIDs.MetroSpeedway, 1, false, false, [], [Addresses.MetroTimeAttackSkillPoint], [], 0),
-                new LevelData("Scorch", (int)LevelInGameIDs.Scorch, 2, true, false, [], [Addresses.ScorchTreesSkillPoint], [Addresses.ScorchLifeBottleAddress], 28, Addresses.ScorchGemMask, 125, [1, 2, 3, 4, 5, 93, 94, 95, 96, 97, 98, 99, 100, 101, 106, 115, 134, 135, 136, 137, 142, 143, 144, 148]),
-                new LevelData("Shady Oasis", (int)LevelInGameIDs.ShadyOasis, 2, true, false, [], [], [Addresses.ShadyLifeBottleAddress], 21, Addresses.ShadyGemMask, 119, [1, 2, 3, 4, 5, 6, 7, 28, 29, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 138, 140, 141, 142, 143, 148, 155, 168, 169]),
-                new LevelData("Magma Cone", (int)LevelInGameIDs.MagmaCone, 3, true, false, [Addresses.MagmaElevatorUnlock], [], [Addresses.MagmaLifeBottle1Address, Addresses.MagmaLifeBottle2Address, Addresses.MagmaLifeBottle3Address, Addresses.MagmaLifeBottle4Address], 19, Addresses.MagmaGemMask, 119, [1, 2, 48, 78, 121, 122, 123]),
-                new LevelData("Fracture Hills", (int)LevelInGameIDs.FractureHills, 3, true, false, [], [Addresses.FractureSuperchargeSkillPoint], [Addresses.FractureLifeBottleAddress], 29, Addresses.FractureGemMask, 115, [1, 2, 3, 20, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 141]),
-                new LevelData("Icy Speedway", (int)LevelInGameIDs.IcySpeedway, 1, false, false, [], [Addresses.IcyTimeAttackSkillPoint], [], 0),
-                new LevelData("Gulp's Overlook", (int)LevelInGameIDs.GulpsOverlook, 0, false, true, [], [Addresses.GulpPerfectSkillPoint, Addresses.GulpRiptoSkillPoint], [], 0),
-                new LevelData("Winter Tundra", (int)LevelInGameIDs.WinterTundra, 3, false, false, [Addresses.CanyonPortalUnlock, Addresses.HeadbashUnlock], [], [], 0, Addresses.WinterGemMask, 101, [1, 2, 3, 4, 5, 6, 7, 13, 14, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143]),
-                new LevelData("Mystic Marsh", (int)LevelInGameIDs.MysticMarsh, 3, false, false, [], [], [Addresses.MysticLifeBottle1Address, Addresses.MysticLifeBottle2Address], 36, Addresses.MysticGemMask, 139, [1, 112, 113, 114, 115, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157]),
-                new LevelData("Cloud Temples", (int)LevelInGameIDs.CloudTemples, 3, false, false, [], [], [Addresses.CloudLifeBottleAddress], 23, Addresses.CloudGemMask, 111, [1, 34, 54, 55, 101, 102, 103]),
-                new LevelData("Canyon Speedway", (int)LevelInGameIDs.CanyonSpeedway, 1, false, false, [], [Addresses.CanyonTimeAttackSkillPoint], [], 0),
-                new LevelData("Robotica Farms", (int)LevelInGameIDs.RoboticaFarms, 3, false, false, [], [], [], 20, Addresses.RoboticaGemMask, 127, [1, 2, 3, 4, 5, 6, 7, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 130, 138, 139, 147, 148, 149, 150, 151, 152, 179, 180, 181, 182, 183]),
-                new LevelData("Metropolis", (int)LevelInGameIDs.Metropolis, 4, false, false, [], [], [], 22, Addresses.MetropolisGemMask, 126, [38, 45, 65, 91, 97, 105, 129, 130, 131, 132]),
-                new LevelData("Dragon Shores", (int)LevelInGameIDs.DragonShores, 0, false, false, [], [], [], 0),
-                new LevelData("Ripto's Arena", (int)LevelInGameIDs.RiptosArena, 0, false, true, [], [Addresses.RiptoPerfectSkillPoint], [], 0),
-            };
-            return levels;
+            Dictionary<ushort, LevelData> levelDataDict = new Dictionary<ushort, LevelData>();
+            levelDataDict.Add(0x0000, new LevelData("Ocean Tower", "Intro cutscene", 0x00, 0x00));
+            levelDataDict.Add(0x0001, new LevelData("Ocean Tower", "Room 1 (Entrance)", 0x00, 0x01));
+            levelDataDict.Add(0x0002, new LevelData("Ocean Tower", "Room 2", 0x00, 0x02));
+            levelDataDict.Add(0x0003, new LevelData("Ocean Tower", "Room 3 (Boss)", 0x00, 0x03));
+            levelDataDict.Add(0x0004, new LevelData("Ocean Tower", "Outdoor Cutscene", 0x00, 0x04));
+            levelDataDict.Add(0x0005, new LevelData("Ocean Tower", "Back To Title Screen", 0x00, 0x05));
+            levelDataDict.Add(0x0006, new LevelData("Ocean Tower", "Empty?", 0x00, 0x06));
+            levelDataDict.Add(0x0100, new LevelData("Opening Text Cutscene", "Scrolling Text", 0x01, 0x00));
+            levelDataDict.Add(0x0200, new LevelData("Crash Cutscene", "Cutscene", 0x02, 0x00));
+            levelDataDict.Add(0x0300, new LevelData("Cardon Forest (Flutter Broken)", "Near ruin entrance", 0x03, 0x00));
+            levelDataDict.Add(0x0301, new LevelData("Cardon Forest (Flutter Broken)", "Crash Site", 0x03, 0x01));
+            levelDataDict.Add(0x0302, new LevelData("Cardon Forest (Flutter Broken)", "City Entrance", 0x03, 0x02));
+            levelDataDict.Add(0x0303, new LevelData("Cardon Forest (Flutter Broken)", "Unknown (floating model)", 0x03, 0x03));
+            levelDataDict.Add(0x0304, new LevelData("Cardon Forest (Flutter Broken)", "Unknown (floating model)", 0x03, 0x04));
+            levelDataDict.Add(0x0305, new LevelData("Cardon Forest (Flutter Broken)", "Barell's Room", 0x03, 0x05));
+            levelDataDict.Add(0x0306, new LevelData("Cardon Forest (Flutter Broken)", "Roll's Room (no Roll)", 0x03, 0x06));
+            levelDataDict.Add(0x0307, new LevelData("Cardon Forest (Flutter Broken)", "Flutter", 0x03, 0x07));
+            levelDataDict.Add(0x0308, new LevelData("Cardon Forest (Flutter Broken)", "Mega Man's Room", 0x03, 0x08));
+            levelDataDict.Add(0x0400, new LevelData("Apple Market", "Apple Market", 0x04, 0x00));
+            levelDataDict.Add(0x0401, new LevelData("Apple Market", "Junk Shop", 0x04, 0x01));
+            levelDataDict.Add(0x0402, new LevelData("Apple Market", "Electronics Shop", 0x04, 0x02));
+            levelDataDict.Add(0x0403, new LevelData("Apple Market", "Hip Bone", 0x04, 0x03));
+            levelDataDict.Add(0x0404, new LevelData("Apple Market", "Tailor Chinos", 0x04, 0x04));
+            levelDataDict.Add(0x0405, new LevelData("Apple Market", "Record Shop", 0x04, 0x05));
+            levelDataDict.Add(0x0500, new LevelData("Downtown", "Downtown", 0x05, 0x00));
+            levelDataDict.Add(0x0501, new LevelData("Downtown", "(no music, no sub-city, missing door texture)", 0x05, 0x01));
+            levelDataDict.Add(0x0502, new LevelData("Downtown", "Library", 0x05, 0x02));
+            levelDataDict.Add(0x0503, new LevelData("Downtown", "Tron's Cockpit", 0x05, 0x03));
+            levelDataDict.Add(0x0504, new LevelData("Downtown", "Stripe Burger", 0x05, 0x04));
+            levelDataDict.Add(0x0600, new LevelData("City Hall", "Outdoors", 0x06, 0x00));
+            levelDataDict.Add(0x0601, new LevelData("City Hall", "Amelia's Office", 0x06, 0x01));
+            levelDataDict.Add(0x0602, new LevelData("City Hall", "Outdoors (no music, cars, or people)", 0x06, 0x02));
+            levelDataDict.Add(0x0603, new LevelData("City Hall", "Teisel's Room", 0x06, 0x03));
+            levelDataDict.Add(0x0604, new LevelData("City Hall", "Amelia's Office (wrecked)", 0x06, 0x04));
+            levelDataDict.Add(0x0700, new LevelData("Gesselschaft Interior", "Empty?", 0x07, 0x00));
+            levelDataDict.Add(0x0701, new LevelData("Gesselschaft Interior", "Engine Room", 0x07, 0x01));
+            levelDataDict.Add(0x0702, new LevelData("Gesselschaft Interior", "Hallway", 0x07, 0x02));
+            levelDataDict.Add(0x0703, new LevelData("Gesselschaft Interior", "Kitchen", 0x07, 0x03));
+            levelDataDict.Add(0x0704, new LevelData("Gesselschaft Interior", "HQ", 0x07, 0x04));
+            levelDataDict.Add(0x0705, new LevelData("Gesselschaft Interior", "First Meeting Room Cutscene", 0x07, 0x05));
+            levelDataDict.Add(0x0706, new LevelData("Gesselschaft Interior", "Meeting Room", 0x07, 0x06));
+            levelDataDict.Add(0x0707, new LevelData("Gesselschaft Interior", "Empty?", 0x07, 0x07));
+            levelDataDict.Add(0x0800, new LevelData("Uptown", "Uptown", 0x08, 0x00));
+            levelDataDict.Add(0x0801, new LevelData("Uptown", "Hospital", 0x08, 0x01));
+            levelDataDict.Add(0x0802, new LevelData("Uptown", "TV Station", 0x08, 0x02));
+            levelDataDict.Add(0x0803, new LevelData("Uptown", "Beast Hunter game", 0x08, 0x03));
+            levelDataDict.Add(0x0804, new LevelData("Uptown", "Balloon Game", 0x08, 0x04));
+            levelDataDict.Add(0x0805, new LevelData("Uptown", "Ira's Room", 0x08, 0x05));
+            levelDataDict.Add(0x0900, new LevelData("Underground Ruins", "Room 1 (Junk Store Man Area)", 0x09, 0x00));
+            levelDataDict.Add(0x0901, new LevelData("Underground Ruins", "Room 2", 0x09, 0x01));
+            levelDataDict.Add(0x0902, new LevelData("Underground Ruins", "Room 3 (Sewer)", 0x09, 0x02));
+            levelDataDict.Add(0x0903, new LevelData("Underground Ruins", "Room 4", 0x09, 0x03));
+            levelDataDict.Add(0x0904, new LevelData("Underground Ruins", "Room 5", 0x09, 0x04));
+            levelDataDict.Add(0x0905, new LevelData("Underground Ruins", "Room 6", 0x09, 0x05));
+            levelDataDict.Add(0x0906, new LevelData("Underground Ruins", "Room 7", 0x09, 0x06));
+            levelDataDict.Add(0x0907, new LevelData("Underground Ruins", "Room 8", 0x09, 0x07));
+            levelDataDict.Add(0x0908, new LevelData("Underground Ruins", "Room 9", 0x09, 0x08));
+            levelDataDict.Add(0x0A00, new LevelData("Clozer Woods (Tiesel)", "Tiesel Area", 0x0A, 0x00));
+            levelDataDict.Add(0x0B00, new LevelData("Lake Jyun", "Inside Bonne Robot", 0x0B, 0x00));
+            levelDataDict.Add(0x0B01, new LevelData("Lake Jyun", "???", 0x0B, 0x01));
+            levelDataDict.Add(0x0B02, new LevelData("Lake Jyun", "On the Lake", 0x0B, 0x02));
+            levelDataDict.Add(0x0B03, new LevelData("Lake Jyun", "Side River", 0x0B, 0x03));
+            levelDataDict.Add(0x0B04, new LevelData("Lake Jyun", "Inside Bonne Robot", 0x0B, 0x04));
+            levelDataDict.Add(0x0B05, new LevelData("Lake Jyun", "Empty?", 0x0B, 0x05));
+            levelDataDict.Add(0x0B06, new LevelData("Lake Jyun", "Door Opening Mechanism", 0x0B, 0x06));
+            levelDataDict.Add(0x0B07, new LevelData("Lake Jyun", "Subgate With Open Door", 0x0B, 0x07));
+            levelDataDict.Add(0x0C00, new LevelData("Outside Cardon Forest Subgate", "Outside", 0x0C, 0x00));
+            levelDataDict.Add(0x0C01, new LevelData("Outside Cardon Forest Subgate", "Door Opening Mechanism", 0x0C, 0x01));
+            levelDataDict.Add(0x0C02, new LevelData("Outside Cardon Forest Subgate", "Subgate With Open Door", 0x0C, 0x02));
+            levelDataDict.Add(0x0C03, new LevelData("Outside Cardon Forest Subgate", "Small Piece of Ground", 0x0C, 0x03));
+            levelDataDict.Add(0x0D00, new LevelData("Wily's Boat", "Walkway", 0x0D, 0x00));
+            levelDataDict.Add(0x0D01, new LevelData("Wily's Boat", "Inside", 0x0D, 0x01));
+            levelDataDict.Add(0x0D02, new LevelData("Wily's Boat", "Boat Area", 0x0D, 0x02));
+            levelDataDict.Add(0x0D03, new LevelData("Wily's Boat", "Inside The Boat", 0x0D, 0x03));
+            levelDataDict.Add(0x0D04, new LevelData("Wily's Boat", "Walkway (no box or woman)", 0x0D, 0x04));
+            levelDataDict.Add(0x0D05, new LevelData("Wily's Boat", "Walkway (no box, woman, or boat)", 0x0D, 0x05));
+            levelDataDict.Add(0x0E00, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x00));
+            levelDataDict.Add(0x0E01, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x01));
+            levelDataDict.Add(0x0E02, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x02));
+            levelDataDict.Add(0x0F00, new LevelData("City Hall (Indoors)", "Police Station", 0x0F, 0x00));
+            levelDataDict.Add(0x0F01, new LevelData("City Hall (Indoors)", "Inspector's Office", 0x0F, 0x01));
+            levelDataDict.Add(0x0F02, new LevelData("City Hall (Indoors)", "City Hall 1st Floor", 0x0F, 0x02));
+            levelDataDict.Add(0x0F03, new LevelData("City Hall (Indoors)", "Bank", 0x0F, 0x03));
+            levelDataDict.Add(0x1000, new LevelData("Yass Plains", "Yass Plains Outdoors", 0x10, 0x00));
+            levelDataDict.Add(0x1001, new LevelData("Yass Plains", "Hideout Stage 1", 0x10, 0x01));
+            levelDataDict.Add(0x1002, new LevelData("Yass Plains", "Hideout Stage 2", 0x10, 0x02));
+            levelDataDict.Add(0x1003, new LevelData("Yass Plains", "Hideout Stage 3", 0x10, 0x03));
+            levelDataDict.Add(0x1004, new LevelData("Yass Plains", "Empty House", 0x10, 0x04));
+            levelDataDict.Add(0x1005, new LevelData("Yass Plains", "Junk Shop House", 0x10, 0x05));
+            levelDataDict.Add(0x1100, new LevelData("Clozer Woods With Bridge", "Clozer Woods With Bridge", 0x11, 0x00));
+            levelDataDict.Add(0x1200, new LevelData("Outside Main Gate", "Outside Main Gate", 0x12, 0x00));
+            levelDataDict.Add(0x1300, new LevelData("Clozer Woods Sub-Gate", "Room 1 (Entrance)", 0x13, 0x00));
+            levelDataDict.Add(0x1301, new LevelData("Clozer Woods Sub-Gate", "Room 2", 0x13, 0x01));
+            levelDataDict.Add(0x1302, new LevelData("Clozer Woods Sub-Gate", "Room 3 (Key Room)", 0x13, 0x02));
+            levelDataDict.Add(0x1303, new LevelData("Clozer Woods Sub-Gate", "Room 4", 0x13, 0x03));
+            levelDataDict.Add(0x1304, new LevelData("Clozer Woods Sub-Gate", "Room 5", 0x13, 0x04));
+            levelDataDict.Add(0x1305, new LevelData("Clozer Woods Sub-Gate", "Room 6", 0x13, 0x05));
+            levelDataDict.Add(0x1306, new LevelData("Clozer Woods Sub-Gate", "Room 7", 0x13, 0x06));
+            levelDataDict.Add(0x1307, new LevelData("Clozer Woods Sub-Gate", "Room 8", 0x13, 0x07));
+            levelDataDict.Add(0x1308, new LevelData("Clozer Woods Sub-Gate", "Room 9 (Generator)", 0x13, 0x08));
+            levelDataDict.Add(0x1309, new LevelData("Clozer Woods Sub-Gate", "Room 10", 0x13, 0x09));
+            levelDataDict.Add(0x130A, new LevelData("Clozer Woods Sub-Gate", "Flutter Barell's Room", 0x13, 0x0A));
+            levelDataDict.Add(0x130B, new LevelData("Clozer Woods Sub-Gate", "Flutter Roll's Room", 0x13, 0x0B));
+            levelDataDict.Add(0x130C, new LevelData("Clozer Woods Sub-Gate", "Flutter Lobby", 0x13, 0x0C));
+            levelDataDict.Add(0x130D, new LevelData("Clozer Woods Sub-Gate", "Flutter Mega Man's Room", 0x13, 0x0D));
+            levelDataDict.Add(0x1400, new LevelData("Lake Jyun Sub-Gate", "Room 1 (Entrance)", 0x14, 0x00));
+            levelDataDict.Add(0x1401, new LevelData("Lake Jyun Sub-Gate", "Room 2", 0x14, 0x01));
+            levelDataDict.Add(0x1402, new LevelData("Lake Jyun Sub-Gate", "Room 3", 0x14, 0x02));
+            levelDataDict.Add(0x1403, new LevelData("Lake Jyun Sub-Gate", "Room 4 ", 0x14, 0x03));
+            levelDataDict.Add(0x1404, new LevelData("Lake Jyun Sub-Gate", "Refractor Room", 0x14, 0x04));
+            levelDataDict.Add(0x1500, new LevelData("Bonne Ending Boat", "Boat Interior", 0x15, 0x00));
+            levelDataDict.Add(0x1501, new LevelData("Bonne Ending Boat", "Ocean", 0x15, 0x01));
+            levelDataDict.Add(0x1600, new LevelData("Flutter To Subgate Cutscene", "Cutscene", 0x16, 0x00));
+            levelDataDict.Add(0x1601, new LevelData("Flutter To Subgate Cutscene", "Flutter Bridge", 0x16, 0x01));
+            levelDataDict.Add(0x1602, new LevelData("Flutter To Subgate Cutscene", "Return Cutscene", 0x16, 0x02));
+            levelDataDict.Add(0x1700, new LevelData("Gesselschaft Battle", "Small Bridge", 0x17, 0x00));
+            levelDataDict.Add(0x1701, new LevelData("Gesselschaft Battle", "Flutter Bridge", 0x17, 0x01));
+            levelDataDict.Add(0x1702, new LevelData("Gesselschaft Battle", "Gesselschaft HQ", 0x17, 0x02));
+            levelDataDict.Add(0x1703, new LevelData("Gesselschaft Battle", "Scrolling Clouds", 0x17, 0x03));
+            levelDataDict.Add(0x1800, new LevelData("Flutter Takeoff", "Cardon Forest with no Flutter (Yasmar Woods)", 0x18, 0x00));
+            levelDataDict.Add(0x1801, new LevelData("Flutter Takeoff", "Flutter Engine Room", 0x18, 0x01));
+            levelDataDict.Add(0x1802, new LevelData("Flutter Takeoff", "Glowing Refractor", 0x18, 0x02));
+            levelDataDict.Add(0x1900, new LevelData("Old City", "Old City (no dogs, weapons usable)", 0x19, 0x00));
+            levelDataDict.Add(0x1901, new LevelData("Old City", "Bonne's Warehouse", 0x19, 0x01));
+            levelDataDict.Add(0x1902, new LevelData("Old City", "Power Plant", 0x19, 0x02));
+            levelDataDict.Add(0x1903, new LevelData("Old City", "Old City (dogs, no weapons)", 0x19, 0x03));
+            levelDataDict.Add(0x1A00, new LevelData("Main Gate", "Second Area (where you unlock the sub-cities)", 0x1A, 0x00));
+            levelDataDict.Add(0x1A01, new LevelData("Main Gate", "Third Area (Watcher, Sleeper, Dreamer doors)", 0x1A, 0x01));
+            levelDataDict.Add(0x1A02, new LevelData("Main Gate", "Final Area", 0x1A, 0x02));
+            levelDataDict.Add(0x1A03, new LevelData("Main Gate", "First Area 1", 0x1A, 0x03));
+            levelDataDict.Add(0x1A04, new LevelData("Main Gate", "First Area 2", 0x1A, 0x04));
+            levelDataDict.Add(0x1A05, new LevelData("Main Gate", "First Area 3", 0x1A, 0x05));
+            levelDataDict.Add(0x1A06, new LevelData("Main Gate", "First Area 4", 0x1A, 0x06));
+            levelDataDict.Add(0x1A07, new LevelData("Main Gate", "First Area 5", 0x1A, 0x07));
+            levelDataDict.Add(0x1A08, new LevelData("Main Gate", "First Area 6", 0x1A, 0x08));
+            levelDataDict.Add(0x1A09, new LevelData("Main Gate", "First Area 7 (Entrance)", 0x1A, 0x09));
+            levelDataDict.Add(0x1A0A, new LevelData("Main Gate", "Tiny Kattelox", 0x1A, 0x0A));
+            levelDataDict.Add(0x1A0B, new LevelData("Main Gate", "Juno Wall", 0x1A, 0x0B));
+            levelDataDict.Add(0x1A0C, new LevelData("Main Gate", "Amelia's Office (simplified)", 0x1A, 0x0C));
+            levelDataDict.Add(0x1A0D, new LevelData("Main Gate", "Downtown (simplified)", 0x1A, 0x0D));
+            levelDataDict.Add(0x1A0E, new LevelData("Main Gate", "Empty?", 0x1A, 0x0E));
+            levelDataDict.Add(0x1A0F, new LevelData("Main Gate", "Juno's Room Without Door", 0x1A, 0x0F));
+            levelDataDict.Add(0x1A10, new LevelData("Main Gate", "Unknown (textures?)", 0x1A, 0x10));
+            levelDataDict.Add(0x1B00, new LevelData("Cardon Forest (Flutter Fixed)", "Near ruin entrance", 0x1B, 0x00));
+            levelDataDict.Add(0x1B01, new LevelData("Cardon Forest (Flutter Fixed)", "Crash Site", 0x1B, 0x01));
+            levelDataDict.Add(0x1B02, new LevelData("Cardon Forest (Flutter Fixed)", "City Entrance", 0x1B, 0x02));
+            levelDataDict.Add(0x1B03, new LevelData("Cardon Forest (Flutter Fixed)", "Unknown (floating model)", 0x1B, 0x03));
+            levelDataDict.Add(0x1B04, new LevelData("Cardon Forest (Flutter Fixed)", "Unknown (floating model)", 0x1B, 0x04));
+            levelDataDict.Add(0x1B05, new LevelData("Cardon Forest (Flutter Fixed)", "Barell's Room", 0x1B, 0x05));
+            levelDataDict.Add(0x1B06, new LevelData("Cardon Forest (Flutter Fixed)", "Roll's Room", 0x1B, 0x06));
+            levelDataDict.Add(0x1B07, new LevelData("Cardon Forest (Flutter Fixed)", "Flutter Lobby", 0x1B, 0x07));
+            levelDataDict.Add(0x1B08, new LevelData("Cardon Forest (Flutter Fixed)", "Mega Man's Room", 0x1B, 0x08));
+            levelDataDict.Add(0x1C00, new LevelData("Museum", "First Floor", 0x1C, 0x00));
+            levelDataDict.Add(0x1C01, new LevelData("Museum", "Second Floor", 0x1C, 0x01));
+            levelDataDict.Add(0x1D00, new LevelData("Sub-Cities", "Watcher Sub-City", 0x1D, 0x00));
+            levelDataDict.Add(0x1D01, new LevelData("Sub-Cities", "Sleeper Sub-City", 0x1D, 0x01));
+            levelDataDict.Add(0x1D02, new LevelData("Sub-Cities", "Dreamer Sub-City", 0x1D, 0x02));
+            levelDataDict.Add(0x1D03, new LevelData("Sub-Cities", "Watcher Chest Room", 0x1D, 0x03));
+            levelDataDict.Add(0x1D04, new LevelData("Sub-Cities", "Sleeper Chest Room", 0x1D, 0x04));
+            levelDataDict.Add(0x1D05, new LevelData("Sub-Cities", "Dreamer Chest Room", 0x1D, 0x05));
+            levelDataDict.Add(0x1E00, new LevelData("Ending", "Flutter Launch Area (different)", 0x1E, 0x00));
+            levelDataDict.Add(0x1E01, new LevelData("Ending", "Flutter Bridge", 0x1E, 0x01));
+            levelDataDict.Add(0x1E02, new LevelData("Ending", "Cliff and Ocean", 0x1E, 0x02));
+            levelDataDict.Add(0x1E03, new LevelData("Ending", "Empty?", 0x1E, 0x03));
+            levelDataDict.Add(0x1E04, new LevelData("Ending", "Empty?", 0x1E, 0x04));
+            levelDataDict.Add(0x1E05, new LevelData("Ending", "Tiny Kattelox", 0x1E, 0x05));
+            return levelDataDict;
         }
     }
 }

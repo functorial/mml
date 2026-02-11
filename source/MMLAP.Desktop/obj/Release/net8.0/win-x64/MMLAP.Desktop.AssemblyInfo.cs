@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MMLAP.Desktop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.0.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.0.1+e9203310e75c3d07272a23fe9c51134ecddfcab5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.0.1+98fe3faac3b63b532fb5eaafa9c667e5238e189c")]
 [assembly: System.Reflection.AssemblyProductAttribute("MMLAP.Desktop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MMLAP.Desktop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.0.1.0")]

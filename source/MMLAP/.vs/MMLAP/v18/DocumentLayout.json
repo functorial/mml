@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|c:\\users\\alexp\\source\\repos\\mmlap\\source\\mmlap\\models\\locationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|solutionrelative:models\\locationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|c:\\users\\alexp\\source\\repos\\mmlap\\source\\mmlap\\models\\itemdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|solutionrelative:models\\itemdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|c:\\users\\alexp\\source\\repos\\mmlap\\source\\mmlap\\helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|solutionrelative:helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|c:\\users\\alexp\\source\\repos\\mmlap\\source\\mmlap\\models\\locationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|solutionrelative:models\\locationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|c:\\users\\alexp\\source\\repos\\mmlap\\source\\mmlap\\models\\leveldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,14 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|c:\\users\\alexp\\source\\repos\\mmlap\\source\\mmlap\\app.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|solutionrelative:app.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|c:\\users\\alexp\\source\\repos\\mmlap\\source\\mmlap\\helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|solutionrelative:helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|c:\\users\\alexp\\source\\repos\\mmlap\\source\\mmlap\\addresses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5593C4D-1ED8-FDB6-63C9-7AA55B576DFB}|MMLAP.csproj|solutionrelative:addresses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,73 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LevelData.cs",
-              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\LevelData.cs",
-              "RelativeDocumentMoniker": "Models\\LevelData.cs",
-              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\LevelData.cs",
-              "RelativeToolTip": "Models\\LevelData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T02:16:00.294Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ItemData.cs",
-              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\ItemData.cs",
-              "RelativeDocumentMoniker": "Models\\ItemData.cs",
-              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\ItemData.cs",
-              "RelativeToolTip": "Models\\ItemData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T06:36:36.063Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LocationData.cs",
-              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\LocationData.cs",
-              "RelativeDocumentMoniker": "Models\\LocationData.cs",
-              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\LocationData.cs",
-              "RelativeToolTip": "Models\\LocationData.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAUwCUAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T02:30:48.326Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "App.axaml.cs",
-              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\App.axaml.cs",
-              "RelativeDocumentMoniker": "App.axaml.cs",
-              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\App.axaml.cs",
-              "RelativeToolTip": "App.axaml.cs",
-              "ViewState": "AgIAABcBAAAAAAAAAAAgwDMBAABTAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-01T20:55:50.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Helpers.cs",
-              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Helpers.cs",
-              "RelativeDocumentMoniker": "Helpers.cs",
-              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Helpers.cs",
-              "RelativeToolTip": "Helpers.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAIwEQAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-01T20:25:59.143Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -110,16 +41,72 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Addresses.cs",
-              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Addresses.cs",
-              "RelativeDocumentMoniker": "Addresses.cs",
-              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Addresses.cs",
-              "RelativeToolTip": "Addresses.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "LevelData.cs",
+              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\LevelData.cs",
+              "RelativeDocumentMoniker": "Models\\LevelData.cs",
+              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\LevelData.cs",
+              "RelativeToolTip": "Models\\LevelData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-31T07:26:59.769Z",
+              "WhenOpened": "2026-02-02T02:16:00.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ItemData.cs",
+              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\ItemData.cs",
+              "RelativeDocumentMoniker": "Models\\ItemData.cs",
+              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\ItemData.cs",
+              "RelativeToolTip": "Models\\ItemData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-03T06:36:36.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LocationData.cs",
+              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\LocationData.cs",
+              "RelativeDocumentMoniker": "Models\\LocationData.cs",
+              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Models\\LocationData.cs",
+              "RelativeToolTip": "Models\\LocationData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T02:30:48.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.axaml.cs",
+              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\App.axaml.cs",
+              "RelativeDocumentMoniker": "App.axaml.cs",
+              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\App.axaml.cs",
+              "RelativeToolTip": "App.axaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMBAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T20:55:50.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Helpers.cs",
+              "DocumentMoniker": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Helpers.cs",
+              "RelativeDocumentMoniker": "Helpers.cs",
+              "ToolTip": "C:\\Users\\alexp\\source\\repos\\MMLAP\\source\\MMLAP\\Helpers.cs",
+              "RelativeToolTip": "Helpers.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAQwLAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T20:25:59.143Z",
               "EditorCaption": ""
             }
           ]

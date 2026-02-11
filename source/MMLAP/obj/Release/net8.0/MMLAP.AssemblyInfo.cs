@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MMLAP")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9203310e75c3d07272a23fe9c51134ecddfcab5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98fe3faac3b63b532fb5eaafa9c667e5238e189c")]
 [assembly: System.Reflection.AssemblyProductAttribute("MMLAP")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MMLAP")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMLAP.Models
+﻿namespace MMLAP.Models
 {
     public class ItemData
     {
-        public required string Name { get; set; }
-        public required string Category { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
         public byte? ItemCode { get; set; }
         public string? InventoryAddress { get; set; }
         public int? InventoryAddressBitNumber { get; set; }

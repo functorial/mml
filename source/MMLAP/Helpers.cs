@@ -9,428 +9,434 @@ namespace MMLAP
     {
         public static Dictionary<ushort, LevelData> GetLevelDataDict()
         {
-            Dictionary<ushort, LevelData> levelDataDict = new Dictionary<ushort, LevelData>();
-            levelDataDict.Add(0x0000, new LevelData("Ocean Tower", "Intro cutscene", 0x00, 0x00));
-            levelDataDict.Add(0x0001, new LevelData("Ocean Tower", "Room 1 (Entrance)", 0x00, 0x01));
-            levelDataDict.Add(0x0002, new LevelData("Ocean Tower", "Room 2", 0x00, 0x02));
-            levelDataDict.Add(0x0003, new LevelData("Ocean Tower", "Room 3 (Boss)", 0x00, 0x03));
-            levelDataDict.Add(0x0004, new LevelData("Ocean Tower", "Outdoor Cutscene", 0x00, 0x04));
-            levelDataDict.Add(0x0005, new LevelData("Ocean Tower", "Back To Title Screen", 0x00, 0x05));
-            levelDataDict.Add(0x0006, new LevelData("Ocean Tower", "Empty?", 0x00, 0x06));
-            levelDataDict.Add(0x0100, new LevelData("Opening Text Cutscene", "Scrolling Text", 0x01, 0x00));
-            levelDataDict.Add(0x0200, new LevelData("Crash Cutscene", "Cutscene", 0x02, 0x00));
-            levelDataDict.Add(0x0300, new LevelData("Cardon Forest (Flutter Broken)", "Near ruin entrance", 0x03, 0x00));
-            levelDataDict.Add(0x0301, new LevelData("Cardon Forest (Flutter Broken)", "Crash Site", 0x03, 0x01));
-            levelDataDict.Add(0x0302, new LevelData("Cardon Forest (Flutter Broken)", "City Entrance", 0x03, 0x02));
-            levelDataDict.Add(0x0303, new LevelData("Cardon Forest (Flutter Broken)", "Unknown (floating model)", 0x03, 0x03));
-            levelDataDict.Add(0x0304, new LevelData("Cardon Forest (Flutter Broken)", "Unknown (floating model)", 0x03, 0x04));
-            levelDataDict.Add(0x0305, new LevelData("Cardon Forest (Flutter Broken)", "Barell's Room", 0x03, 0x05));
-            levelDataDict.Add(0x0306, new LevelData("Cardon Forest (Flutter Broken)", "Roll's Room (no Roll)", 0x03, 0x06));
-            levelDataDict.Add(0x0307, new LevelData("Cardon Forest (Flutter Broken)", "Flutter", 0x03, 0x07));
-            levelDataDict.Add(0x0308, new LevelData("Cardon Forest (Flutter Broken)", "Mega Man's Room", 0x03, 0x08));
-            levelDataDict.Add(0x0400, new LevelData("Apple Market", "Apple Market", 0x04, 0x00));
-            levelDataDict.Add(0x0401, new LevelData("Apple Market", "Junk Shop", 0x04, 0x01));
-            levelDataDict.Add(0x0402, new LevelData("Apple Market", "Electronics Shop", 0x04, 0x02));
-            levelDataDict.Add(0x0403, new LevelData("Apple Market", "Hip Bone", 0x04, 0x03));
-            levelDataDict.Add(0x0404, new LevelData("Apple Market", "Tailor Chinos", 0x04, 0x04));
-            levelDataDict.Add(0x0405, new LevelData("Apple Market", "Record Shop", 0x04, 0x05));
-            levelDataDict.Add(0x0500, new LevelData("Downtown", "Downtown", 0x05, 0x00));
-            levelDataDict.Add(0x0501, new LevelData("Downtown", "(no music, no sub-city, missing door texture)", 0x05, 0x01));
-            levelDataDict.Add(0x0502, new LevelData("Downtown", "Library", 0x05, 0x02));
-            levelDataDict.Add(0x0503, new LevelData("Downtown", "Tron's Cockpit", 0x05, 0x03));
-            levelDataDict.Add(0x0504, new LevelData("Downtown", "Stripe Burger", 0x05, 0x04));
-            levelDataDict.Add(0x0600, new LevelData("City Hall", "Outdoors", 0x06, 0x00));
-            levelDataDict.Add(0x0601, new LevelData("City Hall", "Amelia's Office", 0x06, 0x01));
-            levelDataDict.Add(0x0602, new LevelData("City Hall", "Outdoors (no music, cars, or people)", 0x06, 0x02));
-            levelDataDict.Add(0x0603, new LevelData("City Hall", "Teisel's Room", 0x06, 0x03));
-            levelDataDict.Add(0x0604, new LevelData("City Hall", "Amelia's Office (wrecked)", 0x06, 0x04));
-            levelDataDict.Add(0x0700, new LevelData("Gesselschaft Interior", "Empty?", 0x07, 0x00));
-            levelDataDict.Add(0x0701, new LevelData("Gesselschaft Interior", "Engine Room", 0x07, 0x01));
-            levelDataDict.Add(0x0702, new LevelData("Gesselschaft Interior", "Hallway", 0x07, 0x02));
-            levelDataDict.Add(0x0703, new LevelData("Gesselschaft Interior", "Kitchen", 0x07, 0x03));
-            levelDataDict.Add(0x0704, new LevelData("Gesselschaft Interior", "HQ", 0x07, 0x04));
-            levelDataDict.Add(0x0705, new LevelData("Gesselschaft Interior", "First Meeting Room Cutscene", 0x07, 0x05));
-            levelDataDict.Add(0x0706, new LevelData("Gesselschaft Interior", "Meeting Room", 0x07, 0x06));
-            levelDataDict.Add(0x0707, new LevelData("Gesselschaft Interior", "Empty?", 0x07, 0x07));
-            levelDataDict.Add(0x0800, new LevelData("Uptown", "Uptown", 0x08, 0x00));
-            levelDataDict.Add(0x0801, new LevelData("Uptown", "Hospital", 0x08, 0x01));
-            levelDataDict.Add(0x0802, new LevelData("Uptown", "TV Station", 0x08, 0x02));
-            levelDataDict.Add(0x0803, new LevelData("Uptown", "Beast Hunter game", 0x08, 0x03));
-            levelDataDict.Add(0x0804, new LevelData("Uptown", "Balloon Game", 0x08, 0x04));
-            levelDataDict.Add(0x0805, new LevelData("Uptown", "Ira's Room", 0x08, 0x05));
-            levelDataDict.Add(0x0900, new LevelData("Underground Ruins", "Room 1 (Junk Store Man Area)", 0x09, 0x00));
-            levelDataDict.Add(0x0901, new LevelData("Underground Ruins", "Room 2", 0x09, 0x01));
-            levelDataDict.Add(0x0902, new LevelData("Underground Ruins", "Room 3 (Sewer)", 0x09, 0x02));
-            levelDataDict.Add(0x0903, new LevelData("Underground Ruins", "Room 4", 0x09, 0x03));
-            levelDataDict.Add(0x0904, new LevelData("Underground Ruins", "Room 5", 0x09, 0x04));
-            levelDataDict.Add(0x0905, new LevelData("Underground Ruins", "Room 6", 0x09, 0x05));
-            levelDataDict.Add(0x0906, new LevelData("Underground Ruins", "Room 7", 0x09, 0x06));
-            levelDataDict.Add(0x0907, new LevelData("Underground Ruins", "Room 8", 0x09, 0x07));
-            levelDataDict.Add(0x0908, new LevelData("Underground Ruins", "Room 9", 0x09, 0x08));
-            levelDataDict.Add(0x0A00, new LevelData("Clozer Woods (Tiesel)", "Tiesel Area", 0x0A, 0x00));
-            levelDataDict.Add(0x0B00, new LevelData("Lake Jyun", "Inside Bonne Robot", 0x0B, 0x00));
-            levelDataDict.Add(0x0B01, new LevelData("Lake Jyun", "???", 0x0B, 0x01));
-            levelDataDict.Add(0x0B02, new LevelData("Lake Jyun", "On the Lake", 0x0B, 0x02));
-            levelDataDict.Add(0x0B03, new LevelData("Lake Jyun", "Side River", 0x0B, 0x03));
-            levelDataDict.Add(0x0B04, new LevelData("Lake Jyun", "Inside Bonne Robot", 0x0B, 0x04));
-            levelDataDict.Add(0x0B05, new LevelData("Lake Jyun", "Empty?", 0x0B, 0x05));
-            levelDataDict.Add(0x0B06, new LevelData("Lake Jyun", "Door Opening Mechanism", 0x0B, 0x06));
-            levelDataDict.Add(0x0B07, new LevelData("Lake Jyun", "Subgate With Open Door", 0x0B, 0x07));
-            levelDataDict.Add(0x0C00, new LevelData("Outside Cardon Forest Subgate", "Outside", 0x0C, 0x00));
-            levelDataDict.Add(0x0C01, new LevelData("Outside Cardon Forest Subgate", "Door Opening Mechanism", 0x0C, 0x01));
-            levelDataDict.Add(0x0C02, new LevelData("Outside Cardon Forest Subgate", "Subgate With Open Door", 0x0C, 0x02));
-            levelDataDict.Add(0x0C03, new LevelData("Outside Cardon Forest Subgate", "Small Piece of Ground", 0x0C, 0x03));
-            levelDataDict.Add(0x0D00, new LevelData("Wily's Boat", "Walkway", 0x0D, 0x00));
-            levelDataDict.Add(0x0D01, new LevelData("Wily's Boat", "Inside", 0x0D, 0x01));
-            levelDataDict.Add(0x0D02, new LevelData("Wily's Boat", "Boat Area", 0x0D, 0x02));
-            levelDataDict.Add(0x0D03, new LevelData("Wily's Boat", "Inside The Boat", 0x0D, 0x03));
-            levelDataDict.Add(0x0D04, new LevelData("Wily's Boat", "Walkway (no box or woman)", 0x0D, 0x04));
-            levelDataDict.Add(0x0D05, new LevelData("Wily's Boat", "Walkway (no box, woman, or boat)", 0x0D, 0x05));
-            levelDataDict.Add(0x0E00, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x00));
-            levelDataDict.Add(0x0E01, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x01));
-            levelDataDict.Add(0x0E02, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x02));
-            levelDataDict.Add(0x0F00, new LevelData("City Hall (Indoors)", "Police Station", 0x0F, 0x00));
-            levelDataDict.Add(0x0F01, new LevelData("City Hall (Indoors)", "Inspector's Office", 0x0F, 0x01));
-            levelDataDict.Add(0x0F02, new LevelData("City Hall (Indoors)", "City Hall 1st Floor", 0x0F, 0x02));
-            levelDataDict.Add(0x0F03, new LevelData("City Hall (Indoors)", "Bank", 0x0F, 0x03));
-            levelDataDict.Add(0x1000, new LevelData("Yass Plains", "Yass Plains Outdoors", 0x10, 0x00));
-            levelDataDict.Add(0x1001, new LevelData("Yass Plains", "Hideout Stage 1", 0x10, 0x01));
-            levelDataDict.Add(0x1002, new LevelData("Yass Plains", "Hideout Stage 2", 0x10, 0x02));
-            levelDataDict.Add(0x1003, new LevelData("Yass Plains", "Hideout Stage 3", 0x10, 0x03));
-            levelDataDict.Add(0x1004, new LevelData("Yass Plains", "Empty House", 0x10, 0x04));
-            levelDataDict.Add(0x1005, new LevelData("Yass Plains", "Junk Shop House", 0x10, 0x05));
-            levelDataDict.Add(0x1100, new LevelData("Clozer Woods With Bridge", "Clozer Woods With Bridge", 0x11, 0x00));
-            levelDataDict.Add(0x1200, new LevelData("Outside Main Gate", "Outside Main Gate", 0x12, 0x00));
-            levelDataDict.Add(0x1300, new LevelData("Clozer Woods Sub-Gate", "Room 1 (Entrance)", 0x13, 0x00));
-            levelDataDict.Add(0x1301, new LevelData("Clozer Woods Sub-Gate", "Room 2", 0x13, 0x01));
-            levelDataDict.Add(0x1302, new LevelData("Clozer Woods Sub-Gate", "Room 3 (Key Room)", 0x13, 0x02));
-            levelDataDict.Add(0x1303, new LevelData("Clozer Woods Sub-Gate", "Room 4", 0x13, 0x03));
-            levelDataDict.Add(0x1304, new LevelData("Clozer Woods Sub-Gate", "Room 5", 0x13, 0x04));
-            levelDataDict.Add(0x1305, new LevelData("Clozer Woods Sub-Gate", "Room 6", 0x13, 0x05));
-            levelDataDict.Add(0x1306, new LevelData("Clozer Woods Sub-Gate", "Room 7", 0x13, 0x06));
-            levelDataDict.Add(0x1307, new LevelData("Clozer Woods Sub-Gate", "Room 8", 0x13, 0x07));
-            levelDataDict.Add(0x1308, new LevelData("Clozer Woods Sub-Gate", "Room 9 (Generator)", 0x13, 0x08));
-            levelDataDict.Add(0x1309, new LevelData("Clozer Woods Sub-Gate", "Room 10", 0x13, 0x09));
-            levelDataDict.Add(0x130A, new LevelData("Clozer Woods Sub-Gate", "Flutter Barell's Room", 0x13, 0x0A));
-            levelDataDict.Add(0x130B, new LevelData("Clozer Woods Sub-Gate", "Flutter Roll's Room", 0x13, 0x0B));
-            levelDataDict.Add(0x130C, new LevelData("Clozer Woods Sub-Gate", "Flutter Lobby", 0x13, 0x0C));
-            levelDataDict.Add(0x130D, new LevelData("Clozer Woods Sub-Gate", "Flutter Mega Man's Room", 0x13, 0x0D));
-            levelDataDict.Add(0x1400, new LevelData("Lake Jyun Sub-Gate", "Room 1 (Entrance)", 0x14, 0x00));
-            levelDataDict.Add(0x1401, new LevelData("Lake Jyun Sub-Gate", "Room 2", 0x14, 0x01));
-            levelDataDict.Add(0x1402, new LevelData("Lake Jyun Sub-Gate", "Room 3", 0x14, 0x02));
-            levelDataDict.Add(0x1403, new LevelData("Lake Jyun Sub-Gate", "Room 4 ", 0x14, 0x03));
-            levelDataDict.Add(0x1404, new LevelData("Lake Jyun Sub-Gate", "Refractor Room", 0x14, 0x04));
-            levelDataDict.Add(0x1500, new LevelData("Bonne Ending Boat", "Boat Interior", 0x15, 0x00));
-            levelDataDict.Add(0x1501, new LevelData("Bonne Ending Boat", "Ocean", 0x15, 0x01));
-            levelDataDict.Add(0x1600, new LevelData("Flutter To Subgate Cutscene", "Cutscene", 0x16, 0x00));
-            levelDataDict.Add(0x1601, new LevelData("Flutter To Subgate Cutscene", "Flutter Bridge", 0x16, 0x01));
-            levelDataDict.Add(0x1602, new LevelData("Flutter To Subgate Cutscene", "Return Cutscene", 0x16, 0x02));
-            levelDataDict.Add(0x1700, new LevelData("Gesselschaft Battle", "Small Bridge", 0x17, 0x00));
-            levelDataDict.Add(0x1701, new LevelData("Gesselschaft Battle", "Flutter Bridge", 0x17, 0x01));
-            levelDataDict.Add(0x1702, new LevelData("Gesselschaft Battle", "Gesselschaft HQ", 0x17, 0x02));
-            levelDataDict.Add(0x1703, new LevelData("Gesselschaft Battle", "Scrolling Clouds", 0x17, 0x03));
-            levelDataDict.Add(0x1800, new LevelData("Flutter Takeoff", "Cardon Forest with no Flutter (Yasmar Woods)", 0x18, 0x00));
-            levelDataDict.Add(0x1801, new LevelData("Flutter Takeoff", "Flutter Engine Room", 0x18, 0x01));
-            levelDataDict.Add(0x1802, new LevelData("Flutter Takeoff", "Glowing Refractor", 0x18, 0x02));
-            levelDataDict.Add(0x1900, new LevelData("Old City", "Old City (no dogs, weapons usable)", 0x19, 0x00));
-            levelDataDict.Add(0x1901, new LevelData("Old City", "Bonne's Warehouse", 0x19, 0x01));
-            levelDataDict.Add(0x1902, new LevelData("Old City", "Power Plant", 0x19, 0x02));
-            levelDataDict.Add(0x1903, new LevelData("Old City", "Old City (dogs, no weapons)", 0x19, 0x03));
-            levelDataDict.Add(0x1A00, new LevelData("Main Gate", "Second Area (where you unlock the sub-cities)", 0x1A, 0x00));
-            levelDataDict.Add(0x1A01, new LevelData("Main Gate", "Third Area (Watcher, Sleeper, Dreamer doors)", 0x1A, 0x01));
-            levelDataDict.Add(0x1A02, new LevelData("Main Gate", "Final Area", 0x1A, 0x02));
-            levelDataDict.Add(0x1A03, new LevelData("Main Gate", "First Area 1", 0x1A, 0x03));
-            levelDataDict.Add(0x1A04, new LevelData("Main Gate", "First Area 2", 0x1A, 0x04));
-            levelDataDict.Add(0x1A05, new LevelData("Main Gate", "First Area 3", 0x1A, 0x05));
-            levelDataDict.Add(0x1A06, new LevelData("Main Gate", "First Area 4", 0x1A, 0x06));
-            levelDataDict.Add(0x1A07, new LevelData("Main Gate", "First Area 5", 0x1A, 0x07));
-            levelDataDict.Add(0x1A08, new LevelData("Main Gate", "First Area 6", 0x1A, 0x08));
-            levelDataDict.Add(0x1A09, new LevelData("Main Gate", "First Area 7 (Entrance)", 0x1A, 0x09));
-            levelDataDict.Add(0x1A0A, new LevelData("Main Gate", "Tiny Kattelox", 0x1A, 0x0A));
-            levelDataDict.Add(0x1A0B, new LevelData("Main Gate", "Juno Wall", 0x1A, 0x0B));
-            levelDataDict.Add(0x1A0C, new LevelData("Main Gate", "Amelia's Office (simplified)", 0x1A, 0x0C));
-            levelDataDict.Add(0x1A0D, new LevelData("Main Gate", "Downtown (simplified)", 0x1A, 0x0D));
-            levelDataDict.Add(0x1A0E, new LevelData("Main Gate", "Empty?", 0x1A, 0x0E));
-            levelDataDict.Add(0x1A0F, new LevelData("Main Gate", "Juno's Room Without Door", 0x1A, 0x0F));
-            levelDataDict.Add(0x1A10, new LevelData("Main Gate", "Unknown (textures?)", 0x1A, 0x10));
-            levelDataDict.Add(0x1B00, new LevelData("Cardon Forest (Flutter Fixed)", "Near ruin entrance", 0x1B, 0x00));
-            levelDataDict.Add(0x1B01, new LevelData("Cardon Forest (Flutter Fixed)", "Crash Site", 0x1B, 0x01));
-            levelDataDict.Add(0x1B02, new LevelData("Cardon Forest (Flutter Fixed)", "City Entrance", 0x1B, 0x02));
-            levelDataDict.Add(0x1B03, new LevelData("Cardon Forest (Flutter Fixed)", "Unknown (floating model)", 0x1B, 0x03));
-            levelDataDict.Add(0x1B04, new LevelData("Cardon Forest (Flutter Fixed)", "Unknown (floating model)", 0x1B, 0x04));
-            levelDataDict.Add(0x1B05, new LevelData("Cardon Forest (Flutter Fixed)", "Barell's Room", 0x1B, 0x05));
-            levelDataDict.Add(0x1B06, new LevelData("Cardon Forest (Flutter Fixed)", "Roll's Room", 0x1B, 0x06));
-            levelDataDict.Add(0x1B07, new LevelData("Cardon Forest (Flutter Fixed)", "Flutter Lobby", 0x1B, 0x07));
-            levelDataDict.Add(0x1B08, new LevelData("Cardon Forest (Flutter Fixed)", "Mega Man's Room", 0x1B, 0x08));
-            levelDataDict.Add(0x1C00, new LevelData("Museum", "First Floor", 0x1C, 0x00));
-            levelDataDict.Add(0x1C01, new LevelData("Museum", "Second Floor", 0x1C, 0x01));
-            levelDataDict.Add(0x1D00, new LevelData("Sub-Cities", "Watcher Sub-City", 0x1D, 0x00));
-            levelDataDict.Add(0x1D01, new LevelData("Sub-Cities", "Sleeper Sub-City", 0x1D, 0x01));
-            levelDataDict.Add(0x1D02, new LevelData("Sub-Cities", "Dreamer Sub-City", 0x1D, 0x02));
-            levelDataDict.Add(0x1D03, new LevelData("Sub-Cities", "Watcher Chest Room", 0x1D, 0x03));
-            levelDataDict.Add(0x1D04, new LevelData("Sub-Cities", "Sleeper Chest Room", 0x1D, 0x04));
-            levelDataDict.Add(0x1D05, new LevelData("Sub-Cities", "Dreamer Chest Room", 0x1D, 0x05));
-            levelDataDict.Add(0x1E00, new LevelData("Ending", "Flutter Launch Area (different)", 0x1E, 0x00));
-            levelDataDict.Add(0x1E01, new LevelData("Ending", "Flutter Bridge", 0x1E, 0x01));
-            levelDataDict.Add(0x1E02, new LevelData("Ending", "Cliff and Ocean", 0x1E, 0x02));
-            levelDataDict.Add(0x1E03, new LevelData("Ending", "Empty?", 0x1E, 0x03));
-            levelDataDict.Add(0x1E04, new LevelData("Ending", "Empty?", 0x1E, 0x04));
-            levelDataDict.Add(0x1E05, new LevelData("Ending", "Tiny Kattelox", 0x1E, 0x05));
+            Dictionary<ushort, LevelData> levelDataDict = new()
+            {
+                { 0x0000, new LevelData("Ocean Tower", "Intro cutscene", 0x00, 0x00) },
+                { 0x0001, new LevelData("Ocean Tower", "Room 1 (Entrance)", 0x00, 0x01) },
+                { 0x0002, new LevelData("Ocean Tower", "Room 2", 0x00, 0x02) },
+                { 0x0003, new LevelData("Ocean Tower", "Room 3 (Boss)", 0x00, 0x03) },
+                { 0x0004, new LevelData("Ocean Tower", "Outdoor Cutscene", 0x00, 0x04) },
+                { 0x0005, new LevelData("Ocean Tower", "Back To Title Screen", 0x00, 0x05) },
+                { 0x0006, new LevelData("Ocean Tower", "Empty?", 0x00, 0x06) },
+                { 0x0100, new LevelData("Opening Text Cutscene", "Scrolling Text", 0x01, 0x00) },
+                { 0x0200, new LevelData("Crash Cutscene", "Cutscene", 0x02, 0x00) },
+                { 0x0300, new LevelData("Cardon Forest (Flutter Broken)", "Near ruin entrance", 0x03, 0x00) },
+                { 0x0301, new LevelData("Cardon Forest (Flutter Broken)", "Crash Site", 0x03, 0x01) },
+                { 0x0302, new LevelData("Cardon Forest (Flutter Broken)", "City Entrance", 0x03, 0x02) },
+                { 0x0303, new LevelData("Cardon Forest (Flutter Broken)", "Unknown (floating model)", 0x03, 0x03) },
+                { 0x0304, new LevelData("Cardon Forest (Flutter Broken)", "Unknown (floating model)", 0x03, 0x04) },
+                { 0x0305, new LevelData("Cardon Forest (Flutter Broken)", "Barell's Room", 0x03, 0x05) },
+                { 0x0306, new LevelData("Cardon Forest (Flutter Broken)", "Roll's Room (no Roll)", 0x03, 0x06) },
+                { 0x0307, new LevelData("Cardon Forest (Flutter Broken)", "Flutter", 0x03, 0x07) },
+                { 0x0308, new LevelData("Cardon Forest (Flutter Broken)", "Mega Man's Room", 0x03, 0x08) },
+                { 0x0400, new LevelData("Apple Market", "Apple Market", 0x04, 0x00) },
+                { 0x0401, new LevelData("Apple Market", "Junk Shop", 0x04, 0x01) },
+                { 0x0402, new LevelData("Apple Market", "Electronics Shop", 0x04, 0x02) },
+                { 0x0403, new LevelData("Apple Market", "Hip Bone", 0x04, 0x03) },
+                { 0x0404, new LevelData("Apple Market", "Tailor Chinos", 0x04, 0x04) },
+                { 0x0405, new LevelData("Apple Market", "Record Shop", 0x04, 0x05) },
+                { 0x0500, new LevelData("Downtown", "Downtown", 0x05, 0x00) },
+                { 0x0501, new LevelData("Downtown", "(no music, no sub-city, missing door texture)", 0x05, 0x01) },
+                { 0x0502, new LevelData("Downtown", "Library", 0x05, 0x02) },
+                { 0x0503, new LevelData("Downtown", "Tron's Cockpit", 0x05, 0x03) },
+                { 0x0504, new LevelData("Downtown", "Stripe Burger", 0x05, 0x04) },
+                { 0x0600, new LevelData("City Hall", "Outdoors", 0x06, 0x00) },
+                { 0x0601, new LevelData("City Hall", "Amelia's Office", 0x06, 0x01) },
+                { 0x0602, new LevelData("City Hall", "Outdoors (no music, cars, or people)", 0x06, 0x02) },
+                { 0x0603, new LevelData("City Hall", "Teisel's Room", 0x06, 0x03) },
+                { 0x0604, new LevelData("City Hall", "Amelia's Office (wrecked)", 0x06, 0x04) },
+                { 0x0700, new LevelData("Gesselschaft Interior", "Empty?", 0x07, 0x00) },
+                { 0x0701, new LevelData("Gesselschaft Interior", "Engine Room", 0x07, 0x01) },
+                { 0x0702, new LevelData("Gesselschaft Interior", "Hallway", 0x07, 0x02) },
+                { 0x0703, new LevelData("Gesselschaft Interior", "Kitchen", 0x07, 0x03) },
+                { 0x0704, new LevelData("Gesselschaft Interior", "HQ", 0x07, 0x04) },
+                { 0x0705, new LevelData("Gesselschaft Interior", "First Meeting Room Cutscene", 0x07, 0x05) },
+                { 0x0706, new LevelData("Gesselschaft Interior", "Meeting Room", 0x07, 0x06) },
+                { 0x0707, new LevelData("Gesselschaft Interior", "Empty?", 0x07, 0x07) },
+                { 0x0800, new LevelData("Uptown", "Uptown", 0x08, 0x00) },
+                { 0x0801, new LevelData("Uptown", "Hospital", 0x08, 0x01) },
+                { 0x0802, new LevelData("Uptown", "TV Station", 0x08, 0x02) },
+                { 0x0803, new LevelData("Uptown", "Beast Hunter game", 0x08, 0x03) },
+                { 0x0804, new LevelData("Uptown", "Balloon Game", 0x08, 0x04) },
+                { 0x0805, new LevelData("Uptown", "Ira's Room", 0x08, 0x05) },
+                { 0x0900, new LevelData("Underground Ruins", "Room 1 (Junk Store Man Area)", 0x09, 0x00) },
+                { 0x0901, new LevelData("Underground Ruins", "Room 2", 0x09, 0x01) },
+                { 0x0902, new LevelData("Underground Ruins", "Room 3 (Sewer)", 0x09, 0x02) },
+                { 0x0903, new LevelData("Underground Ruins", "Room 4", 0x09, 0x03) },
+                { 0x0904, new LevelData("Underground Ruins", "Room 5", 0x09, 0x04) },
+                { 0x0905, new LevelData("Underground Ruins", "Room 6", 0x09, 0x05) },
+                { 0x0906, new LevelData("Underground Ruins", "Room 7", 0x09, 0x06) },
+                { 0x0907, new LevelData("Underground Ruins", "Room 8", 0x09, 0x07) },
+                { 0x0908, new LevelData("Underground Ruins", "Room 9", 0x09, 0x08) },
+                { 0x0A00, new LevelData("Clozer Woods (Tiesel)", "Tiesel Area", 0x0A, 0x00) },
+                { 0x0B00, new LevelData("Lake Jyun", "Inside Bonne Robot", 0x0B, 0x00) },
+                { 0x0B01, new LevelData("Lake Jyun", "???", 0x0B, 0x01) },
+                { 0x0B02, new LevelData("Lake Jyun", "On the Lake", 0x0B, 0x02) },
+                { 0x0B03, new LevelData("Lake Jyun", "Side River", 0x0B, 0x03) },
+                { 0x0B04, new LevelData("Lake Jyun", "Inside Bonne Robot", 0x0B, 0x04) },
+                { 0x0B05, new LevelData("Lake Jyun", "Empty?", 0x0B, 0x05) },
+                { 0x0B06, new LevelData("Lake Jyun", "Door Opening Mechanism", 0x0B, 0x06) },
+                { 0x0B07, new LevelData("Lake Jyun", "Subgate With Open Door", 0x0B, 0x07) },
+                { 0x0C00, new LevelData("Outside Cardon Forest Subgate", "Outside", 0x0C, 0x00) },
+                { 0x0C01, new LevelData("Outside Cardon Forest Subgate", "Door Opening Mechanism", 0x0C, 0x01) },
+                { 0x0C02, new LevelData("Outside Cardon Forest Subgate", "Subgate With Open Door", 0x0C, 0x02) },
+                { 0x0C03, new LevelData("Outside Cardon Forest Subgate", "Small Piece of Ground", 0x0C, 0x03) },
+                { 0x0D00, new LevelData("Wily's Boat", "Walkway", 0x0D, 0x00) },
+                { 0x0D01, new LevelData("Wily's Boat", "Inside", 0x0D, 0x01) },
+                { 0x0D02, new LevelData("Wily's Boat", "Boat Area", 0x0D, 0x02) },
+                { 0x0D03, new LevelData("Wily's Boat", "Inside The Boat", 0x0D, 0x03) },
+                { 0x0D04, new LevelData("Wily's Boat", "Walkway (no box or woman)", 0x0D, 0x04) },
+                { 0x0D05, new LevelData("Wily's Boat", "Walkway (no box, woman, or boat)", 0x0D, 0x05) },
+                { 0x0E00, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x00) },
+                { 0x0E01, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x01) },
+                { 0x0E02, new LevelData("Cardon Forest Sub-gate", "Room 1", 0x0E, 0x02) },
+                { 0x0F00, new LevelData("City Hall (Indoors)", "Police Station", 0x0F, 0x00) },
+                { 0x0F01, new LevelData("City Hall (Indoors)", "Inspector's Office", 0x0F, 0x01) },
+                { 0x0F02, new LevelData("City Hall (Indoors)", "City Hall 1st Floor", 0x0F, 0x02) },
+                { 0x0F03, new LevelData("City Hall (Indoors)", "Bank", 0x0F, 0x03) },
+                { 0x1000, new LevelData("Yass Plains", "Yass Plains Outdoors", 0x10, 0x00) },
+                { 0x1001, new LevelData("Yass Plains", "Hideout Stage 1", 0x10, 0x01) },
+                { 0x1002, new LevelData("Yass Plains", "Hideout Stage 2", 0x10, 0x02) },
+                { 0x1003, new LevelData("Yass Plains", "Hideout Stage 3", 0x10, 0x03) },
+                { 0x1004, new LevelData("Yass Plains", "Empty House", 0x10, 0x04) },
+                { 0x1005, new LevelData("Yass Plains", "Junk Shop House", 0x10, 0x05) },
+                { 0x1100, new LevelData("Clozer Woods With Bridge", "Clozer Woods With Bridge", 0x11, 0x00) },
+                { 0x1200, new LevelData("Outside Main Gate", "Outside Main Gate", 0x12, 0x00) },
+                { 0x1300, new LevelData("Clozer Woods Sub-Gate", "Room 1 (Entrance)", 0x13, 0x00) },
+                { 0x1301, new LevelData("Clozer Woods Sub-Gate", "Room 2", 0x13, 0x01) },
+                { 0x1302, new LevelData("Clozer Woods Sub-Gate", "Room 3 (Key Room)", 0x13, 0x02) },
+                { 0x1303, new LevelData("Clozer Woods Sub-Gate", "Room 4", 0x13, 0x03) },
+                { 0x1304, new LevelData("Clozer Woods Sub-Gate", "Room 5", 0x13, 0x04) },
+                { 0x1305, new LevelData("Clozer Woods Sub-Gate", "Room 6", 0x13, 0x05) },
+                { 0x1306, new LevelData("Clozer Woods Sub-Gate", "Room 7", 0x13, 0x06) },
+                { 0x1307, new LevelData("Clozer Woods Sub-Gate", "Room 8", 0x13, 0x07) },
+                { 0x1308, new LevelData("Clozer Woods Sub-Gate", "Room 9 (Generator)", 0x13, 0x08) },
+                { 0x1309, new LevelData("Clozer Woods Sub-Gate", "Room 10", 0x13, 0x09) },
+                { 0x130A, new LevelData("Clozer Woods Sub-Gate", "Flutter Barell's Room", 0x13, 0x0A) },
+                { 0x130B, new LevelData("Clozer Woods Sub-Gate", "Flutter Roll's Room", 0x13, 0x0B) },
+                { 0x130C, new LevelData("Clozer Woods Sub-Gate", "Flutter Lobby", 0x13, 0x0C) },
+                { 0x130D, new LevelData("Clozer Woods Sub-Gate", "Flutter Mega Man's Room", 0x13, 0x0D) },
+                { 0x1400, new LevelData("Lake Jyun Sub-Gate", "Room 1 (Entrance)", 0x14, 0x00) },
+                { 0x1401, new LevelData("Lake Jyun Sub-Gate", "Room 2", 0x14, 0x01) },
+                { 0x1402, new LevelData("Lake Jyun Sub-Gate", "Room 3", 0x14, 0x02) },
+                { 0x1403, new LevelData("Lake Jyun Sub-Gate", "Room 4 ", 0x14, 0x03) },
+                { 0x1404, new LevelData("Lake Jyun Sub-Gate", "Refractor Room", 0x14, 0x04) },
+                { 0x1500, new LevelData("Bonne Ending Boat", "Boat Interior", 0x15, 0x00) },
+                { 0x1501, new LevelData("Bonne Ending Boat", "Ocean", 0x15, 0x01) },
+                { 0x1600, new LevelData("Flutter To Subgate Cutscene", "Cutscene", 0x16, 0x00) },
+                { 0x1601, new LevelData("Flutter To Subgate Cutscene", "Flutter Bridge", 0x16, 0x01) },
+                { 0x1602, new LevelData("Flutter To Subgate Cutscene", "Return Cutscene", 0x16, 0x02) },
+                { 0x1700, new LevelData("Gesselschaft Battle", "Small Bridge", 0x17, 0x00) },
+                { 0x1701, new LevelData("Gesselschaft Battle", "Flutter Bridge", 0x17, 0x01) },
+                { 0x1702, new LevelData("Gesselschaft Battle", "Gesselschaft HQ", 0x17, 0x02) },
+                { 0x1703, new LevelData("Gesselschaft Battle", "Scrolling Clouds", 0x17, 0x03) },
+                { 0x1800, new LevelData("Flutter Takeoff", "Cardon Forest with no Flutter (Yasmar Woods)", 0x18, 0x00) },
+                { 0x1801, new LevelData("Flutter Takeoff", "Flutter Engine Room", 0x18, 0x01) },
+                { 0x1802, new LevelData("Flutter Takeoff", "Glowing Refractor", 0x18, 0x02) },
+                { 0x1900, new LevelData("Old City", "Old City (no dogs, weapons usable)", 0x19, 0x00) },
+                { 0x1901, new LevelData("Old City", "Bonne's Warehouse", 0x19, 0x01) },
+                { 0x1902, new LevelData("Old City", "Power Plant", 0x19, 0x02) },
+                { 0x1903, new LevelData("Old City", "Old City (dogs, no weapons)", 0x19, 0x03) },
+                { 0x1A00, new LevelData("Main Gate", "Second Area (where you unlock the sub-cities)", 0x1A, 0x00) },
+                { 0x1A01, new LevelData("Main Gate", "Third Area (Watcher, Sleeper, Dreamer doors)", 0x1A, 0x01) },
+                { 0x1A02, new LevelData("Main Gate", "Final Area", 0x1A, 0x02) },
+                { 0x1A03, new LevelData("Main Gate", "First Area 1", 0x1A, 0x03) },
+                { 0x1A04, new LevelData("Main Gate", "First Area 2", 0x1A, 0x04) },
+                { 0x1A05, new LevelData("Main Gate", "First Area 3", 0x1A, 0x05) },
+                { 0x1A06, new LevelData("Main Gate", "First Area 4", 0x1A, 0x06) },
+                { 0x1A07, new LevelData("Main Gate", "First Area 5", 0x1A, 0x07) },
+                { 0x1A08, new LevelData("Main Gate", "First Area 6", 0x1A, 0x08) },
+                { 0x1A09, new LevelData("Main Gate", "First Area 7 (Entrance)", 0x1A, 0x09) },
+                { 0x1A0A, new LevelData("Main Gate", "Tiny Kattelox", 0x1A, 0x0A) },
+                { 0x1A0B, new LevelData("Main Gate", "Juno Wall", 0x1A, 0x0B) },
+                { 0x1A0C, new LevelData("Main Gate", "Amelia's Office (simplified)", 0x1A, 0x0C) },
+                { 0x1A0D, new LevelData("Main Gate", "Downtown (simplified)", 0x1A, 0x0D) },
+                { 0x1A0E, new LevelData("Main Gate", "Empty?", 0x1A, 0x0E) },
+                { 0x1A0F, new LevelData("Main Gate", "Juno's Room Without Door", 0x1A, 0x0F) },
+                { 0x1A10, new LevelData("Main Gate", "Unknown (textures?)", 0x1A, 0x10) },
+                { 0x1B00, new LevelData("Cardon Forest (Flutter Fixed)", "Near ruin entrance", 0x1B, 0x00) },
+                { 0x1B01, new LevelData("Cardon Forest (Flutter Fixed)", "Crash Site", 0x1B, 0x01) },
+                { 0x1B02, new LevelData("Cardon Forest (Flutter Fixed)", "City Entrance", 0x1B, 0x02) },
+                { 0x1B03, new LevelData("Cardon Forest (Flutter Fixed)", "Unknown (floating model)", 0x1B, 0x03) },
+                { 0x1B04, new LevelData("Cardon Forest (Flutter Fixed)", "Unknown (floating model)", 0x1B, 0x04) },
+                { 0x1B05, new LevelData("Cardon Forest (Flutter Fixed)", "Barell's Room", 0x1B, 0x05) },
+                { 0x1B06, new LevelData("Cardon Forest (Flutter Fixed)", "Roll's Room", 0x1B, 0x06) },
+                { 0x1B07, new LevelData("Cardon Forest (Flutter Fixed)", "Flutter Lobby", 0x1B, 0x07) },
+                { 0x1B08, new LevelData("Cardon Forest (Flutter Fixed)", "Mega Man's Room", 0x1B, 0x08) },
+                { 0x1C00, new LevelData("Museum", "First Floor", 0x1C, 0x00) },
+                { 0x1C01, new LevelData("Museum", "Second Floor", 0x1C, 0x01) },
+                { 0x1D00, new LevelData("Sub-Cities", "Watcher Sub-City", 0x1D, 0x00) },
+                { 0x1D01, new LevelData("Sub-Cities", "Sleeper Sub-City", 0x1D, 0x01) },
+                { 0x1D02, new LevelData("Sub-Cities", "Dreamer Sub-City", 0x1D, 0x02) },
+                { 0x1D03, new LevelData("Sub-Cities", "Watcher Chest Room", 0x1D, 0x03) },
+                { 0x1D04, new LevelData("Sub-Cities", "Sleeper Chest Room", 0x1D, 0x04) },
+                { 0x1D05, new LevelData("Sub-Cities", "Dreamer Chest Room", 0x1D, 0x05) },
+                { 0x1E00, new LevelData("Ending", "Flutter Launch Area (different)", 0x1E, 0x00) },
+                { 0x1E01, new LevelData("Ending", "Flutter Bridge", 0x1E, 0x01) },
+                { 0x1E02, new LevelData("Ending", "Cliff and Ocean", 0x1E, 0x02) },
+                { 0x1E03, new LevelData("Ending", "Empty?", 0x1E, 0x03) },
+                { 0x1E04, new LevelData("Ending", "Empty?", 0x1E, 0x04) },
+                { 0x1E05, new LevelData("Ending", "Tiny Kattelox", 0x1E, 0x05) }
+            };
             return levelDataDict;
         }
         public static ItemData GetZennyItemData(uint quantity)
         {
-            ItemData zennyItemData = new ItemData("Zenny", "Zenny", quantity, null, null, null);
+            ItemData zennyItemData = new("Zenny", "Zenny", quantity, null, null, null);
             return zennyItemData;
         }
         public static ItemData GetNothingItemData()
         {
-            ItemData nothingItemData = new ItemData("Nothing", "Nothing", null, 0xFF, null, null);
+            ItemData nothingItemData = new("Nothing", "Nothing", null, 0xFF, null, null);
             return nothingItemData;
         }
         public static Dictionary<uint, ItemData> GetItemDataDict()
         {
-            Dictionary<uint, ItemData> itemDataDict = new Dictionary<uint, ItemData>();
-            itemDataDict.Add(0x00, new ItemData("Buster Part", "Blaster Unit Omega", 1, 0x00, null, null));
-            itemDataDict.Add(0x01, new ItemData("Buster Part", "Sniper Unit Omega", 1, 0x01, null, null));
-            itemDataDict.Add(0x02, new ItemData("Buster Part", "Laser", 1, 0x02, null, null));
-            itemDataDict.Add(0x03, new ItemData("Buster Part", "Sniper Range", 1, 0x03, null, null));
-            itemDataDict.Add(0x04, new ItemData("Buster Part", "Turbo Battery", 1, 0x04, null, null));
-            itemDataDict.Add(0x05, new ItemData("Buster Part", "Power Raiser Omega", 1, 0x05, null, null));
-            itemDataDict.Add(0x06, new ItemData("Buster Part", "Range Booster Omega", 1, 0x06, null, null));
-            itemDataDict.Add(0x07, new ItemData("Buster Part", "Turbo Charger Omega", 1, 0x07, null, null));
-            itemDataDict.Add(0x08, new ItemData("Buster Part", "Blast Unit", 1, 0x08, null, null));
-            itemDataDict.Add(0x09, new ItemData("Buster Part", "Sniper Unit", 1, 0x09, null, null));
-            itemDataDict.Add(0x0A, new ItemData("Buster Part", "Power Raiser Alpha", 1, 0x0A, null, null));
-            itemDataDict.Add(0x0B, new ItemData("Buster Part", "Range Booster Alpha", 1, 0x0B, null, null));
-            itemDataDict.Add(0x0C, new ItemData("Buster Part", "Turbo Charger Alpha", 1, 0x0C, null, null));
-            itemDataDict.Add(0x0D, new ItemData("Buster Part", "Power Raiser", 1, 0x0D, null, null));
-            itemDataDict.Add(0x0E, new ItemData("Buster Part", "Range Booster", 1, 0x0E, null, null));
-            itemDataDict.Add(0x0F, new ItemData("Buster Part", "Turbo Charger", 1, 0x0F, null, null));
-            itemDataDict.Add(0x10, new ItemData("Buster Part", "Buster Max", 1, 0x10, null, null));
-            itemDataDict.Add(0x11, new ItemData("Buster Part", "Power Stream", 1, 0x11, null, null));
-            itemDataDict.Add(0x12, new ItemData("Buster Part", "Blaster Unit R", 1, 0x12, null, null));
-            itemDataDict.Add(0x13, new ItemData("Buster Part", "Buster Unit Omega", 1, 0x13, null, null));
-            itemDataDict.Add(0x14, new ItemData("Buster Part", "Omni-Unit Omega", 1, 0x14, null, null));
-            itemDataDict.Add(0x15, new ItemData("Buster Part", "Auto Battery", 1, 0x15, null, null));
-            itemDataDict.Add(0x16, new ItemData("Buster Part", "Sniper Scope", 1, 0x16, null, null));
-            itemDataDict.Add(0x17, new ItemData("Buster Part", "Rapid Striker", 1, 0x17, null, null));
-            itemDataDict.Add(0x18, new ItemData("Buster Part", "Gatling Gun", 1, 0x18, null, null));
-            itemDataDict.Add(0x19, new ItemData("Buster Part", "Omni Unit", 1, 0x19, null, null));
-            itemDataDict.Add(0x1A, new ItemData("Buster Part", "Power Blaster R", 1, 0x1A, null, null));
-            itemDataDict.Add(0x1B, new ItemData("Buster Part", "Power Blaster L", 1, 0x1B, null, null));
-            itemDataDict.Add(0x1C, new ItemData("Buster Part", "Machine Gun", 1, 0x1C, null, null));
-            itemDataDict.Add(0x1D, new ItemData("Buster Part", "Triple Access", 1, 0x1D, null, null));
-            itemDataDict.Add(0x1E, new ItemData("Buster Part", "Buster Unit", 1, 0x1E, null, null));
-            itemDataDict.Add(0x1F, new ItemData("Buster Part", "Rapid Fire", 1, 0x1F, null, null));
-            itemDataDict.Add(0x20, new ItemData("Special Item", "Helmet", 1, 0x20, null, null));
-            itemDataDict.Add(0x21, new ItemData("Special Item", "Jump Springs", 1, 0x21, null, null));
-            itemDataDict.Add(0x22, new ItemData("Special Item", "Jet Skates", 1, 0x22, null, null));
-            itemDataDict.Add(0x23, new ItemData("Special Item", "Life Gauge", 1, 0x23, null, null));
-            itemDataDict.Add(0x24, new ItemData("Special Item", "Energy Canteen", 1, 0x24, null, null));
-            itemDataDict.Add(0x25, new ItemData("Special Item", "Extra Pack", 1, 0x25, null, null));
-            itemDataDict.Add(0x26, new ItemData("Special Item", "Adapter Plug", 1, 0x26, null, null));
-            itemDataDict.Add(0x27, new ItemData("Special Item", "Refractor", 1, 0x27, null, null));
-            itemDataDict.Add(0x28, new ItemData("Special Item", "Refractor", 1, 0x28, null, null));
-            itemDataDict.Add(0x29, new ItemData("Special Item", "Refractor", 1, 0x29, null, null));
-            itemDataDict.Add(0x2A, new ItemData("Special Item", "Citizen's Card", 1, 0x2A, null, null));
-            itemDataDict.Add(0x2B, new ItemData("Special Item", "Class A License", 1, 0x2B, null, null));
-            itemDataDict.Add(0x2C, new ItemData("Special Item", "Class B License", 1, 0x2C, null, null));
-            itemDataDict.Add(0x2D, new ItemData("Special Item", "Bonne Key", 1, 0x2D, null, null));
-            itemDataDict.Add(0x2E, new ItemData("Special Item", "Starter Key", 1, 0x2E, null, null));
-            itemDataDict.Add(0x2F, new ItemData("Special Item", "Starter Key", 1, 0x2F, null, null));
-            itemDataDict.Add(0x30, new ItemData("Special Item", "Starter Key", 1, 0x30, null, null));
-            itemDataDict.Add(0x31, new ItemData("Special Item", "Starter Key", 1, 0x31, null, null));
-            itemDataDict.Add(0x32, new ItemData("Special Item", "Starter Key", 1, 0x32, null, null));
-            itemDataDict.Add(0x33, new ItemData("Special Item", "Starter Key", 1, 0x33, null, null));
-            itemDataDict.Add(0x34, new ItemData("Special Item", "ID Card", 1, 0x34, null, null));
-            itemDataDict.Add(0x35, new ItemData("Special Item", "ID Card", 1, 0x35, null, null));
-            itemDataDict.Add(0x36, new ItemData("Special Item", "ID Card", 1, 0x36, null, null));
-            itemDataDict.Add(0x37, new ItemData("Special Item", "Watcher' Key", 1, 0x37, null, null));
-            itemDataDict.Add(0x38, new ItemData("Special Item", "Sleeper' Key", 1, 0x38, null, null));
-            itemDataDict.Add(0x39, new ItemData("Special Item", "Dreamer' Key", 1, 0x39, null, null));
-            itemDataDict.Add(0x3A, new ItemData("Special Item", "Flak Jacket", 1, 0x3A, null, null));
-            itemDataDict.Add(0x3B, new ItemData("Special Item", "Kevlar Jacket", 1, 0x3B, null, null));
-            itemDataDict.Add(0x3C, new ItemData("Special Item", "Kevlar Jacket Omega", 1, 0x3C, null, null));
-            itemDataDict.Add(0x3D, new ItemData("Special Item", "Walkie-Talkie", 1, 0x3D, null, null));
-            itemDataDict.Add(0x3E, new ItemData("Special Item", "KEY-ITEM 1E", 1, 0x3E, null, null));
-            itemDataDict.Add(0x3F, new ItemData("Special Item", "(empty)", 1, 0x3F, null, null));
-            itemDataDict.Add(0x40, new ItemData("Normal Item", "Shield Repair", 1, 0x40, 0xBE420, 7));
-            itemDataDict.Add(0x41, new ItemData("Normal Item", "Hyper Cartridge", 1, 0x41, 0xBE420, 6));
-            itemDataDict.Add(0x42, new ItemData("Normal Item", "Chamelion Net", 1, 0x42, 0xBE420, 5));
-            itemDataDict.Add(0x43, new ItemData("Normal Item", "Defense Shield", 1, 0x43, 0xBE420, 4));
-            itemDataDict.Add(0x44, new ItemData("Normal Item", "Flower", 1, 0x44, 0xBE420, 3));
-            itemDataDict.Add(0x45, new ItemData("Normal Item", "Bag", 1, 0x45, 0xBE420, 2));
-            itemDataDict.Add(0x46, new ItemData("Normal Item", "Trunk", 1, 0x46, 0xBE420, 1));
-            itemDataDict.Add(0x47, new ItemData("Normal Item", "Pick", 1, 0x47, 0xBE420, 0));
-            itemDataDict.Add(0x48, new ItemData("Normal Item", "Saw", 1, 0x48, 0xBE421, 7));
-            itemDataDict.Add(0x49, new ItemData("Normal Item", "Lipstick", 1, 0x49, 0xBE421, 6));
-            itemDataDict.Add(0x4A, new ItemData("Normal Item", "Music Box", 1, 0x4A, 0xBE421, 5));
-            itemDataDict.Add(0x4B, new ItemData("Normal Item", "Old Bone", 1, 0x4B, 0xBE421, 4));
-            itemDataDict.Add(0x4C, new ItemData("Normal Item", "Old Heater", 1, 0x4C, 0xBE421, 3));
-            itemDataDict.Add(0x4D, new ItemData("Normal Item", "Old Doll", 1, 0x4D, 0xBE421, 2));
-            itemDataDict.Add(0x4E, new ItemData("Normal Item", "Antique Bell", 1, 0x4E, 0xBE421, 1));
-            itemDataDict.Add(0x4F, new ItemData("Normal Item", "Giant Horn", 1, 0x4F, 0xBE421, 0));
-            itemDataDict.Add(0x50, new ItemData("Normal Item", "Shiny Object", 1, 0x50, 0xBE422, 7));
-            itemDataDict.Add(0x51, new ItemData("Normal Item", "Old Shield", 1, 0x51, 0xBE422, 6));
-            itemDataDict.Add(0x52, new ItemData("Normal Item", "Shiny Red Stone", 1, 0x52, 0xBE422, 5));
-            itemDataDict.Add(0x53, new ItemData("Normal Item", "Stag Beetle", 1, 0x53, 0xBE422, 4));
-            itemDataDict.Add(0x54, new ItemData("Normal Item", "Beetle", 1, 0x54, 0xBE422, 3));
-            itemDataDict.Add(0x55, new ItemData("Normal Item", "Comic Book", 1, 0x55, 0xBE422, 2));
-            itemDataDict.Add(0x56, new ItemData("Normal Item", "Ring", 1, 0x56, 0xBE422, 1));
-            itemDataDict.Add(0x57, new ItemData("Normal Item", "EMPTY", 1, 0x57, 0xBE422, 0));
-            itemDataDict.Add(0x58, new ItemData("Normal Item", "Mine Parts Kit", 1, 0x58, 0xBE423, 7));
-            itemDataDict.Add(0x59, new ItemData("Normal Item", "Cannon Kit", 1, 0x59, 0xBE423, 6));
-            itemDataDict.Add(0x5A, new ItemData("Normal Item", "Grenade Kit", 1, 0x5A, 0xBE423, 5));
-            itemDataDict.Add(0x5B, new ItemData("Normal Item", "Blumebear Parts", 1, 0x5B, 0xBE423, 4));
-            itemDataDict.Add(0x5C, new ItemData("Normal Item", "Mystic Orb", 1, 0x5C, 0xBE423, 3));
-            itemDataDict.Add(0x5D, new ItemData("Normal Item", "Marlwolf Shell", 1, 0x5D, 0xBE423, 2));
-            itemDataDict.Add(0x5E, new ItemData("Normal Item", "Broken Motor", 1, 0x5E, 0xBE423, 1));
-            itemDataDict.Add(0x5F, new ItemData("Normal Item", "Broken Propeller", 1, 0x5F, 0xBE423, 0));
-            itemDataDict.Add(0x60, new ItemData("Normal Item", "Broken Cleaner", 1, 0x60, 0xBE424, 7));
-            itemDataDict.Add(0x61, new ItemData("Normal Item", "Bomb Schematic", 1, 0x61, 0xBE424, 6));
-            itemDataDict.Add(0x62, new ItemData("Normal Item", "Blunted Drill", 1, 0x62, 0xBE424, 5));
-            itemDataDict.Add(0x63, new ItemData("Normal Item", "Guidance Unit", 1, 0x63, 0xBE424, 4));
-            itemDataDict.Add(0x64, new ItemData("Normal Item", "Zetsabre", 1, 0x64, 0xBE424, 3));
-            itemDataDict.Add(0x65, new ItemData("Normal Item", "Pen Light", 1, 0x65, 0xBE424, 2));
-            itemDataDict.Add(0x66, new ItemData("Normal Item", "Old Launcher", 1, 0x66, 0xBE424, 1));
-            itemDataDict.Add(0x67, new ItemData("Normal Item", "Ancient Book", 1, 0x67, 0xBE424, 0));
-            itemDataDict.Add(0x68, new ItemData("Normal Item", "Arm Supporter", 1, 0x68, 0xBE425, 7));
-            itemDataDict.Add(0x69, new ItemData("Normal Item", "X Buster", 1, 0x69, 0xBE425, 6));
-            itemDataDict.Add(0x6A, new ItemData("Normal Item", "Weapon Plans", 1, 0x6A, 0xBE425, 5));
-            itemDataDict.Add(0x6B, new ItemData("Normal Item", "Prism Crystal", 1, 0x6B, 0xBE425, 4));
-            itemDataDict.Add(0x6C, new ItemData("Normal Item", "Spring Set", 1, 0x6C, 0xBE425, 3));
-            itemDataDict.Add(0x6D, new ItemData("Normal Item", "Safety Helmet", 1, 0x6D, 0xBE425, 2));
-            itemDataDict.Add(0x6E, new ItemData("Normal Item", "Rollerboard", 1, 0x6E, 0xBE425, 1));
-            itemDataDict.Add(0x6F, new ItemData("Normal Item", "Old Hoverjets", 1, 0x6F, 0xBE425, 0));
-            itemDataDict.Add(0x70, new ItemData("Normal Item", "Joint Plug", 1, 0x70, 0xBE426, 7));
-            itemDataDict.Add(0x71, new ItemData("Normal Item", "Broken Circuits", 1, 0x71, 0xBE426, 6));
-            itemDataDict.Add(0x72, new ItemData("Normal Item", "Main Core Shard", 1, 0x72, 0xBE426, 5));
-            itemDataDict.Add(0x73, new ItemData("Normal Item", "Sun-light", 1, 0x73, 0xBE426, 4));
-            itemDataDict.Add(0x74, new ItemData("Normal Item", "Rapidfire Barrel", 1, 0x74, 0xBE426, 3));
-            itemDataDict.Add(0x75, new ItemData("Normal Item", "Plastique", 1, 0x75, 0xBE426, 2));
-            itemDataDict.Add(0x76, new ItemData("Normal Item", "Bomb", 1, 0x76, 0xBE426, 1));
-            itemDataDict.Add(0x77, new ItemData("Normal Item", "Gatling Part", 1, 0x77, 0xBE426, 0));
-            itemDataDict.Add(0x78, new ItemData("Normal Item", "Flower Pearl", 1, 0x78, 0xBE427, 7));
-            itemDataDict.Add(0x79, new ItemData("Normal Item", "Autofire Barrel", 1, 0x79, 0xBE427, 6));
-            itemDataDict.Add(0x7A, new ItemData("Normal Item", "Generator Part", 1, 0x7A, 0xBE427, 5));
-            itemDataDict.Add(0x7B, new ItemData("Normal Item", "Target Sensor", 1, 0x7B, 0xBE427, 4));
-            itemDataDict.Add(0x7C, new ItemData("Normal Item", "Tele-lens", 1, 0x7C, 0xBE427, 3));
-            itemDataDict.Add(0x7D, new ItemData("Normal Item", "JUNK-ITEM 25", 1, 0x7D, 0xBE427, 2));
-            itemDataDict.Add(0x7E, new ItemData("Normal Item", "JUNK-ITEM 26", 1, 0x7E, 0xBE427, 1));
-            itemDataDict.Add(0x7F, new ItemData("Normal Item", "JUNK-ITEM 27", 1, 0x7F, 0xBE427, 0));
+            Dictionary<uint, ItemData> itemDataDict = new Dictionary<uint, ItemData>
+            {
+                { 0x00, new ItemData("Buster Part", "Blaster Unit Omega", 1, 0x00, null, null) },
+                { 0x01, new ItemData("Buster Part", "Sniper Unit Omega", 1, 0x01, null, null) },
+                { 0x02, new ItemData("Buster Part", "Laser", 1, 0x02, null, null) },
+                { 0x03, new ItemData("Buster Part", "Sniper Range", 1, 0x03, null, null) },
+                { 0x04, new ItemData("Buster Part", "Turbo Battery", 1, 0x04, null, null) },
+                { 0x05, new ItemData("Buster Part", "Power Raiser Omega", 1, 0x05, null, null) },
+                { 0x06, new ItemData("Buster Part", "Range Booster Omega", 1, 0x06, null, null) },
+                { 0x07, new ItemData("Buster Part", "Turbo Charger Omega", 1, 0x07, null, null) },
+                { 0x08, new ItemData("Buster Part", "Blast Unit", 1, 0x08, null, null) },
+                { 0x09, new ItemData("Buster Part", "Sniper Unit", 1, 0x09, null, null) },
+                { 0x0A, new ItemData("Buster Part", "Power Raiser Alpha", 1, 0x0A, null, null) },
+                { 0x0B, new ItemData("Buster Part", "Range Booster Alpha", 1, 0x0B, null, null) },
+                { 0x0C, new ItemData("Buster Part", "Turbo Charger Alpha", 1, 0x0C, null, null) },
+                { 0x0D, new ItemData("Buster Part", "Power Raiser", 1, 0x0D, null, null) },
+                { 0x0E, new ItemData("Buster Part", "Range Booster", 1, 0x0E, null, null) },
+                { 0x0F, new ItemData("Buster Part", "Turbo Charger", 1, 0x0F, null, null) },
+                { 0x10, new ItemData("Buster Part", "Buster Max", 1, 0x10, null, null) },
+                { 0x11, new ItemData("Buster Part", "Power Stream", 1, 0x11, null, null) },
+                { 0x12, new ItemData("Buster Part", "Blaster Unit R", 1, 0x12, null, null) },
+                { 0x13, new ItemData("Buster Part", "Buster Unit Omega", 1, 0x13, null, null) },
+                { 0x14, new ItemData("Buster Part", "Omni-Unit Omega", 1, 0x14, null, null) },
+                { 0x15, new ItemData("Buster Part", "Auto Battery", 1, 0x15, null, null) },
+                { 0x16, new ItemData("Buster Part", "Sniper Scope", 1, 0x16, null, null) },
+                { 0x17, new ItemData("Buster Part", "Rapid Striker", 1, 0x17, null, null) },
+                { 0x18, new ItemData("Buster Part", "Gatling Gun", 1, 0x18, null, null) },
+                { 0x19, new ItemData("Buster Part", "Omni Unit", 1, 0x19, null, null) },
+                { 0x1A, new ItemData("Buster Part", "Power Blaster R", 1, 0x1A, null, null) },
+                { 0x1B, new ItemData("Buster Part", "Power Blaster L", 1, 0x1B, null, null) },
+                { 0x1C, new ItemData("Buster Part", "Machine Gun", 1, 0x1C, null, null) },
+                { 0x1D, new ItemData("Buster Part", "Triple Access", 1, 0x1D, null, null) },
+                { 0x1E, new ItemData("Buster Part", "Buster Unit", 1, 0x1E, null, null) },
+                { 0x1F, new ItemData("Buster Part", "Rapid Fire", 1, 0x1F, null, null) },
+                { 0x20, new ItemData("Special Item", "Helmet", 1, 0x20, null, null) },
+                { 0x21, new ItemData("Special Item", "Jump Springs", 1, 0x21, null, null) },
+                { 0x22, new ItemData("Special Item", "Jet Skates", 1, 0x22, null, null) },
+                { 0x23, new ItemData("Special Item", "Life Gauge", 1, 0x23, null, null) },
+                { 0x24, new ItemData("Special Item", "Energy Canteen", 1, 0x24, null, null) },
+                { 0x25, new ItemData("Special Item", "Extra Pack", 1, 0x25, null, null) },
+                { 0x26, new ItemData("Special Item", "Adapter Plug", 1, 0x26, null, null) },
+                { 0x27, new ItemData("Special Item", "Refractor", 1, 0x27, null, null) },
+                { 0x28, new ItemData("Special Item", "Refractor", 1, 0x28, null, null) },
+                { 0x29, new ItemData("Special Item", "Refractor", 1, 0x29, null, null) },
+                { 0x2A, new ItemData("Special Item", "Citizen's Card", 1, 0x2A, null, null) },
+                { 0x2B, new ItemData("Special Item", "Class A License", 1, 0x2B, null, null) },
+                { 0x2C, new ItemData("Special Item", "Class B License", 1, 0x2C, null, null) },
+                { 0x2D, new ItemData("Special Item", "Bonne Key", 1, 0x2D, null, null) },
+                { 0x2E, new ItemData("Special Item", "Starter Key", 1, 0x2E, null, null) },
+                { 0x2F, new ItemData("Special Item", "Starter Key", 1, 0x2F, null, null) },
+                { 0x30, new ItemData("Special Item", "Starter Key", 1, 0x30, null, null) },
+                { 0x31, new ItemData("Special Item", "Starter Key", 1, 0x31, null, null) },
+                { 0x32, new ItemData("Special Item", "Starter Key", 1, 0x32, null, null) },
+                { 0x33, new ItemData("Special Item", "Starter Key", 1, 0x33, null, null) },
+                { 0x34, new ItemData("Special Item", "ID Card", 1, 0x34, null, null) },
+                { 0x35, new ItemData("Special Item", "ID Card", 1, 0x35, null, null) },
+                { 0x36, new ItemData("Special Item", "ID Card", 1, 0x36, null, null) },
+                { 0x37, new ItemData("Special Item", "Watcher' Key", 1, 0x37, null, null) },
+                { 0x38, new ItemData("Special Item", "Sleeper' Key", 1, 0x38, null, null) },
+                { 0x39, new ItemData("Special Item", "Dreamer' Key", 1, 0x39, null, null) },
+                { 0x3A, new ItemData("Special Item", "Flak Jacket", 1, 0x3A, null, null) },
+                { 0x3B, new ItemData("Special Item", "Kevlar Jacket", 1, 0x3B, null, null) },
+                { 0x3C, new ItemData("Special Item", "Kevlar Jacket Omega", 1, 0x3C, null, null) },
+                { 0x3D, new ItemData("Special Item", "Walkie-Talkie", 1, 0x3D, null, null) },
+                { 0x3E, new ItemData("Special Item", "KEY-ITEM 1E", 1, 0x3E, null, null) },
+                { 0x3F, new ItemData("Special Item", "(empty)", 1, 0x3F, null, null) },
+                { 0x40, new ItemData("Normal Item", "Shield Repair", 1, 0x40, 0xBE420, 7) },
+                { 0x41, new ItemData("Normal Item", "Hyper Cartridge", 1, 0x41, 0xBE420, 6) },
+                { 0x42, new ItemData("Normal Item", "Chamelion Net", 1, 0x42, 0xBE420, 5) },
+                { 0x43, new ItemData("Normal Item", "Defense Shield", 1, 0x43, 0xBE420, 4) },
+                { 0x44, new ItemData("Normal Item", "Flower", 1, 0x44, 0xBE420, 3) },
+                { 0x45, new ItemData("Normal Item", "Bag", 1, 0x45, 0xBE420, 2) },
+                { 0x46, new ItemData("Normal Item", "Trunk", 1, 0x46, 0xBE420, 1) },
+                { 0x47, new ItemData("Normal Item", "Pick", 1, 0x47, 0xBE420, 0) },
+                { 0x48, new ItemData("Normal Item", "Saw", 1, 0x48, 0xBE421, 7) },
+                { 0x49, new ItemData("Normal Item", "Lipstick", 1, 0x49, 0xBE421, 6) },
+                { 0x4A, new ItemData("Normal Item", "Music Box", 1, 0x4A, 0xBE421, 5) },
+                { 0x4B, new ItemData("Normal Item", "Old Bone", 1, 0x4B, 0xBE421, 4) },
+                { 0x4C, new ItemData("Normal Item", "Old Heater", 1, 0x4C, 0xBE421, 3) },
+                { 0x4D, new ItemData("Normal Item", "Old Doll", 1, 0x4D, 0xBE421, 2) },
+                { 0x4E, new ItemData("Normal Item", "Antique Bell", 1, 0x4E, 0xBE421, 1) },
+                { 0x4F, new ItemData("Normal Item", "Giant Horn", 1, 0x4F, 0xBE421, 0) },
+                { 0x50, new ItemData("Normal Item", "Shiny Object", 1, 0x50, 0xBE422, 7) },
+                { 0x51, new ItemData("Normal Item", "Old Shield", 1, 0x51, 0xBE422, 6) },
+                { 0x52, new ItemData("Normal Item", "Shiny Red Stone", 1, 0x52, 0xBE422, 5) },
+                { 0x53, new ItemData("Normal Item", "Stag Beetle", 1, 0x53, 0xBE422, 4) },
+                { 0x54, new ItemData("Normal Item", "Beetle", 1, 0x54, 0xBE422, 3) },
+                { 0x55, new ItemData("Normal Item", "Comic Book", 1, 0x55, 0xBE422, 2) },
+                { 0x56, new ItemData("Normal Item", "Ring", 1, 0x56, 0xBE422, 1) },
+                { 0x57, new ItemData("Normal Item", "EMPTY", 1, 0x57, 0xBE422, 0) },
+                { 0x58, new ItemData("Normal Item", "Mine Parts Kit", 1, 0x58, 0xBE423, 7) },
+                { 0x59, new ItemData("Normal Item", "Cannon Kit", 1, 0x59, 0xBE423, 6) },
+                { 0x5A, new ItemData("Normal Item", "Grenade Kit", 1, 0x5A, 0xBE423, 5) },
+                { 0x5B, new ItemData("Normal Item", "Blumebear Parts", 1, 0x5B, 0xBE423, 4) },
+                { 0x5C, new ItemData("Normal Item", "Mystic Orb", 1, 0x5C, 0xBE423, 3) },
+                { 0x5D, new ItemData("Normal Item", "Marlwolf Shell", 1, 0x5D, 0xBE423, 2) },
+                { 0x5E, new ItemData("Normal Item", "Broken Motor", 1, 0x5E, 0xBE423, 1) },
+                { 0x5F, new ItemData("Normal Item", "Broken Propeller", 1, 0x5F, 0xBE423, 0) },
+                { 0x60, new ItemData("Normal Item", "Broken Cleaner", 1, 0x60, 0xBE424, 7) },
+                { 0x61, new ItemData("Normal Item", "Bomb Schematic", 1, 0x61, 0xBE424, 6) },
+                { 0x62, new ItemData("Normal Item", "Blunted Drill", 1, 0x62, 0xBE424, 5) },
+                { 0x63, new ItemData("Normal Item", "Guidance Unit", 1, 0x63, 0xBE424, 4) },
+                { 0x64, new ItemData("Normal Item", "Zetsabre", 1, 0x64, 0xBE424, 3) },
+                { 0x65, new ItemData("Normal Item", "Pen Light", 1, 0x65, 0xBE424, 2) },
+                { 0x66, new ItemData("Normal Item", "Old Launcher", 1, 0x66, 0xBE424, 1) },
+                { 0x67, new ItemData("Normal Item", "Ancient Book", 1, 0x67, 0xBE424, 0) },
+                { 0x68, new ItemData("Normal Item", "Arm Supporter", 1, 0x68, 0xBE425, 7) },
+                { 0x69, new ItemData("Normal Item", "X Buster", 1, 0x69, 0xBE425, 6) },
+                { 0x6A, new ItemData("Normal Item", "Weapon Plans", 1, 0x6A, 0xBE425, 5) },
+                { 0x6B, new ItemData("Normal Item", "Prism Crystal", 1, 0x6B, 0xBE425, 4) },
+                { 0x6C, new ItemData("Normal Item", "Spring Set", 1, 0x6C, 0xBE425, 3) },
+                { 0x6D, new ItemData("Normal Item", "Safety Helmet", 1, 0x6D, 0xBE425, 2) },
+                { 0x6E, new ItemData("Normal Item", "Rollerboard", 1, 0x6E, 0xBE425, 1) },
+                { 0x6F, new ItemData("Normal Item", "Old Hoverjets", 1, 0x6F, 0xBE425, 0) },
+                { 0x70, new ItemData("Normal Item", "Joint Plug", 1, 0x70, 0xBE426, 7) },
+                { 0x71, new ItemData("Normal Item", "Broken Circuits", 1, 0x71, 0xBE426, 6) },
+                { 0x72, new ItemData("Normal Item", "Main Core Shard", 1, 0x72, 0xBE426, 5) },
+                { 0x73, new ItemData("Normal Item", "Sun-light", 1, 0x73, 0xBE426, 4) },
+                { 0x74, new ItemData("Normal Item", "Rapidfire Barrel", 1, 0x74, 0xBE426, 3) },
+                { 0x75, new ItemData("Normal Item", "Plastique", 1, 0x75, 0xBE426, 2) },
+                { 0x76, new ItemData("Normal Item", "Bomb", 1, 0x76, 0xBE426, 1) },
+                { 0x77, new ItemData("Normal Item", "Gatling Part", 1, 0x77, 0xBE426, 0) },
+                { 0x78, new ItemData("Normal Item", "Flower Pearl", 1, 0x78, 0xBE427, 7) },
+                { 0x79, new ItemData("Normal Item", "Autofire Barrel", 1, 0x79, 0xBE427, 6) },
+                { 0x7A, new ItemData("Normal Item", "Generator Part", 1, 0x7A, 0xBE427, 5) },
+                { 0x7B, new ItemData("Normal Item", "Target Sensor", 1, 0x7B, 0xBE427, 4) },
+                { 0x7C, new ItemData("Normal Item", "Tele-lens", 1, 0x7C, 0xBE427, 3) },
+                { 0x7D, new ItemData("Normal Item", "JUNK-ITEM 25", 1, 0x7D, 0xBE427, 2) },
+                { 0x7E, new ItemData("Normal Item", "JUNK-ITEM 26", 1, 0x7E, 0xBE427, 1) },
+                { 0x7F, new ItemData("Normal Item", "JUNK-ITEM 27", 1, 0x7F, 0xBE427, 0) }
+            };
             return itemDataDict;
         }
         public static List<LocationData> GetLocationDataList()
         {
             Dictionary<ushort, LevelData> levelDataDict = GetLevelDataDict();
             Dictionary<uint, ItemData> itemDataDict = GetItemDataDict();
-            List<LocationData> locationDataList = new List<LocationData>();
-            locationDataList.Add(new LocationData("Ocean tower, Right chest", "Container", levelDataDict[0x0002], itemDataDict[0x0D], 0xBE400, 7, null, true, 0x9F114, 0x1539E8));
-            locationDataList.Add(new LocationData("Ocean tower, Left chest", "Container", levelDataDict[0x0002], GetZennyItemData(560), 0xBE400, 6, null, true, 0x9F4D4, 0x8C735));
-            locationDataList.Add(new LocationData("Apple market, Electric goods box", "Container", levelDataDict[0x0400], itemDataDict[0x60], 0xBE3F9, 6, null, false, 0xBF264, 0x8C4B2));
-            locationDataList.Add(new LocationData("Apple market, Book store box", "Container", levelDataDict[0x0400], GetNothingItemData(), 0xBE3F9, 7, null, false, 0xBF214, 0x8C46A));
-            locationDataList.Add(new LocationData("Apple market, Junk store box", "Container", levelDataDict[0x0400], GetZennyItemData(100), 0xBE3F8, 0, null, false, 0xBF1C4, 0x8C502));
-            locationDataList.Add(new LocationData("Apple market, North pail", "Container", levelDataDict[0x0400], GetZennyItemData(20), 0xBE3F9, 5, null, false, 0xBF2B4, 0x8C3DE));
-            locationDataList.Add(new LocationData("Apple market, South pail", "Container", levelDataDict[0x0400], GetZennyItemData(50), 0xBE3F9, 2, null, false, 0xBF304, 0x8C332));
-            locationDataList.Add(new LocationData("Downtown, South east peace sign pail", "Container", levelDataDict[0x0500], GetZennyItemData(10), 0xBE3F8, 6, null, false, 0xBF354, 0x8C3DE));
-            locationDataList.Add(new LocationData("Downtown, Center east pail", "Container", levelDataDict[0x0500], itemDataDict[0x5E], 0xBE3F8, 2, null, false, 0xBF494, 0x8C382));
-            locationDataList.Add(new LocationData("Downtown, Don't kick us pail", "Container", levelDataDict[0x0500], itemDataDict[0x5B], 0xBE3F8, 5, null, false, 0xBF3A4, 0x8C332));
-            locationDataList.Add(new LocationData("Downtown, Center pail", "Container", levelDataDict[0x0500], GetNothingItemData(), 0xBE3F8, 4, null, false, 0xBF3F4, 0x8C332));
-            locationDataList.Add(new LocationData("Downtown, Library pail", "Container", levelDataDict[0x0500], GetNothingItemData(), 0xBE3F8, 3, null, false, 0xBF444, 0x8C332));
-            locationDataList.Add(new LocationData("Uptown, Hospital right pail", "Container", levelDataDict[0x0800], itemDataDict[0x5F], 0xBE3F9, 1, null, false, 0xBF214, 0x8C382));
-            locationDataList.Add(new LocationData("Uptown, Hospital left pail", "Container", levelDataDict[0x0800], GetNothingItemData(), 0xBE3F9, 0, null, false, 0xBF264, 0x8C332));
-            locationDataList.Add(new LocationData("Uptown, Ocean corner pail", "Container", levelDataDict[0x0800], GetZennyItemData(30), 0xBE3FA, 6, null, false, 0xBF2B4, 0x8C3DE));
-            locationDataList.Add(new LocationData("Willy's Boat, Right box", "Container", levelDataDict[0x0D00], GetZennyItemData(20), 0xBE3FA, 1, null, false, 0xBF174, 0x8C46A));
-            locationDataList.Add(new LocationData("Willy's Boat, Left box", "Container", levelDataDict[0x0D00], GetNothingItemData(), 0xBE3FA, 2, null, false, 0xBF124, 0x8C46A));
-            locationDataList.Add(new LocationData("Willy's Boat, Pail", "Container", levelDataDict[0x0D00], GetZennyItemData(10), 0xBE3F0, 0, null, false, 0xBF1C4, 0x8C3DE));
-            locationDataList.Add(new LocationData("Yass plains, Plateau house box", "Container", levelDataDict[0x1000], itemDataDict[0x6D], 0xBE3FB, 6, null, false, 0xBF174, 0x8C4B2));
-            locationDataList.Add(new LocationData("Yass plains, Plateau house pail", "Container", levelDataDict[0x1000], GetNothingItemData(), 0xBE3FB, 3, null, false, 0xBF214, 0x8C332));
-            locationDataList.Add(new LocationData("Yass plains, Behind hideout pail", "Container", levelDataDict[0x1000], GetZennyItemData(200), 0xBE3FB, 4, null, false, 0xBF1C4, 0x8C3DE));
-            locationDataList.Add(new LocationData("Yass plains, Across hideout pail", "Container", levelDataDict[0x1000], GetNothingItemData(), 0xBE3FB, 5, null, false, 0xBF264, 0x8C332));
-            locationDataList.Add(new LocationData("Underground ruins, Junk store man chest", "Container", levelDataDict[0x0900], itemDataDict[0x1F], 0xBE400, 5, null, false, 0x9F114, 0x1533A5));
-            locationDataList.Add(new LocationData("Underground ruins, Junk store man hole", "Hole", levelDataDict[0x0900], GetZennyItemData(2600), 0xBE3DF, 6, null, false, null, 0x15386F));
-            locationDataList.Add(new LocationData("Underground ruins, Main gate entrance chest", "Container", levelDataDict[0x0901], itemDataDict[0x7A], 0xBE402, 6, null, false, 0x9F894, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, 2 box ledge chest", "Container", levelDataDict[0x0901], itemDataDict[0x1E], 0xBE400, 4, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Miroc room ledge chest", "Container", levelDataDict[0x0901], GetZennyItemData(1180), 0xBE404, 6, null, false, 0x9FC54, 0x8C759));
-            locationDataList.Add(new LocationData("Underground ruins, Cross room chest", "Container", levelDataDict[0x0901], itemDataDict[0x2E], 0xBE400, 1, null, false, 0x9F4D4, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Miroc room left hole", "Hole", levelDataDict[0x0901], GetZennyItemData(9240), 0xBE3DE, 3, null, false, null, 0x1535B7));
-            locationDataList.Add(new LocationData("Underground ruins, Miroc room right hole", "Hole", levelDataDict[0x0901], GetZennyItemData(820), 0xBE3DF, 4, null, false, null, 0x1539AB));
-            locationDataList.Add(new LocationData("Underground ruins, Arukoitan battle north chest", "Container", levelDataDict[0x0904], GetZennyItemData(2280), 0xBE403, 0, null, false, 0x9F114, 0x8C759));
-            locationDataList.Add(new LocationData("Underground ruins, Arukoitan battle south chest", "Container", levelDataDict[0x0904], GetZennyItemData(2840), 0xBE404, 7, null, false, 0x9F4D4, 0x8C759));
-            locationDataList.Add(new LocationData("Underground ruins, Obstacle room cliff east hole", "Hole", levelDataDict[0x0904], GetZennyItemData(780), 0xBE3DF, 2, null, false, null, 0x153AB8));
-            locationDataList.Add(new LocationData("Underground ruins, Obstacle room cliff west hole", "Hole", levelDataDict[0x0904], GetZennyItemData(4520), 0xBE3DE, 0, null, false, null, 0x1536C4));
-            locationDataList.Add(new LocationData("Underground ruins, Shekuten pillar room chest", "Container", levelDataDict[0x0905], GetZennyItemData(1620), 0xBE404, 5, null, false, 0x9F114, 0x8C759));
-            locationDataList.Add(new LocationData("Underground ruins, Shekuten pillar room hole", "Hole", levelDataDict[0x0905], itemDataDict[0x51], 0xBE422, 6, null, false, null, 0x153800));
-            locationDataList.Add(new LocationData("Underground ruins, Kuruguru obstacle hole", "Hole", levelDataDict[0x0905], itemDataDict[0x50], 0xBE3DE, 2, null, false, null, 0x153655));
-            locationDataList.Add(new LocationData("Underground ruins, Gold Gorubesshu chest", "Container", levelDataDict[0x0906], itemDataDict[0x66], 0xBE401, 6, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable pillar room south chest", "Container", levelDataDict[0x0906], itemDataDict[0x65], 0xBE402, 5, null, false, 0x9F4D4, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable pillar room north chest", "Container", levelDataDict[0x0906], itemDataDict[0x17], 0xBE402, 4, null, false, 0x9F894, 0x8C735));
-            locationDataList.Add(new LocationData("Undeground ruins, 3 chest room middle chest", "Container", levelDataDict[0x0906], GetZennyItemData(5600), 0xBE401, 5, null, false, 0x9FC54, 0x8C759));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable pillars room south hole", "Hole", levelDataDict[0x0906], GetZennyItemData(920), 0xBE3DF, 5, null, false, null, 0x15390D));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable pillars room west hole", "Hole", levelDataDict[0x0906], GetZennyItemData(660), 0xBE3DF, 0, null, false, null, 0x153BF4));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable pillars room north hole", "Hole", levelDataDict[0x0906], itemDataDict[0x72], 0xBE3DE, 4, null, false, null, 0x153548));
-            locationDataList.Add(new LocationData("Underground ruins, Fireball Orudakoitan chest", "Container", levelDataDict[0x0907], itemDataDict[0x59], 0xBE403, 4, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Clozer exit chest", "Container", levelDataDict[0x0908], GetZennyItemData(1780), 0xBE403, 3, null, false, 0x9FC54, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable wall room middle cliff chest", "Container", levelDataDict[0x0908], itemDataDict[0x67], 0xBE401, 2, null, false, 0x9F4D4, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable wall room west cliff chest", "Container", levelDataDict[0x0908], itemDataDict[0x74], 0xBE400, 0, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable wall room east cliff chest", "Container", levelDataDict[0x0908], itemDataDict[0x12], 0xBE401, 1, null, false, 0x9F894, 0x8C735));
-            locationDataList.Add(new LocationData("Underground ruins, Trapped box hole", "Hole", levelDataDict[0x0908], GetZennyItemData(1510), 0xBE3DE, 0, null, false, null, 0x153762));
-            locationDataList.Add(new LocationData("Underground ruins, Drillable wall room east cliff hole", "Hole", levelDataDict[0x0908], itemDataDict[0x6A], 0xBE3DF, 3, null, false, null, 0x153A49));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Sharukurusu floor hole", "Hole", levelDataDict[0x0E01], GetZennyItemData(2300), 0xBE3DC, 5, null, false, null, 0x153C41));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Cliff hole", "Hole", levelDataDict[0x0E01], itemDataDict[0x4B], 0xBE3DC, 7, null, false, null, 0x153B63));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Cliff chest", "Container", levelDataDict[0x0E01], itemDataDict[0x6C], 0xBE400, 2, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Bottom conveyor hole", "Hole", levelDataDict[0x0E02], GetZennyItemData(300), 0xBE3DC, 4, null, false, null, 0x153CDF));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Middle conveyor hole", "Hole", levelDataDict[0x0E02], itemDataDict[0x4D], 0xBE3DC, 4, null, false, null, 0x153BD2));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Middle switch chest", "Container", levelDataDict[0x0E02], itemDataDict[0x5A], 0xBE400, 3, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Sharukurusu starter key get", "Hole", levelDataDict[0x0E01], itemDataDict[0x30], 0xBE439, 6, null, false, null, null));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Conveyor key get", "Hole", levelDataDict[0x0E02], itemDataDict[0x2F], 0xBE439, 5, null, false, null, null));
-            locationDataList.Add(new LocationData("Cardon Forest Sub-Gate, Conveyor key get", "Hole", levelDataDict[0x0E00], itemDataDict[0x2E], 0xBE439, 4, null, false, null, null));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, Entrance right hole", "Hole", levelDataDict[0x1400], GetZennyItemData(1240), 0xBE3DC, 1, null, false, null, 0x153A7E));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, Entrance left hole", "Hole", levelDataDict[0x1400], GetZennyItemData(220), 0xBE3DD, 7, null, false, null, 0x153BBA));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, Entrance chest", "Container", levelDataDict[0x1400], itemDataDict[0x6F], 0xBE401, 7, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, East corridor hole", "Hole", levelDataDict[0x1401], itemDataDict[0x56], 0xBE3DC, 2, null, false, null, 0x153A0F));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, West corridor hole", "Hole", levelDataDict[0x1401], itemDataDict[0x77], 0xBE3DC, 3, null, false, null, 0x1539A0));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, West corridor chest", "Container", levelDataDict[0x1401], itemDataDict[0x31], 0xBE402, 3, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, Sharukurusu east chest", "Container", levelDataDict[0x1402], itemDataDict[0x33], 0xBE402, 1, null, false, 0x9F894, 0x8C735));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, Sharukurusu middle chest", "Container", levelDataDict[0x1402], itemDataDict[0x70], 0xBE402, 0, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, Sharukurusu west chest", "Container", levelDataDict[0x1402], itemDataDict[0x32], 0xBE402, 2, null, false, 0x9F4D4, 0x8C735));
-            locationDataList.Add(new LocationData("Lake Jyun Sub-Gate, Sharukurusu west hole", "Hole", levelDataDict[0x1402], GetZennyItemData(5130), 0xBE3DC, 0, null, false, null, 0x153B1C));
-            locationDataList.Add(new LocationData("Closer Woods Sub-Gate, Sharukurusu E room left hole", "Hole", levelDataDict[0x1303], itemDataDict[0x7C], 0xBE3DD, 6, null, false, null, 0x153ED6));
-            locationDataList.Add(new LocationData("Closer Woods Sub-Gate, Sharukurusu E room right hole", "Hole", levelDataDict[0x1303], GetZennyItemData(450), 0xBE3DD, 1, null, false, null, 0x15418E));
-            locationDataList.Add(new LocationData("Clozer woods Sub-Gate, Miroc+Gorubesshu west cliff chest", "Container", levelDataDict[0x1305], itemDataDict[0x63], 0xBE401, 4, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Clozer woods Sub-Gate, Miroc+Gorubesshu east cliff chest", "Container", levelDataDict[0x1305], itemDataDict[0x34], 0xBE403, 7, null, false, 0x9F4D4, 0x8C735));
-            locationDataList.Add(new LocationData("Clozer woods Sub-Gate, Miroc+Gorubesshu southeast pillar hole", "Hole", levelDataDict[0x1305], GetZennyItemData(1840), 0xBE3DD, 4, null, false, null, 0x153FB4));
-            locationDataList.Add(new LocationData("Clozer woods Sub-Gate, Miroc+Gorubesshu northeast pillar hole", "Hole", levelDataDict[0x1305], GetZennyItemData(1200), 0xBE3DD, 2, null, false, null, 0x1540F0));
-            locationDataList.Add(new LocationData("Clozer woods Sub-Gate, Miroc+Gorubesshu northwest pillar hole", "Hole", levelDataDict[0x1305], itemDataDict[0x4E], 0xBE3DD, 5, null, false, null, 0x153F45));
-            locationDataList.Add(new LocationData("Clozer woods Sub-Gate, Miroc+Gorubesshu southwest pillar hole", "Hole", levelDataDict[0x1305], GetZennyItemData(920), 0xBE3DD, 3, null, false, null, 0x154052));
-            locationDataList.Add(new LocationData("Clozer Woods Sub-Gate, Generator room upper chest", "Container", levelDataDict[0x1308], itemDataDict[0x36], 0xBE403, 5, null, false, 0x9F4D4, 0x8C735));
-            locationDataList.Add(new LocationData("Clozer Woods Sub-Gate, Gorubesshu corridor east chest", "Container", levelDataDict[0x1309], itemDataDict[0x7B], 0xBE401, 3, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Clozer Woods Sub-Gate, Generator room lower chest", "Container", levelDataDict[0x1308], itemDataDict[0x35], 0xBE403, 6, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Main Gate, Maze Chest", "Container", levelDataDict[0x1A00], itemDataDict[0x62], 0xBE402, 7, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Main Gate, Maze entrance hole", "Hole", levelDataDict[0x1A00], GetZennyItemData(2170), 0xBE3DE, 6, null, false, null, 0x153D8F));
-            locationDataList.Add(new LocationData("Main Gate, Maze Karumuna Bash hole", "Hole", levelDataDict[0x1A00], itemDataDict[0x52], 0xBE3DD, 0, null, false, null, 0x153C82));
-            locationDataList.Add(new LocationData("Main Gate, Maze Reaverbot hole", "Hole", levelDataDict[0x1A00], itemDataDict[0x79], 0xBE3DE, 5, null, false, null, 0x153E2D));
-            locationDataList.Add(new LocationData("Main Gate, Two Gorubesshu room chest", "Container", levelDataDict[0x1A06], itemDataDict[0x13], 0xBE401, 0, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Main Gate, Entrance hole", "Hole", levelDataDict[0x1A07], GetZennyItemData(10000), 0xBE3DE, 7, null, false, null, 0x153CF1));
-            locationDataList.Add(new LocationData("Main Gate, Boss corridor chest", "Hole", levelDataDict[0x1A01], itemDataDict[0x11], 0xBE404, 1, null, false, null, 0x8C735));
-            locationDataList.Add(new LocationData("Old City Sub-City, Chest", "Container", levelDataDict[0x1D03], itemDataDict[0x37], 0xBE404, 4, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Downtown Sub-City, Chest", "Container", levelDataDict[0x1D04], itemDataDict[0x38], 0xBE404, 3, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Uptown Sub-City, Chest", "Container", levelDataDict[0x1D05], itemDataDict[0x39], 0xBE404, 0, null, false, 0x9F114, 0x8C735));
-            locationDataList.Add(new LocationData("Flutter, Study chest", "Hole", levelDataDict[0x1B05], itemDataDict[0x61], 0xBE3E1, 5, null, false, null, 0x15333F));
+            List<LocationData> locationDataList =
+            [
+                new LocationData(1, "Ocean tower, Right chest", "Container", levelDataDict[0x0002], itemDataDict[0x0D], 0xBE400, 7, null, true, 0x9F114, 0x1539E8),
+                new LocationData(2, "Ocean tower, Left chest", "Container", levelDataDict[0x0002], GetZennyItemData(560), 0xBE400, 6, null, true, 0x9F4D4, 0x8C735),
+                new LocationData(3, "Apple market, Electric goods box", "Container", levelDataDict[0x0400], itemDataDict[0x60], 0xBE3F9, 6, null, false, 0xBF264, 0x8C4B2),
+                new LocationData(4, "Apple market, Book store box", "Container", levelDataDict[0x0400], GetNothingItemData(), 0xBE3F9, 7, null, false, 0xBF214, 0x8C46A),
+                new LocationData(5, "Apple market, Junk store box", "Container", levelDataDict[0x0400], GetZennyItemData(100), 0xBE3F8, 0, null, false, 0xBF1C4, 0x8C502),
+                new LocationData(6, "Apple market, North pail", "Container", levelDataDict[0x0400], GetZennyItemData(20), 0xBE3F9, 5, null, false, 0xBF2B4, 0x8C3DE),
+                new LocationData(7, "Apple market, South pail", "Container", levelDataDict[0x0400], GetZennyItemData(50), 0xBE3F9, 2, null, false, 0xBF304, 0x8C332),
+                new LocationData(8, "Downtown, South east peace sign pail", "Container", levelDataDict[0x0500], GetZennyItemData(10), 0xBE3F8, 6, null, false, 0xBF354, 0x8C3DE),
+                new LocationData(9, "Downtown, Center east pail", "Container", levelDataDict[0x0500], itemDataDict[0x5E], 0xBE3F8, 2, null, false, 0xBF494, 0x8C382),
+                new LocationData(10, "Downtown, Don't kick us pail", "Container", levelDataDict[0x0500], itemDataDict[0x5B], 0xBE3F8, 5, null, false, 0xBF3A4, 0x8C332),
+                new LocationData(11, "Downtown, Center pail", "Container", levelDataDict[0x0500], GetNothingItemData(), 0xBE3F8, 4, null, false, 0xBF3F4, 0x8C332),
+                new LocationData(12, "Downtown, Library pail", "Container", levelDataDict[0x0500], GetNothingItemData(), 0xBE3F8, 3, null, false, 0xBF444, 0x8C332),
+                new LocationData(13, "Uptown, Hospital right pail", "Container", levelDataDict[0x0800], itemDataDict[0x5F], 0xBE3F9, 1, null, false, 0xBF214, 0x8C382),
+                new LocationData(14, "Uptown, Hospital left pail", "Container", levelDataDict[0x0800], GetNothingItemData(), 0xBE3F9, 0, null, false, 0xBF264, 0x8C332),
+                new LocationData(15, "Uptown, Ocean corner pail", "Container", levelDataDict[0x0800], GetZennyItemData(30), 0xBE3FA, 6, null, false, 0xBF2B4, 0x8C3DE),
+                new LocationData(16, "Willy's Boat, Right box", "Container", levelDataDict[0x0D00], GetZennyItemData(20), 0xBE3FA, 1, null, false, 0xBF174, 0x8C46A),
+                new LocationData(17, "Willy's Boat, Left box", "Container", levelDataDict[0x0D00], GetNothingItemData(), 0xBE3FA, 2, null, false, 0xBF124, 0x8C46A),
+                new LocationData(18, "Willy's Boat, Pail", "Container", levelDataDict[0x0D00], GetZennyItemData(10), 0xBE3F0, 0, null, false, 0xBF1C4, 0x8C3DE),
+                new LocationData(19, "Yass plains, Plateau house box", "Container", levelDataDict[0x1000], itemDataDict[0x6D], 0xBE3FB, 6, null, false, 0xBF174, 0x8C4B2),
+                new LocationData(20, "Yass plains, Plateau house pail", "Container", levelDataDict[0x1000], GetNothingItemData(), 0xBE3FB, 3, null, false, 0xBF214, 0x8C332),
+                new LocationData(21, "Yass plains, Behind hideout pail", "Container", levelDataDict[0x1000], GetZennyItemData(200), 0xBE3FB, 4, null, false, 0xBF1C4, 0x8C3DE),
+                new LocationData(22, "Yass plains, Across hideout pail", "Container", levelDataDict[0x1000], GetNothingItemData(), 0xBE3FB, 5, null, false, 0xBF264, 0x8C332),
+                new LocationData(23, "Underground ruins, Junk store man chest", "Container", levelDataDict[0x0900], itemDataDict[0x1F], 0xBE400, 5, null, false, 0x9F114, 0x1533A5),
+                new LocationData(24, "Underground ruins, Junk store man hole", "Hole", levelDataDict[0x0900], GetZennyItemData(2600), 0xBE3DF, 6, null, false, null, 0x15386F),
+                new LocationData(25, "Underground ruins, Main gate entrance chest", "Container", levelDataDict[0x0901], itemDataDict[0x7A], 0xBE402, 6, null, false, 0x9F894, 0x8C735),
+                new LocationData(26, "Underground ruins, 2 box ledge chest", "Container", levelDataDict[0x0901], itemDataDict[0x1E], 0xBE400, 4, null, false, 0x9F114, 0x8C735),
+                new LocationData(27, "Underground ruins, Miroc room ledge chest", "Container", levelDataDict[0x0901], GetZennyItemData(1180), 0xBE404, 6, null, false, 0x9FC54, 0x8C759),
+                new LocationData(28, "Underground ruins, Cross room chest", "Container", levelDataDict[0x0901], itemDataDict[0x2E], 0xBE400, 1, null, false, 0x9F4D4, 0x8C735),
+                new LocationData(29, "Underground ruins, Miroc room left hole", "Hole", levelDataDict[0x0901], GetZennyItemData(9240), 0xBE3DE, 3, null, false, null, 0x1535B7),
+                new LocationData(30, "Underground ruins, Miroc room right hole", "Hole", levelDataDict[0x0901], GetZennyItemData(820), 0xBE3DF, 4, null, false, null, 0x1539AB),
+                new LocationData(31, "Underground ruins, Arukoitan battle north chest", "Container", levelDataDict[0x0904], GetZennyItemData(2280), 0xBE403, 0, null, false, 0x9F114, 0x8C759),
+                new LocationData(32, "Underground ruins, Arukoitan battle south chest", "Container", levelDataDict[0x0904], GetZennyItemData(2840), 0xBE404, 7, null, false, 0x9F4D4, 0x8C759),
+                new LocationData(33, "Underground ruins, Obstacle room cliff east hole", "Hole", levelDataDict[0x0904], GetZennyItemData(780), 0xBE3DF, 2, null, false, null, 0x153AB8),
+                new LocationData(34, "Underground ruins, Obstacle room cliff west hole", "Hole", levelDataDict[0x0904], GetZennyItemData(4520), 0xBE3DE, 0, null, false, null, 0x1536C4),
+                new LocationData(35, "Underground ruins, Shekuten pillar room chest", "Container", levelDataDict[0x0905], GetZennyItemData(1620), 0xBE404, 5, null, false, 0x9F114, 0x8C759),
+                new LocationData(36, "Underground ruins, Shekuten pillar room hole", "Hole", levelDataDict[0x0905], itemDataDict[0x51], 0xBE422, 6, null, false, null, 0x153800),
+                new LocationData(37, "Underground ruins, Kuruguru obstacle hole", "Hole", levelDataDict[0x0905], itemDataDict[0x50], 0xBE3DE, 2, null, false, null, 0x153655),
+                new LocationData(38, "Underground ruins, Gold Gorubesshu chest", "Container", levelDataDict[0x0906], itemDataDict[0x66], 0xBE401, 6, null, false, 0x9F114, 0x8C735),
+                new LocationData(39, "Underground ruins, Drillable pillar room south chest", "Container", levelDataDict[0x0906], itemDataDict[0x65], 0xBE402, 5, null, false, 0x9F4D4, 0x8C735),
+                new LocationData(40, "Underground ruins, Drillable pillar room north chest", "Container", levelDataDict[0x0906], itemDataDict[0x17], 0xBE402, 4, null, false, 0x9F894, 0x8C735),
+                new LocationData(41, "Undeground ruins, 3 chest room middle chest", "Container", levelDataDict[0x0906], GetZennyItemData(5600), 0xBE401, 5, null, false, 0x9FC54, 0x8C759),
+                new LocationData(42, "Underground ruins, Drillable pillars room south hole", "Hole", levelDataDict[0x0906], GetZennyItemData(920), 0xBE3DF, 5, null, false, null, 0x15390D),
+                new LocationData(43, "Underground ruins, Drillable pillars room west hole", "Hole", levelDataDict[0x0906], GetZennyItemData(660), 0xBE3DF, 0, null, false, null, 0x153BF4),
+                new LocationData(44, "Underground ruins, Drillable pillars room north hole", "Hole", levelDataDict[0x0906], itemDataDict[0x72], 0xBE3DE, 4, null, false, null, 0x153548),
+                new LocationData(45, "Underground ruins, Fireball Orudakoitan chest", "Container", levelDataDict[0x0907], itemDataDict[0x59], 0xBE403, 4, null, false, 0x9F114, 0x8C735),
+                new LocationData(46, "Underground ruins, Clozer exit chest", "Container", levelDataDict[0x0908], GetZennyItemData(1780), 0xBE403, 3, null, false, 0x9FC54, 0x8C735),
+                new LocationData(47, "Underground ruins, Drillable wall room middle cliff chest", "Container", levelDataDict[0x0908], itemDataDict[0x67], 0xBE401, 2, null, false, 0x9F4D4, 0x8C735),
+                new LocationData(48, "Underground ruins, Drillable wall room west cliff chest", "Container", levelDataDict[0x0908], itemDataDict[0x74], 0xBE400, 0, null, false, 0x9F114, 0x8C735),
+                new LocationData(49, "Underground ruins, Drillable wall room east cliff chest", "Container", levelDataDict[0x0908], itemDataDict[0x12], 0xBE401, 1, null, false, 0x9F894, 0x8C735),
+                new LocationData(50, "Underground ruins, Trapped box hole", "Hole", levelDataDict[0x0908], GetZennyItemData(1510), 0xBE3DE, 0, null, false, null, 0x153762),
+                new LocationData(51, "Underground ruins, Drillable wall room east cliff hole", "Hole", levelDataDict[0x0908], itemDataDict[0x6A], 0xBE3DF, 3, null, false, null, 0x153A49),
+                new LocationData(52, "Cardon Forest Sub-Gate, Sharukurusu floor hole", "Hole", levelDataDict[0x0E01], GetZennyItemData(2300), 0xBE3DC, 5, null, false, null, 0x153C41),
+                new LocationData(53, "Cardon Forest Sub-Gate, Cliff hole", "Hole", levelDataDict[0x0E01], itemDataDict[0x4B], 0xBE3DC, 7, null, false, null, 0x153B63),
+                new LocationData(54, "Cardon Forest Sub-Gate, Cliff chest", "Container", levelDataDict[0x0E01], itemDataDict[0x6C], 0xBE400, 2, null, false, 0x9F114, 0x8C735),
+                new LocationData(55, "Cardon Forest Sub-Gate, Bottom conveyor hole", "Hole", levelDataDict[0x0E02], GetZennyItemData(300), 0xBE3DC, 4, null, false, null, 0x153CDF),
+                new LocationData(56, "Cardon Forest Sub-Gate, Middle conveyor hole", "Hole", levelDataDict[0x0E02], itemDataDict[0x4D], 0xBE3DC, 4, null, false, null, 0x153BD2),
+                new LocationData(57, "Cardon Forest Sub-Gate, Middle switch chest", "Container", levelDataDict[0x0E02], itemDataDict[0x5A], 0xBE400, 3, null, false, 0x9F114, 0x8C735),
+                new LocationData(58, "Cardon Forest Sub-Gate, Sharukurusu starter key get", "Hole", levelDataDict[0x0E01], itemDataDict[0x30], 0xBE439, 6, null, false, null, null),
+                new LocationData(59, "Cardon Forest Sub-Gate, Conveyor key get", "Hole", levelDataDict[0x0E02], itemDataDict[0x2F], 0xBE439, 5, null, false, null, null),
+                new LocationData(60, "Cardon Forest Sub-Gate, Conveyor key get", "Hole", levelDataDict[0x0E00], itemDataDict[0x2E], 0xBE439, 4, null, false, null, null),
+                new LocationData(61, "Lake Jyun Sub-Gate, Entrance right hole", "Hole", levelDataDict[0x1400], GetZennyItemData(1240), 0xBE3DC, 1, null, false, null, 0x153A7E),
+                new LocationData(62, "Lake Jyun Sub-Gate, Entrance left hole", "Hole", levelDataDict[0x1400], GetZennyItemData(220), 0xBE3DD, 7, null, false, null, 0x153BBA),
+                new LocationData(63, "Lake Jyun Sub-Gate, Entrance chest", "Container", levelDataDict[0x1400], itemDataDict[0x6F], 0xBE401, 7, null, false, 0x9F114, 0x8C735),
+                new LocationData(64, "Lake Jyun Sub-Gate, East corridor hole", "Hole", levelDataDict[0x1401], itemDataDict[0x56], 0xBE3DC, 2, null, false, null, 0x153A0F),
+                new LocationData(65, "Lake Jyun Sub-Gate, West corridor hole", "Hole", levelDataDict[0x1401], itemDataDict[0x77], 0xBE3DC, 3, null, false, null, 0x1539A0),
+                new LocationData(66, "Lake Jyun Sub-Gate, West corridor chest", "Container", levelDataDict[0x1401], itemDataDict[0x31], 0xBE402, 3, null, false, 0x9F114, 0x8C735),
+                new LocationData(67, "Lake Jyun Sub-Gate, Sharukurusu east chest", "Container", levelDataDict[0x1402], itemDataDict[0x33], 0xBE402, 1, null, false, 0x9F894, 0x8C735),
+                new LocationData(68, "Lake Jyun Sub-Gate, Sharukurusu middle chest", "Container", levelDataDict[0x1402], itemDataDict[0x70], 0xBE402, 0, null, false, 0x9F114, 0x8C735),
+                new LocationData(69, "Lake Jyun Sub-Gate, Sharukurusu west chest", "Container", levelDataDict[0x1402], itemDataDict[0x32], 0xBE402, 2, null, false, 0x9F4D4, 0x8C735),
+                new LocationData(70, "Lake Jyun Sub-Gate, Sharukurusu west hole", "Hole", levelDataDict[0x1402], GetZennyItemData(5130), 0xBE3DC, 0, null, false, null, 0x153B1C),
+                new LocationData(71, "Closer Woods Sub-Gate, Sharukurusu E room left hole", "Hole", levelDataDict[0x1303], itemDataDict[0x7C], 0xBE3DD, 6, null, false, null, 0x153ED6),
+                new LocationData(72, "Closer Woods Sub-Gate, Sharukurusu E room right hole", "Hole", levelDataDict[0x1303], GetZennyItemData(450), 0xBE3DD, 1, null, false, null, 0x15418E),
+                new LocationData(73, "Clozer woods Sub-Gate, Miroc+Gorubesshu west cliff chest", "Container", levelDataDict[0x1305], itemDataDict[0x63], 0xBE401, 4, null, false, 0x9F114, 0x8C735),
+                new LocationData(74, "Clozer woods Sub-Gate, Miroc+Gorubesshu east cliff chest", "Container", levelDataDict[0x1305], itemDataDict[0x34], 0xBE403, 7, null, false, 0x9F4D4, 0x8C735),
+                new LocationData(75, "Clozer woods Sub-Gate, Miroc+Gorubesshu southeast pillar hole", "Hole", levelDataDict[0x1305], GetZennyItemData(1840), 0xBE3DD, 4, null, false, null, 0x153FB4),
+                new LocationData(76, "Clozer woods Sub-Gate, Miroc+Gorubesshu northeast pillar hole", "Hole", levelDataDict[0x1305], GetZennyItemData(1200), 0xBE3DD, 2, null, false, null, 0x1540F0),
+                new LocationData(77, "Clozer woods Sub-Gate, Miroc+Gorubesshu northwest pillar hole", "Hole", levelDataDict[0x1305], itemDataDict[0x4E], 0xBE3DD, 5, null, false, null, 0x153F45),
+                new LocationData(78, "Clozer woods Sub-Gate, Miroc+Gorubesshu southwest pillar hole", "Hole", levelDataDict[0x1305], GetZennyItemData(920), 0xBE3DD, 3, null, false, null, 0x154052),
+                new LocationData(79, "Clozer Woods Sub-Gate, Generator room upper chest", "Container", levelDataDict[0x1308], itemDataDict[0x36], 0xBE403, 5, null, false, 0x9F4D4, 0x8C735),
+                new LocationData(80, "Clozer Woods Sub-Gate, Gorubesshu corridor east chest", "Container", levelDataDict[0x1309], itemDataDict[0x7B], 0xBE401, 3, null, false, 0x9F114, 0x8C735),
+                new LocationData(81, "Clozer Woods Sub-Gate, Generator room lower chest", "Container", levelDataDict[0x1308], itemDataDict[0x35], 0xBE403, 6, null, false, 0x9F114, 0x8C735),
+                new LocationData(82, "Main Gate, Maze Chest", "Container", levelDataDict[0x1A00], itemDataDict[0x62], 0xBE402, 7, null, false, 0x9F114, 0x8C735),
+                new LocationData(83, "Main Gate, Maze entrance hole", "Hole", levelDataDict[0x1A00], GetZennyItemData(2170), 0xBE3DE, 6, null, false, null, 0x153D8F),
+                new LocationData(84, "Main Gate, Maze Karumuna Bash hole", "Hole", levelDataDict[0x1A00], itemDataDict[0x52], 0xBE3DD, 0, null, false, null, 0x153C82),
+                new LocationData(85, "Main Gate, Maze Reaverbot hole", "Hole", levelDataDict[0x1A00], itemDataDict[0x79], 0xBE3DE, 5, null, false, null, 0x153E2D),
+                new LocationData(86, "Main Gate, Two Gorubesshu room chest", "Container", levelDataDict[0x1A06], itemDataDict[0x13], 0xBE401, 0, null, false, 0x9F114, 0x8C735),
+                new LocationData(87, "Main Gate, Entrance hole", "Hole", levelDataDict[0x1A07], GetZennyItemData(10000), 0xBE3DE, 7, null, false, null, 0x153CF1),
+                new LocationData(88, "Main Gate, Boss corridor chest", "Hole", levelDataDict[0x1A01], itemDataDict[0x11], 0xBE404, 1, null, false, null, 0x8C735),
+                new LocationData(89, "Old City Sub-City, Chest", "Container", levelDataDict[0x1D03], itemDataDict[0x37], 0xBE404, 4, null, false, 0x9F114, 0x8C735),
+                new LocationData(90, "Downtown Sub-City, Chest", "Container", levelDataDict[0x1D04], itemDataDict[0x38], 0xBE404, 3, null, false, 0x9F114, 0x8C735),
+                new LocationData(91, "Uptown Sub-City, Chest", "Container", levelDataDict[0x1D05], itemDataDict[0x39], 0xBE404, 0, null, false, 0x9F114, 0x8C735),
+                new LocationData(92, "Flutter, Study chest", "Hole", levelDataDict[0x1B05], itemDataDict[0x61], 0xBE3E1, 5, null, false, null, 0x15333F),
+            ];
             return locationDataList;
         }
         //public static List<ILocation> BuildLocationList(Dictionary<string, object> options)
         public static List<ILocation> BuildLocationList()
         {
             List<LocationData> locationDataList = GetLocationDataList();
-            List<ILocation> locationList = new List<ILocation>();
+            List<ILocation> locationList = [];
             foreach (LocationData locationData in locationDataList)
             {
                 if (locationData.CheckBitNumber is not null) {
-                    Location location = new Location()
+                    Location location = new()
                     {
-                        Id = 1001,
+                        Id = locationData.Id,
                         Name = locationData.Name,
                         Address = locationData.CheckAddress,
                         CheckType = LocationCheckType.Bit,

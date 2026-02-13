@@ -2,6 +2,7 @@
 {
     public class LocationData
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
         public LevelData LevelData { get; set; }
@@ -13,6 +14,7 @@
         public ulong? ChestItemSignatureAddress { get; set; }
         public ulong? TextBoxStartAddress { get; set; }
         public LocationData(
+            int id,
             string name,
             string category,
             LevelData levelData,
@@ -25,6 +27,7 @@
             ulong? textBoxStartAddress = null
         )
         {
+            Id = id;
             Name = name;
             Category = category;
             LevelData = levelData;

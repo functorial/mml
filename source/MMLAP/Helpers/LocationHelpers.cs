@@ -3,9 +3,9 @@ using DynamicData;
 using MMLAP.Models;
 using System.Buffers.Text;
 using System.Collections.Generic;
-namespace MMLAP
+namespace MMLAP.Helpers
 {
-    public class Helpers
+    public class LocationHelpers
     {
         public static Dictionary<ushort, LevelData> GetLevelDataDict()
         {

@@ -2,21 +2,21 @@
 {
     public class ItemData
     {
-        public string Category { get; set; }
+        public Enums.ItemCategory Category { get; set; }
         public string Name { get; set; }
         public uint? Quantity { get; set; }
         public byte? ItemCode { get; set; }
         public ulong? InventoryAddress { get; set; }
-        public uint? InventoryAddressBitNumber { get; set; }
+        public int? InventoryAddressBitNumber { get; set; }
         //public bool IsSellable { get; set; }
 
         public ItemData(
-            string category,
+            Enums.ItemCategory category,
             string name,
             uint? quantity = null,
             byte? code = null,
             ulong? address = null,
-            uint? addressBit = null
+            int? addressBit = null
             ///bool isSellable = false
         )
         {

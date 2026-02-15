@@ -22,5 +22,19 @@ namespace MMLAP.Helpers
         {
             Log.Logger.Information("Disconnected from Archipelago");
         }
+        public async void ItemReceived(object sender, ItemReceivedEventArgs args, ArchipelagoClient client)
+        {
+            if (client.CurrentSession == null) return;
+            switch (args.Item)
+            {
+                case var x when x.Category == "Zenny": ItemHelpers.ReceiveZenny(x); break;
+                case var x when x.Category == "Buster Part": ItemHelpers.ReceiveBusterPart(x); break;
+                case var x when x.Category == "Normal Item": ItemHelpers.ReceiveNormalItem(x); break;
+                case var x when x.Category == "Special Item": ItemHelpers.ReceiveSpecialItem(x); break;
+                case var x when x.Category == "Nothing": ItemHelpers.ReceiveNothing(x); break;
+                default: Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
+            };
+            Log.Logger.Debug($"Item Received: {JsonConvert.SerializeObject(args.Item)}");
+        }
     }
 }

@@ -442,7 +442,7 @@ namespace MMLAP.Helpers
                         Address = locationData.CheckAddress,
                         CheckType = LocationCheckType.Bit,
                         AddressBit = locationData.CheckBitNumber ?? -1,
-                        Category = locationData.Category
+                        Category = locationData.Category.ToString()
                     };
                     locationList.Add(location);
                 }

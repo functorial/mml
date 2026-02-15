@@ -16,5 +16,10 @@ namespace MMLAP.Models
             Special = 3,
             Normal = 4
         }
+        public enum LocationCategory
+        {
+            Container = 0,
+            Hole = 1
+        }
     }
 }

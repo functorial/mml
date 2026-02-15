@@ -1,10 +1,12 @@
-﻿namespace MMLAP.Models
+﻿using static MMLAP.Models.Enums;
+
+namespace MMLAP.Models
 {
     public class LocationData
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
+        public LocationCategory Category { get; set; }
         public LevelData LevelData { get; set; }
         public ItemData DefaultItemData { get; set; }
         public ulong CheckAddress { get; set; }
@@ -16,7 +18,7 @@
         public LocationData(
             int id,
             string name,
-            string category,
+            LocationCategory category,
             LevelData levelData,
             ItemData defaultItemData,
             ulong checkAddress,

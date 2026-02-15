@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MMLAP.Helpers
 {
-    internal class ItemHelpers
+    public class ItemHelpers
     {
         public static void ReceiveNothing(Item item)
         {

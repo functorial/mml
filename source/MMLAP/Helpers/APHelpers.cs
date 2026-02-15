@@ -1,12 +1,10 @@
 ﻿using Archipelago.Core;
 using Archipelago.Core.Models;
+using MMLAP.Models;
+using static MMLAP.Models.Enums;
 using Newtonsoft.Json;
 using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MMLAP.Helpers
 {
@@ -27,12 +25,18 @@ namespace MMLAP.Helpers
             if (client.CurrentSession == null) return;
             switch (args.Item)
             {
-                case var x when x.Category == "Zenny": ItemHelpers.ReceiveZenny(x); break;
-                case var x when x.Category == "Buster Part": ItemHelpers.ReceiveBusterPart(x); break;
-                case var x when x.Category == "Normal Item": ItemHelpers.ReceiveNormalItem(x); break;
-                case var x when x.Category == "Special Item": ItemHelpers.ReceiveSpecialItem(x); break;
-                case var x when x.Category == "Nothing": ItemHelpers.ReceiveNothing(x); break;
-                default: Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
+                case var x when Enum.TryParse<ItemCategory>(x.Category, out var category) && (category == ItemCategory.Nothing):
+                    ItemHelpers.ReceiveNothing(x); break;
+                case var x when Enum.TryParse<ItemCategory>(x.Category, out var category) && (category == ItemCategory.Zenny):
+                    ItemHelpers.ReceiveZenny(x); break;
+                case var x when Enum.TryParse<ItemCategory>(x.Category, out var category) && (category == ItemCategory.Buster):
+                    ItemHelpers.ReceiveBusterPart(x); break;
+                case var x when Enum.TryParse<ItemCategory>(x.Category, out var category) && (category == ItemCategory.Special):
+                    ItemHelpers.ReceiveSpecialItem(x); break;
+                case var x when Enum.TryParse<ItemCategory>(x.Category, out var category) && (category == ItemCategory.Normal):
+                    ItemHelpers.ReceiveNormalItem(x); break;
+                default:
+                    Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
             };
             Log.Logger.Debug($"Item Received: {JsonConvert.SerializeObject(args.Item)}");
         }

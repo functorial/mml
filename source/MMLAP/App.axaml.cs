@@ -43,6 +43,7 @@ public partial class App : Application
     public static ArchipelagoClient Client { get; set; }
     private static string _playerName { get; set; }
     public static List<ILocation> GameLocations { get; set; }
+    public static Dictionary<long, ItemData> scoutedLocationItemData {  get; set; }
     private static readonly object _lockObject = new object();
     private static bool _hasSubmittedGoal { get; set; }
     private static bool _useQuietHints { get; set; }
@@ -94,8 +95,8 @@ public partial class App : Application
         //Context.Host = "Hello World";
         _hasSubmittedGoal = false;
         _useQuietHints = true;
-        Log.Logger.Information("This Archipelago Client is compatible only with the NTSC-U release of Spyro 2 (North America version).");
-        Log.Logger.Information("Trying to play with a different version will not work and may release all of your locations at the start.");
+        Log.Logger.Information("This Archipelago Client is compatible only with the USA release of Mega Man Legends.");
+        Log.Logger.Information("Trying to play with a different version will not work as intended.");
         if (!IsRunningAsAdministrator())
         {
             Log.Logger.Warning("You do not appear to be running this client as an administrator.");
@@ -109,15 +110,15 @@ public partial class App : Application
         switch (command)
         {
             case "showGoal":
-                CompletionGoal goal = (CompletionGoal)(int.Parse(Client.Options?.GetValueOrDefault("goal", 0).ToString()));
+                CompletionGoal goal = (CompletionGoal)int.Parse(Client.Options?.GetValueOrDefault("goal", 0).ToString());
                 string goalText = "";
                 switch (goal)
                 {
-                    case CompletionGoal.Ripto:
-                        goalText = "Defeat Ripto and collect " + _requiredOrbs + " orbs, the requirement to open his arena";
+                    case CompletionGoal.Juno:
+                        goalText = "Defeat Juno.";
                         break;
                     default:
-                        goalText = "Defeat Ripto and collect " + _requiredOrbs + " orbs, the requirement to open his arena";
+                        goalText = "Unknown.";
                         break;
                 }
                 Log.Logger.Information($"Your goal is: {goalText}");
@@ -160,7 +161,7 @@ public partial class App : Application
         Client.Connected += OnConnected;
         Client.Disconnected += OnDisconnected;
 
-        await Client.Connect(e.Host, "Spyro 2", "save1");
+        await Client.Connect(e.Host, "Mega Man Legends", "save1");
         if (!Client.IsConnected)
         {
             Log.Logger.Error("Your host seems to be invalid.  Please confirm that you have entered it correctly.");
@@ -176,7 +177,7 @@ public partial class App : Application
         await Client.Login(e.Slot, !string.IsNullOrWhiteSpace(e.Password) ? e.Password : null);
         if (Client.Options?.Count > 0)
         {
-            GemsanityOptions gemsanityOption = (GemsanityOptions)int.Parse(Client.Options?.GetValueOrDefault("enable_gemsanity", "0").ToString());
+            // GemsanityOptions gemsanityOption = (GemsanityOptions)int.Parse(Client.Options?.GetValueOrDefault("enable_gemsanity", "0").ToString());
             int slot = Client.CurrentSession.ConnectionInfo.Slot;
             Dictionary<string, object> slotData = await Client.CurrentSession.DataStorage.GetSlotDataAsync(slot);
             List<int> gemsanityIDs = new List<int>();
@@ -210,10 +211,9 @@ public partial class App : Application
                 //Log.Logger.Error($"The host's AP world version predates 1.0.0, but the client version is {Version}.");
                 Log.Logger.Error("This will almost certainly result in errors.");
             }
-            _requiredOrbs = int.Parse(Client.Options?.GetValueOrDefault("ripto_door_orbs", 0).ToString());
-            bool easyFracture = int.Parse(Client.Options?.GetValueOrDefault("fracture_easy_earthshapers", 0).ToString()) > 0;
+            //_requiredOrbs = int.Parse(Client.Options?.GetValueOrDefault("ripto_door_orbs", 0).ToString());
 
-            GameLocations = Helpers.BuildLocationList(easyFracture: easyFracture, includeGemsanity: gemsanityOption != GemsanityOptions.Off, gemsanityIDs: gemsanityIDs);
+            GameLocations = LocationHelpers.BuildLocationList();
             GameLocations = GameLocations.Where(x => x != null && !Client.CurrentSession.Locations.AllLocationsChecked.Contains(x.Id)).ToList();
             Client.MonitorLocations(GameLocations);
 
@@ -236,7 +236,7 @@ public partial class App : Application
 
     private async void ItemReceived(object? o, ItemReceivedEventArgs args)
     {
-        if (client.CurrentSession == null) return;
+        if (Client.CurrentSession == null) return;
         Log.Logger.Debug($"Item Received: {JsonConvert.SerializeObject(args.Item)}");
         switch (args.Item)
         {
@@ -285,15 +285,7 @@ public partial class App : Application
 
     private static async void Client_MessageReceived(object? sender, MessageReceivedEventArgs e)
     {
-        // If the player requests it, don't show "found" hints in the main client.
-        if (e.Message.Parts.Any(x => x.Text == "[Hint]: ") && (!_useQuietHints || !e.Message.Parts.Any(x => x.Text.Trim() == "(found)")))
-        {
-            LogHint(e.Message);
-        }
-        if (!e.Message.Parts.Any(x => x.Text == "[Hint]: ") || !_useQuietHints || !e.Message.Parts.Any(x => x.Text.Trim() == "(found)"))
-        {
-            Log.Logger.Information(JsonConvert.SerializeObject(e.Message));
-        }
+        Log.Logger.Information(JsonConvert.SerializeObject(e.Message));
     }
     private static async void Locations_CheckedLocationsUpdated(System.Collections.ObjectModel.ReadOnlyCollection<long> newCheckedLocations)
     {
@@ -312,16 +304,17 @@ public partial class App : Application
     {
         // Load locations and start monitoring
         List<ILocation> locations = LocationHelpers.BuildLocationList();
-        await client.MonitorLocationsAsync(locations);
+        await Client.MonitorLocationsAsync(locations);
 
-        // Get locationID -> ItemData map
+        // Scout locations for items
         long[] locationIds = locations.Select(loc => (long)loc.Id).ToArray();
-        ArchipelagoSession session = client.CurrentSession;
+        ArchipelagoSession session = Client.CurrentSession;
         Dictionary<long, ScoutedItemInfo> scoutedLocations = await session.Locations.ScoutLocationsAsync(locationIds);
-        // TODO: stuff
+        Dictionary<long, ItemData> itemDataDict = LocationHelpers.GetItemDataDict();
+        scoutedLocationItemData = scoutedLocations.Keys.ToDictionary(locationId => locationId, locationId => itemDataDict[scoutedLocations[locationId].ItemId]);
 
         Log.Logger.Information("Connected to Archipelago");
-        Log.Logger.Information($"Playing {client.CurrentSession.ConnectionInfo.Game} as {client.CurrentSession.Players.GetPlayerName(client.CurrentSession.ConnectionInfo.Slot)}");
+        Log.Logger.Information($"Playing {Client.CurrentSession.ConnectionInfo.Game} as {Client.CurrentSession.Players.GetPlayerName(Client.CurrentSession.ConnectionInfo.Slot)}");
     }
 
     private static async void OnDisconnected(object sender, EventArgs args)
@@ -331,8 +324,8 @@ public partial class App : Application
         _hasSubmittedGoal = false;
         _useQuietHints = true;
         _unlockedLevels = 0;
-        Log.Logger.Information("This Archipelago Client is compatible only with the NTSC-U release of Spyro 2 (North America version).");
-        Log.Logger.Information("Trying to play with a different version will not work and may release all of your locations at the start.");
+        Log.Logger.Information("This Archipelago Client is compatible only with the USA release of Mega Man Legends.");
+        Log.Logger.Information("Trying to play with a different version will not work as intended.");
 
         //if (_deathLinkService != null)
         //{

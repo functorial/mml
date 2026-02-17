@@ -182,7 +182,7 @@ namespace MMLAP.Helpers
             return levelDataDict;
         }
         
-        public static ItemData GetZennyItemData(uint quantity)
+        public static ItemData GetZennyItemData(short quantity)
         {
             string name = quantity.ToString() + " Zenny";
             return new(ItemCategory.Zenny, name, quantity, null, null, null);
@@ -202,6 +202,8 @@ namespace MMLAP.Helpers
         {
             Dictionary<long, ItemData> itemDataDict = new Dictionary<long, ItemData>
             {
+                { 0x0000, GetAPItemData() },
+                { 0x00FF, GetNothingItemData() },
                 { 0x0200, new ItemData(ItemCategory.Buster, "Blaster Unit Omega", 1, 0x00, null, null) },
                 { 0x0201, new ItemData(ItemCategory.Buster, "Sniper Unit Omega", 1, 0x01, null, null) },
                 { 0x0202, new ItemData(ItemCategory.Buster, "Laser", 1, 0x02, null, null) },
@@ -329,7 +331,43 @@ namespace MMLAP.Helpers
                 { 0x027C, new ItemData(ItemCategory.Normal, "Tele-lens", 1, 0x7C, 0xBE427, 3) },
                 { 0x027D, new ItemData(ItemCategory.Normal, "JUNK-ITEM 25", 1, 0x7D, 0xBE427, 2) },
                 { 0x027E, new ItemData(ItemCategory.Normal, "JUNK-ITEM 26", 1, 0x7E, 0xBE427, 1) },
-                { 0x027F, new ItemData(ItemCategory.Normal, "JUNK-ITEM 27", 1, 0x7F, 0xBE427, 0) }
+                { 0x027F, new ItemData(ItemCategory.Normal, "JUNK-ITEM 27", 1, 0x7F, 0xBE427, 0) },
+                { 0x8001, GetZennyItemData(0x001) },
+                //{ 0x8001, GetZennyItemData(0x001) },
+                { 0x8002, GetZennyItemData(0x002) },
+                //{ 0x8002, GetZennyItemData(0x002) },
+                { 0x8003, GetZennyItemData(0x003) },
+                { 0x8005, GetZennyItemData(0x005) },
+                { 0x800A, GetZennyItemData(0x00A) },
+                { 0x8014, GetZennyItemData(0x014) },
+                { 0x8016, GetZennyItemData(0x016) },
+                { 0x801E, GetZennyItemData(0x01E) },
+                { 0x802D, GetZennyItemData(0x02D) },
+                { 0x8038, GetZennyItemData(0x038) },
+                { 0x8042, GetZennyItemData(0x042) },
+                { 0x804E, GetZennyItemData(0x04E) },
+                { 0x8050, GetZennyItemData(0x050) },
+                { 0x8052, GetZennyItemData(0x052) },
+                { 0x805C, GetZennyItemData(0x05C) },
+                //{ 0x805C, GetZennyItemData(0x05C) },
+                { 0x8076, GetZennyItemData(0x076) },
+                { 0x8078, GetZennyItemData(0x078) },
+                { 0x807C, GetZennyItemData(0x07C) },
+                { 0x8097, GetZennyItemData(0x097) },
+                { 0x80A2, GetZennyItemData(0x0A2) },
+                { 0x80B2, GetZennyItemData(0x0B2) },
+                { 0x80B8, GetZennyItemData(0x0B8) },
+                { 0x80D9, GetZennyItemData(0x0D9) },
+                { 0x80E4, GetZennyItemData(0x0E4) },
+                { 0x80E6, GetZennyItemData(0x0E6) },
+                { 0x8104, GetZennyItemData(0x104) },
+                { 0x811C, GetZennyItemData(0x11C) },
+                { 0x81C4, GetZennyItemData(0x1C4) },
+                { 0x8201, GetZennyItemData(0x201) },
+                { 0x8230, GetZennyItemData(0x230) },
+                { 0x839C, GetZennyItemData(0x39C) },
+                { 0x83E8, GetZennyItemData(0x3E8) }
+                // TODO: Add filler items
             };
             return itemDataDict;
         }

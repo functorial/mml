@@ -174,7 +174,7 @@ namespace MMLAP.Helpers
             return coloredEncoding;
         }
 
-        public static byte[] EncodeYouGotItemWindow(ItemData item)
+        public static byte[] EncodeYouGotItemWindow(ItemData itemdata)
         {
             List<ItemCategory> displayedItemCategories =
             [
@@ -183,16 +183,16 @@ namespace MMLAP.Helpers
                 ItemCategory.Normal 
             ];
             byte[] itemByteArray = [];
-            switch (item.Category)
+            switch (itemdata.Category)
             {
                 case ItemCategory category when displayedItemCategories.Contains(category):
-                    itemByteArray = AddTextColor(EncodeItemDisplay(item.ItemCode ?? 0), textColorGreen);
+                    itemByteArray = AddTextColor(EncodeItemDisplay(itemdata.ItemCode ?? 0), textColorGreen);
                     break;
                 case ItemCategory category when category == ItemCategory.Nothing:
                     itemByteArray = nothing; 
                     break;
                 case ItemCategory category when category == ItemCategory.Zenny:
-                    itemByteArray = EncodeSimpleString(item.Name);
+                    itemByteArray = EncodeSimpleString(itemdata.Name);
                     break;
                 case ItemCategory category when category == ItemCategory.AP:
                     itemByteArray = redAPItem;

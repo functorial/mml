@@ -14,10 +14,10 @@ namespace MMLAP.Helpers
 
         public static void ReceiveZenny(Item item)
         {
-            uint oldZenny = Memory.ReadUInt(Addresses.CurrentZenny);
+            uint oldZenny = Memory.ReadUInt(Addresses.CurrentZenny.Address);
             uint amountReceived = uint.Parse(item.Name.Split(' ')[0]);
             uint newZenny = ((oldZenny + amountReceived) < oldZenny) ? uint.MaxValue : oldZenny + amountReceived;
-            _ = Memory.Write(Addresses.CurrentZenny, newZenny);
+            _ = Memory.Write(Addresses.CurrentZenny.Address, newZenny);
             return;
         }
 
@@ -25,7 +25,7 @@ namespace MMLAP.Helpers
         {
             Dictionary<long, ItemData> itemDataDict = LocationHelpers.GetItemDataDict();
             ItemData itemData = itemDataDict[item.Id];
-            ulong busterInv = Addresses.UnequippedBusterInvStart;
+            ulong busterInv = Addresses.UnequippedBusterInvStart.Address;
             for (uint i = 0; i < 34; i++)
             {
                 ulong busterInvSlot = busterInv + i;
@@ -45,7 +45,7 @@ namespace MMLAP.Helpers
         {
             Dictionary<long, ItemData> itemDataDict = LocationHelpers.GetItemDataDict();
             ItemData itemData = itemDataDict[item.Id];
-            _ = Memory.WriteBit(itemData.InventoryAddress ?? 0, itemData.InventoryAddressBitNumber ?? 0, true);
+            _ = Memory.WriteBit(itemData.InventoryAddressData.Address, itemData.InventoryAddressData.BitNumber ?? 0, true);
             return;
         }
 
@@ -53,7 +53,7 @@ namespace MMLAP.Helpers
         {
             Dictionary<long, ItemData> itemDataDict = LocationHelpers.GetItemDataDict();
             ItemData itemData = itemDataDict[item.Id];
-            _ = Memory.WriteBit(itemData.InventoryAddress ?? 0, itemData.InventoryAddressBitNumber ?? 0, true);
+            _ = Memory.WriteBit(itemData.InventoryAddressData.Address, itemData.InventoryAddressData.BitNumber ?? 0, true);
             return;
         }
     }

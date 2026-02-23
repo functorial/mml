@@ -98,40 +98,47 @@ public partial class App : Application
 
     private void Context_CommandReceived(object? sender, ArchipelagoCommandEventArgs a)
     {
-        if (APClient == null || APClient.ItemManager == null || APClient.CurrentSession == null)
-        {
-            return;
-        }
 
         if (string.IsNullOrWhiteSpace(a.Command))
         {
             return;
         }
-
-        APClient.SendMessage(a.Command);
+        Log.Logger.Information($"> {a.Command}");
         string command = a.Command.Trim().ToLower();
         switch (command)
         {
             case "reload":
-                Log.Logger.Information("Clearing the game state.  Please reconnect to the server while in game to refresh received items.");
-                APClient.ItemManager.ForceReloadAllItems();
-                break;
-            case "showGoal":
-                CompletionGoal goal = (CompletionGoal)int.Parse(APClient.Options?.GetValueOrDefault("goal", 0).ToString());
-                string goalText;
-                switch (goal)
+                if (APClient != null && APClient.ItemManager != null)
                 {
-                    case CompletionGoal.Juno:
-                        goalText = "Defeat Juno.";
-                        break;
-                    default:
-                        goalText = "Unknown.";
-                        break;
+                    Log.Logger.Information("Clearing the game state.  Please reconnect to the server while in game to refresh received items.");
+                    APClient.ItemManager.ForceReloadAllItems();
+                    return;
                 }
-                Log.Logger.Information($"Your goal is: {goalText}");
+                else
+                {
+                    Log.Logger.Warning("Please connect the client before attempting reload.");
+                }
+                break;
+            case "goal":
+                string goalText;
+                if (APClient != null && APClient.Options != null && APClient.Options.TryGetValue("goal", out var goalValueObj))
+                {
+                    int goalValue = goalValueObj as int? ?? 0;
+                    CompletionGoal goal = (CompletionGoal)goalValue;
+                    goalText = goal switch
+                    {
+                        CompletionGoal.Juno => "Defeat Juno.",
+                        _ => "Unknown.",
+                    };
+                }
+                else
+                {
+                    goalText = "Unknown.";
+                }
+                Log.Logger.Information($"Your goal is: {goalText}.");
                 break;
             default:
-                Log.Logger.Information("Command not recognized.");
+                Log.Logger.Information("Command not recognized. Did you mean one of the following?\n  [reload]: Forces all items to reload\n  [goal]: Show current goal.");
                 break;
         }
         return;
@@ -192,7 +199,9 @@ public partial class App : Application
         APClient.MessageReceived += Client_MessageReceived;
 
         // Connect to host and log in to slot => init Options, ItemManager, LocationManager
-        await APClient.Connect(e.Host, "Mega Man Legends");
+        if (e.Host != null) {
+            await APClient.Connect(e.Host, "Mega Man Legends");
+        }
         if (!APClient.IsConnected)
         {
             Log.Logger.Error("Your host seems to be invalid.  Please confirm that you have entered it correctly.");
@@ -391,8 +400,6 @@ public partial class App : Application
         Log.Logger.Information("Disconnected from Archipelago");
         // Avoid ongoing timers affecting a new game.
         _hasSubmittedGoal = false;
-        Log.Logger.Information("This Archipelago Client is compatible only with the USA release of Mega Man Legends.");
-        Log.Logger.Information("Trying to play with a different version will not work as intended.");
         return;
     }
 }

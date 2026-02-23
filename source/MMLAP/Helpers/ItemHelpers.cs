@@ -17,7 +17,7 @@ namespace MMLAP.Helpers
             uint oldZenny = Memory.ReadUInt(Addresses.CurrentZenny.Address);
             uint amountReceived = uint.Parse(item.Name.Split(' ')[0]);
             uint newZenny = ((oldZenny + amountReceived) < oldZenny) ? uint.MaxValue : oldZenny + amountReceived;
-            _ = Memory.Write(Addresses.CurrentZenny.Address, newZenny);
+            _ = Memory.Write(Addresses.CurrentZenny.Address, newZenny, Archipelago.Core.Util.Enums.Endianness.Big);
             return;
         }
 

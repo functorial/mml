@@ -127,15 +127,15 @@ public partial class App : Application
                     CompletionGoal goal = (CompletionGoal)goalValue;
                     goalText = goal switch
                     {
-                        CompletionGoal.Juno => "Defeat Juno.",
-                        _ => "Unknown.",
+                        CompletionGoal.Juno => "Defeat Juno",
+                        _ => "Unknown",
                     };
                 }
                 else
                 {
-                    goalText = "Unknown.";
+                    goalText = "Unknown";
                 }
-                Log.Logger.Information($"Your goal is: {goalText}");
+                Log.Logger.Information($"Your goal is: {goalText}.");
                 break;
             default:
                 Log.Logger.Information("Command not recognized. Did you mean one of the following?\n  [reload]: Forces all items to reload\n  [goal]: Show current goal.");
@@ -262,18 +262,16 @@ public partial class App : Application
 
     private void LocationManager_LocationCompleted(object? sender, LocationCompletedEventArgs e)
     {
-        if (APClient.LocationManager == null || APClient.CurrentSession == null)
+        if (APClient.LocationManager != null || APClient.CurrentSession != null)
         {
-            return;
-        }
-
-        // Use scouted location item to rewrite textbox
-        Dictionary<int, LocationData> locationDataDict = LocationHelpers.GetLocationDataDict();
-        LocationData locationData = locationDataDict[e.CompletedLocation.Id];
-        if (locationData.TextBoxStartAddress != null)
-        {
-            ItemData itemData = scoutedLocationItemData[e.CompletedLocation.Id];
-            Memory.WriteByteArray(locationData.TextBoxStartAddress ?? 0, TextHelpers.EncodeYouGotItemWindow(itemData)); // TODO: Is this big endian?
+            // Use scouted location item to rewrite textbox
+            Dictionary<int, LocationData> locationDataDict = LocationHelpers.GetLocationDataDict();
+            LocationData locationData = locationDataDict[e.CompletedLocation.Id];
+            if (locationData.TextBoxStartAddress != null)
+            {
+                ItemData itemData = scoutedLocationItemData[e.CompletedLocation.Id];
+                Memory.WriteByteArray(locationData.TextBoxStartAddress ?? 0, TextHelpers.EncodeYouGotItemWindow(itemData), Archipelago.Core.Util.Enums.Endianness.Big); // TODO: Is this big endian?
+            }
         }
         return;
     }
@@ -319,7 +317,7 @@ public partial class App : Application
 
     private static async void ModifyGameLoop(object? sender, ElapsedEventArgs e)
     {
-        if (APClient.ItemManager == null || APClient.CurrentSession == null)
+        if (APClient == null || APClient.ItemManager == null || APClient.CurrentSession == null)
         {
             return;
         }
@@ -339,29 +337,24 @@ public partial class App : Application
     private static void CheckGoalCondition()
     {
         if (
-            APClient == null ||
-            APClient.CurrentSession == null ||
-            APClient.CurrentSession.Locations == null ||
-            APClient.CurrentSession.Locations.AllLocationsChecked == null ||
-            APClient.ItemManager == null ||
-            GameLocations == null ||
-            _hasSubmittedGoal ||
-            !LocationManager_EnableLocationsCondition()
+            !_hasSubmittedGoal ||
+            LocationManager_EnableLocationsCondition()
         )
         {
-            return;
-        }
-        
-        int goal = int.Parse(APClient.Options?.GetValueOrDefault("goal", 0).ToString());
-        bool isGoalComplete = (CompletionGoal)goal switch
-        {
-            CompletionGoal.Juno => Memory.ReadBit(Addresses.GoalJunoFlag.Address, Addresses.GoalJunoFlag.BitNumber ?? 0),
-            _ => false
-        };
-        if (isGoalComplete)
-        {
-            APClient.SendGoalCompletion();
-            _hasSubmittedGoal = true;
+            if (APClient != null && APClient.Options != null && APClient.Options.TryGetValue("goal", out var goalValueObj))
+            {
+                int goalValue = goalValueObj as int? ?? 0;
+                bool isGoalComplete = (CompletionGoal)goalValue switch
+                {
+                    CompletionGoal.Juno => Memory.ReadBit(Addresses.GoalJunoFlag.Address, Addresses.GoalJunoFlag.BitNumber ?? 0),
+                    _ => false
+                };
+                if (isGoalComplete)
+                {
+                    APClient.SendGoalCompletion();
+                    _hasSubmittedGoal = true;
+                }
+            }
         }
         return;
     }

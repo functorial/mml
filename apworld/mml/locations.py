@@ -1,6 +1,13 @@
-from enum import Enum
+from __future__ import annotations
 
-from BaseClasses import Location, Region
+from typing import TYPE_CHECKING
+
+from BaseClasses import ItemClassification, Location
+
+from . import items
+
+if TYPE_CHECKING:
+    from .world import MMLWorld
 
 LOCATION_NAME_TO_ID = {
     "Ocean tower, Right chest" :  1,
@@ -93,3 +100,21 @@ LOCATION_NAME_TO_ID = {
     "Uptown Sub-City, Chest" : 91,
     "Flutter, Study chest" : 92
 }
+
+class MMLLocation(Location):
+    game = "Mega Man Legends"
+
+def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | None]:
+    return {location_name: LOCATION_NAME_TO_ID[location_name] for location_name in location_names}
+
+
+def create_all_locations(world: MMLWorld) -> None:
+    create_regular_locations(world)
+    create_events(world)
+
+def create_regular_locations(world: MMLWorld) -> None:
+    universe = world.get_region("Universe")
+    universe.add_locations(LOCATION_NAME_TO_ID, MMLLocation)
+
+def create_events(world: MMLWorld) -> None:
+    pass

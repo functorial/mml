@@ -26,6 +26,8 @@ ITEM_NAME_TO_ID = {
     "Watcher' Key":                         0x0237,
     "Sleeper' Key":                         0x0238,
     "Dreamer' Key":                         0x0239,
+    "Bag":                                  0x0245,
+    "Saw":                                  0x0248,
     "Old Bone":                             0x024B,
     "Old Doll":                             0x024D,
     "Antique Bell":                         0x024E,
@@ -109,7 +111,9 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Clozer Woods Sub-Gate Key 3":          ItemClassification.filler, 
     "Watcher' Key":                         ItemClassification.filler, 
     "Sleeper' Key":                         ItemClassification.filler, 
-    "Dreamer' Key":                         ItemClassification.filler, 
+    "Dreamer' Key":                         ItemClassification.filler,
+    "Bag":                                  ItemClassification.filler,
+    "Saw":                                  ItemClassification.filler,
     "Old Bone":                             ItemClassification.filler, 
     "Old Doll":                             ItemClassification.filler, 
     "Antique Bell":                         ItemClassification.filler, 
@@ -179,8 +183,6 @@ class MMLItem(Item):
     game = "Mega Man Legends"
 
 def get_random_filler_item_name(world: MMLWorld) -> str:
-    if world.random.randint(0, 99) < world.options.trap_chance:
-        return "Nothing"
     return "100 Zenny"
 
 def create_item_with_correct_classification(world: MMLWorld, name: str) -> MMLItem:
@@ -189,4 +191,106 @@ def create_item_with_correct_classification(world: MMLWorld, name: str) -> MMLIt
 
 def create_all_items(world: MMLWorld) -> None:
     #TODO
-    pass
+
+    itemPool: list[MMLItem] = [
+        world.create_item("Nothing"),
+        world.create_item("Nothing"),
+        world.create_item("Nothing"),
+        world.create_item("Nothing"),
+        world.create_item("Nothing"),
+        world.create_item("10 Zenny"),
+        world.create_item("10 Zenny"),
+        world.create_item("20 Zenny"),
+        world.create_item("20 Zenny"),
+        world.create_item("30 Zenny"),
+        world.create_item("50 Zenny"),
+        world.create_item("100 Zenny"),
+        world.create_item("200 Zenny"),
+        world.create_item("220 Zenny"),
+        world.create_item("300 Zenny"),
+        world.create_item("450 Zenny"),
+        world.create_item("560 Zenny"),
+        world.create_item("660 Zenny"),
+        world.create_item("780 Zenny"),
+        world.create_item("820 Zenny"),
+        world.create_item("920 Zenny"),
+        world.create_item("920 Zenny"),
+        world.create_item("1180 Zenny"),
+        world.create_item("1200 Zenny"),
+        world.create_item("1240 Zenny"),
+        world.create_item("1510 Zenny"),
+        world.create_item("1620 Zenny"),
+        world.create_item("1780 Zenny"),
+        world.create_item("1840 Zenny"),
+        world.create_item("2170 Zenny"),
+        world.create_item("2280 Zenny"),
+        world.create_item("2300 Zenny"),
+        world.create_item("2600 Zenny"),
+        world.create_item("2840 Zenny"),
+        world.create_item("4520 Zenny"),
+        world.create_item("5130 Zenny"),
+        world.create_item("5600 Zenny"),
+        world.create_item("9240 Zenny"),
+        world.create_item("10000 Zenny"),
+        world.create_item("Power Raiser"),
+        world.create_item("Power Stream"),
+        world.create_item("Blaster Unit R"),
+        world.create_item("Buster Unit Omega"),
+        world.create_item("Rapid Striker"),
+        world.create_item("Buster Unit"),
+        world.create_item("Rapid Fire"),
+        world.create_item("Lake Jyun Sub-Gate Starter Key 1"),
+        world.create_item("Lake Jyun Sub-Gate Starter Key 2"),
+        world.create_item("Lake Jyun Sub-Gate Starter Key 3"),
+        world.create_item("Clozer Woods Sub-Gate Key 1"),
+        world.create_item("Clozer Woods Sub-Gate Key 2"),
+        world.create_item("Clozer Woods Sub-Gate Key 3"),
+        world.create_item("Watcher' Key"),
+        world.create_item("Sleeper' Key"),
+        world.create_item("Dreamer' Key"),
+        world.create_item("Bag"),
+        world.create_item("Saw"),
+        world.create_item("Old Bone"),
+        world.create_item("Old Doll"),
+        world.create_item("Antique Bell"),
+        world.create_item("Shiny Object"),
+        world.create_item("Old Shield"),
+        world.create_item("Shiny Red Stone"),
+        world.create_item("Ring"),
+        world.create_item("Cannon Kit"),
+        world.create_item("Grenade Kit"),
+        world.create_item("Blumebear Parts"),
+        world.create_item("Broken Motor"),
+        world.create_item("Broken Propeller"),
+        world.create_item("Broken Cleaner"),
+        world.create_item("Bomb Schematic"),
+        world.create_item("Blunted Drill"),
+        world.create_item("Guidance Unit"),
+        world.create_item("Pen Light"),
+        world.create_item("Old Launcher"),
+        world.create_item("Ancient Book"),
+        world.create_item("Weapon Plans"),
+        world.create_item("Spring Set"),
+        world.create_item("Safety Helmet"),
+        world.create_item("Rollerboard"),
+        world.create_item("Old Hoverjets"),
+        world.create_item("Joint Plug"),
+        world.create_item("Main Core Shard"),
+        world.create_item("Rapidfire Barrel"),
+        world.create_item("Gatling Part"),
+        world.create_item("Autofire Barrel"),
+        world.create_item("Generator Part"),
+        world.create_item("Target Sensor"),
+        world.create_item("Tele-lens")
+    ]
+
+    number_of_items = len(itemPool)
+
+    number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
+
+    needed_number_of_filler_items = number_of_unfilled_locations - number_of_items
+
+    itemPool += [world.create_filler() for _ in range(needed_number_of_filler_items)]
+
+    world.multiworld.itempool += itemPool
+

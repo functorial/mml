@@ -7,21 +7,20 @@ from Options import Toggle, DefaultOnToggle, Option, Range, Choice, ItemDict, De
 # Range: options that have a mix/max value, like damage amplification, or a chance of something happening.
 # Choice: an option where you pick a discrete answer like in a dropdown menu.
 
-# TODO
-class MMLOptions(PerGameCommonOptions):
-    x = "NOTHING"
-
-# TODO
-option_presets = {}
-
 class Goal(Choice):
     """
     The goal that the player will have.
     """
 
-    display_name = "goal"
+    display_name = "Goal"
 
-    juno = 0
+    option_juno = 0
     #complete_museum = 1
 
-    default = juno
+    default = option_juno
+
+@dataclass
+class MMLOptions(PerGameCommonOptions):
+    goal: Goal
+
+option_presets = {}

@@ -14,11 +14,10 @@ def set_all_rules(world: MMLWorld) -> None:
     set_completion_condition(world)
 
 def set_all_entrance_rules(world: MMLWorld) -> None:
-    universe = world.get_entrance("Universe")
     pass
 
 def set_all_location_rules(world: MMLWorld) -> None:
     pass
 
 def set_completion_condition(world: APQuestWorld) -> None:
-    world.multiworld.completion_condition[world.player] = lambda state: state.has("goal", world.player)
+    world.multiworld.completion_condition[world.player] = lambda state: True

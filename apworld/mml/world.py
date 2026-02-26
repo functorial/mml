@@ -5,7 +5,7 @@ from typing import Any
 from worlds.AutoWorld import World
 
 # Imports of your world's files must be relative.
-from . import items, locations, regions, rules, web_world
+from . import items, locations, regions, rules
 from . import options as mml_options  
 from collections.abc import Mapping
 from typing import Any
@@ -19,7 +19,13 @@ class MMLWorld(World):
 
     game = "MegaMan Legends"
 
-    #web = web_world.MMLWebWorld()
+    options_dataclass = mml_options.APQuestOptions
+    options: mml_options.APQuestOptions
+
+    location_name_to_id = locations.LOCATION_NAME_TO_ID
+    item_name_to_id = items.ITEM_NAME_TO_ID
+
+    origin_region_name = "Universe"
 
     def create_regions(self) -> None:
         regions.create_and_connect_regions(self)

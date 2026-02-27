@@ -21,7 +21,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Principal;
 using System.Timers;
-using static MMLAP.Models.Enums;
+using static MMLAP.Models.MMLEnums;
 
 namespace MMLAP;
 
@@ -138,7 +138,7 @@ public partial class App : Application
                 Log.Logger.Information($"Your goal is: {goalText}.");
                 break;
             default:
-                Log.Logger.Information("Command not recognized. Did you mean one of the following?\n  [reload]: Forces all items to reload\n  [goal]: Show current goal.");
+                Log.Logger.Information("Command not recognized. Did you mean one of the following?\n  [reload]: Forces all items to reload.\n  [goal]: Show current goal.");
                 break;
         }
         return;
@@ -272,7 +272,7 @@ public partial class App : Application
             if (locationData.TextBoxStartAddress != null)
             {
                 ItemData itemData = scoutedLocationItemData[e.CompletedLocation.Id];
-                Memory.WriteByteArray(locationData.TextBoxStartAddress ?? 0, TextHelpers.EncodeYouGotItemWindow(itemData), Archipelago.Core.Util.Enums.Endianness.Little); // TODO: Is this big endian?
+                Memory.WriteByteArray(locationData.TextBoxStartAddress ?? 0, TextHelpers.EncodeYouGotItemWindow(itemData)); // TODO: Is this big endian?
             }
         }
         return;
@@ -292,27 +292,13 @@ public partial class App : Application
         return conditions.All(value => value);
     }
 
-    private async void ItemManager_ItemReceived(object? sender, ItemReceivedEventArgs args)
+    private static void ItemManager_ItemReceived(object? sender, ItemReceivedEventArgs args)
     {
-        if (APClient.CurrentSession != null)
+        Dictionary<long, ItemData> itemDataDict = LocationHelpers.GetItemDataDict();
+        if (APClient.CurrentSession != null && itemDataDict.TryGetValue(args.Item.Id, out ItemData? itemData))
         {
+            ItemHelpers.ReceiveGenericItem(itemData);
             Log.Logger.Debug($"Item Received: {JsonConvert.SerializeObject(args.Item)}");
-            switch (args.Item)
-            {
-                case Item x when Enum.TryParse(x.Category, out ItemCategory category) && (category == ItemCategory.Nothing):
-                    ItemHelpers.ReceiveNothing(x); break;
-                case Item x when Enum.TryParse(x.Category, out ItemCategory category) && (category == ItemCategory.Zenny):
-                    ItemHelpers.ReceiveZenny(x); break;
-                case Item x when Enum.TryParse(x.Category, out ItemCategory category) && (category == ItemCategory.Buster):
-                    ItemHelpers.ReceiveBusterPart(x); break;
-                case Item x when Enum.TryParse(x.Category, out ItemCategory category) && (category == ItemCategory.Special):
-                    ItemHelpers.ReceiveSpecialItem(x); break;
-                case Item x when Enum.TryParse(x.Category, out ItemCategory category) && (category == ItemCategory.Normal):
-                    ItemHelpers.ReceiveNormalItem(x); break;
-                default:
-                    Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
-            }
-            ;
         }
         return;
     }

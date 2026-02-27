@@ -1,6 +1,6 @@
 ﻿namespace MMLAP.Models
 {
-    public class Enums
+    public class MMLEnums
     {
         public enum ItemCategory
         {

@@ -1,17 +1,17 @@
 ﻿namespace MMLAP.Models
 {
     public class ItemData(
-        Enums.ItemCategory category,
+        MMLEnums.ItemCategory category,
         string name,
-        short? quantity = null,
+        uint quantity = 1,
         byte? itemCode = null,
         AddressData? inventoryAddressData = null,
         bool isFiller = false
     )
     {
-        public Enums.ItemCategory Category { get; set; } = category;
+        public MMLEnums.ItemCategory Category { get; set; } = category;
         public string Name { get; set; } = name;
-        public short? Quantity { get; set; } = quantity;
+        public uint Quantity { get; set; } = quantity;
         public byte? ItemCode { get; set; } = itemCode;
         public AddressData? InventoryAddressData { get; set; } = inventoryAddressData;
         public bool IsFiller { get; set; } = isFiller;

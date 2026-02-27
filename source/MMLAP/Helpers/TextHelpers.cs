@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MMLAP.Models;
-using static MMLAP.Models.Enums;
+using static MMLAP.Models.MMLEnums;
 
 namespace MMLAP.Helpers
 {
@@ -31,8 +31,8 @@ namespace MMLAP.Helpers
         public static readonly byte textColorCool1 = 0x58;
         public static readonly byte textColorCool2 = 0xB0;
         public static readonly byte[] youGot = [0x2E, 0x3F, 0x45, 0x4F, 0x36, 0x3F, 0x44, 0x13, 0x86];
-        public static readonly byte[] redAPItem = [0x89, 0x02, 0x15, 0x24, 0x4F, 0x1D, 0x44, 0x34, 0x3C, 0x89];
-        public static readonly byte[] nothing = [0X3D, 0X3F, 0X44, 0X37, 0X38, 0X3D, 0X36];
+        public static readonly byte[] redAPItem = [0x89, 0x02, 0x15, 0x24, 0x4F, 0x1D, 0x44, 0x34, 0x3C, 0x89, 0x00];
+        public static readonly byte[] nothing = [0X22, 0X3F, 0X44, 0X37, 0X38, 0X3D, 0X36];
         public static readonly byte[] newPage = [0x9F, 0x87, 0x04, 0x00];
         public static readonly byte[] endWindow = [0x9F, 0xA9, 0x84, 0x04, 0x00];
 
@@ -166,11 +166,12 @@ namespace MMLAP.Helpers
 
         public static byte[] AddTextColor(byte[] encoding, byte textColor)
         {
-            byte[] coloredEncoding = new byte[encoding.Length + 3];
+            byte[] coloredEncoding = new byte[encoding.Length + 4];
             coloredEncoding[0] = 0x89;
             coloredEncoding[1] = textColor;
             encoding.CopyTo(coloredEncoding, 2);
-            coloredEncoding[^1] = 0x89;
+            coloredEncoding[^2] = 0x89;
+            coloredEncoding[^1] = 0x00; // reset to default color 
             return coloredEncoding;
         }
 

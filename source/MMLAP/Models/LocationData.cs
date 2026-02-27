@@ -1,11 +1,11 @@
-﻿using static MMLAP.Models.Enums;
+﻿using static MMLAP.Models.MMLEnums;
 
 namespace MMLAP.Models
 {
     public class LocationData(
         int id,
         string name,
-        Enums.LocationCategory category,
+        MMLEnums.LocationCategory category,
         LevelData levelData,
         ItemData defaultItemData,
         AddressData checkAddressData,

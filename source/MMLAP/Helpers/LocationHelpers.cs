@@ -1,7 +1,7 @@
 ﻿using Archipelago.Core.Models;
 using MMLAP.Models;
 using System.Collections.Generic;
-using static MMLAP.Models.Enums;
+using static MMLAP.Models.MMLEnums;
 namespace MMLAP.Helpers
 {
     public class LocationHelpers
@@ -180,7 +180,7 @@ namespace MMLAP.Helpers
             return levelDataDict;
         }
         
-        public static ItemData GetZennyItemData(short quantity, bool isFiller=false)
+        public static ItemData GetZennyItemData(uint quantity, bool isFiller=false)
         {
             string name = quantity.ToString() + " Zenny";
             return new(ItemCategory.Zenny, name, quantity, null, null, isFiller);
@@ -188,12 +188,12 @@ namespace MMLAP.Helpers
         
         public static ItemData GetNothingItemData(bool isFiller=false)
         {
-            return new(ItemCategory.Nothing, "Nothing", null, 0xFF, null, isFiller);
+            return new(ItemCategory.Nothing, "Nothing", 1, 0xFF, null, isFiller);
         }
 
         public static ItemData GetAPItemData()
         {
-            return new(ItemCategory.AP, "AP Item", null, null, null, false);
+            return new(ItemCategory.AP, "AP Item", 1, null, null, false);
         }
         
         public static Dictionary<long, ItemData> GetItemDataDict()
@@ -374,7 +374,7 @@ namespace MMLAP.Helpers
             Dictionary<int, LocationData> locationDataDict = new()
             {
                 { 1, new LocationData(1, "Ocean tower, Right chest", LocationCategory.Container, levelDataDict[0x0002], itemDataDict[0x020D], new AddressData(0xBE400, 7, null), null, true, 0x9F114, 0x1539E8) },
-                { 2, new LocationData(2, "Ocean tower, Left chest", LocationCategory.Container, levelDataDict[0x0002], GetZennyItemData(560), new AddressData(0xBE400, 6, null), null, true, 0x9F4D4, 0x8C735) },
+                { 2, new LocationData(2, "Ocean tower, Left chest", LocationCategory.Container, levelDataDict[0x0002], GetZennyItemData(560), new AddressData(0xBE400, 6, null), null, true, 0x9F4D4, 0x8C759) },
                 { 3, new LocationData(3, "Apple market, Electric goods box", LocationCategory.Container, levelDataDict[0x0400], itemDataDict[0x0260], new AddressData(0xBE3F9, 6, null), null, false, 0xBF264, 0x8C4B2) },
                 { 4, new LocationData(4, "Apple market, Book store box", LocationCategory.Container, levelDataDict[0x0400], GetNothingItemData(), new AddressData(0xBE3F9, 7, null), null, false, 0xBF214, 0x8C46A) },
                 { 5, new LocationData(5, "Apple market, Junk store box", LocationCategory.Container, levelDataDict[0x0400], GetZennyItemData(100), new AddressData(0xBE3F8, 0, null), null, false, 0xBF1C4, 0x8C502) },

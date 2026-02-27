@@ -270,8 +270,9 @@ public partial class App : Application
             Log.Logger.Error("Unable to retrieve apworldversion from slot data.");
         }
         Log.Logger.Information("Warnings and errors above are okay if this is your first time connecting to this multiworld server.");
-        
+
         APClient.MonitorLocationsAsync(GameLocations);
+        await APClient.ReceiveReady();
 
         Context.ConnectButtonEnabled = true;
         return;

@@ -14,6 +14,7 @@
 	<!--https://github.com/Uroogla/Archipelago.Core-->
 
   <ItemGroup>
+    <PackageReference Include="Archipelago.Core" Version="1.4.2" />
     <PackageReference Include="Archipelago.Core.AvaloniaGUI" Version="0.6.1" />
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />

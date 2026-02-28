@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 ITEM_NAME_TO_ID = {
     "Nothing":                              0x00FF,
     "Power Raiser":                         0x020D,
+    "Buster Max":                           0x0210,
     "Power Stream":                         0x0211,
     "Blaster Unit R":                       0x0212,
     "Buster Unit Omega":                    0x0213,
@@ -96,7 +97,8 @@ ITEM_NAME_TO_ID = {
 #TODO map every item to a classification of progressive,useful,filler,etc
 DEFAULT_ITEM_CLASSIFICATIONS = {
     "Nothing":                              ItemClassification.filler, 
-    "Power Raiser":                         ItemClassification.filler, 
+    "Power Raiser":                         ItemClassification.filler,
+    "Buster Max":                           ItemClassification.useful,
     "Power Stream":                         ItemClassification.filler, 
     "Blaster Unit R":                       ItemClassification.filler, 
     "Buster Unit Omega":                    ItemClassification.filler, 

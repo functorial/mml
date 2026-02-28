@@ -39,6 +39,8 @@ public partial class App : Application
     private static bool _hasSubmittedGoal { get; set; }
     private static Timer _gameLoopTimer { get; set; }
 
+    private static Timer _startMMLTimer { get; set; }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -183,13 +185,23 @@ public partial class App : Application
             Context.ConnectButtonEnabled = true;
             return;
         }
-        bool connected = gameClient.Connect();
-        if (!connected)
+        try
+        {
+            bool connected = gameClient.Connect();
+            if (!connected)
+            {
+                Log.Logger.Warning("Duckstation not running, open Duckstation and launch the game before connecting!");
+                Context.ConnectButtonEnabled = true;
+                return;
+            }
+        }
+        catch (ArgumentException ex)
         {
             Log.Logger.Warning("Duckstation not running, open Duckstation and launch the game before connecting!");
             Context.ConnectButtonEnabled = true;
             return;
         }
+
         Memory.GlobalOffset = Memory.GetDuckstationOffset();
 
         // Initialize ArchipelagoClient
@@ -227,15 +239,18 @@ public partial class App : Application
         GameLocations = LocationHelpers.BuildLocationList(APClient.Options);
         GameLocations = GameLocations.Where(x => x != null && !APClient.CurrentSession.Locations.AllLocationsChecked.Contains(x.Id)).ToList();
 
+        int slot = APClient.CurrentSession.ConnectionInfo.Slot;
+
         // Scout location item data for future use
         long[] locationIds = GameLocations.Select(loc => (long)loc.Id).ToArray();
         ArchipelagoSession session = APClient.CurrentSession;
         Dictionary<long, ScoutedItemInfo> scoutedLocations = await session.Locations.ScoutLocationsAsync(locationIds);
         Dictionary<long, ItemData> itemDataDict = LocationHelpers.GetItemDataDict();
-        scoutedLocationItemData = scoutedLocations.Keys.ToDictionary(locationId => locationId, locationId => itemDataDict[scoutedLocations[locationId].ItemId]);
+        scoutedLocationItemData = scoutedLocations.Keys.ToDictionary(
+            locationId => locationId, locationId => scoutedLocations[locationId].Player.Slot == slot ? itemDataDict[scoutedLocations[locationId].ItemId] : itemDataDict[0]
+        );
 
         // Check apworld version compatibility with host and log results
-        int slot = APClient.CurrentSession.ConnectionInfo.Slot;
         Dictionary<string, object> slotData = await APClient.CurrentSession.DataStorage.GetSlotDataAsync(slot);
         if (slotData.TryGetValue("apworldVersion", out var versionValue) && versionValue != null)
         {
@@ -256,8 +271,8 @@ public partial class App : Application
         }
         Log.Logger.Information("Warnings and errors above are okay if this is your first time connecting to this multiworld server.");
         
-        await APClient.MonitorLocationsAsync(GameLocations);
-        
+        APClient.MonitorLocationsAsync(GameLocations);
+
         Context.ConnectButtonEnabled = true;
         return;
     }
@@ -301,6 +316,26 @@ public partial class App : Application
             Log.Logger.Debug($"Item Received: {JsonConvert.SerializeObject(args.Item)}");
         }
         return;
+    }
+
+    private static async void StartMMLGame(object? sender, ElapsedEventArgs e)
+    {
+        if (APClient == null || APClient.ItemManager == null || APClient.CurrentSession == null || !LocationManager_EnableLocationsCondition())
+        {
+            return;
+        }
+
+        // Start gameplay loop
+        _gameLoopTimer = new Timer();
+        _gameLoopTimer.Elapsed += new ElapsedEventHandler(ModifyGameLoop);
+        _gameLoopTimer.Interval = 500;
+        _gameLoopTimer.Enabled = true;
+        APClient.ReceiveReady();
+
+        if (_startMMLTimer != null)
+        {
+            _startMMLTimer.Enabled = false;
+        }
     }
 
     private static async void ModifyGameLoop(object? sender, ElapsedEventArgs e)
@@ -366,11 +401,11 @@ public partial class App : Application
 
     private static async void Client_Connected(object? sender, EventArgs args)
     {
-        // Start gameplay loop
-        _gameLoopTimer = new Timer();
-        _gameLoopTimer.Elapsed += new ElapsedEventHandler(ModifyGameLoop);
-        _gameLoopTimer.Interval = 500;
-        _gameLoopTimer.Enabled = true;
+        // Ensure player is in game before starting gameplay loop
+        _startMMLTimer = new Timer();
+        _startMMLTimer.Elapsed += new ElapsedEventHandler(StartMMLGame);
+        _startMMLTimer.Interval = 5000;
+        _startMMLTimer.Enabled = true;
 
         Log.Logger.Information("Connected to Archipelago");
         Log.Logger.Information($"Playing {APClient.CurrentSession.ConnectionInfo.Game} as {APClient.CurrentSession.Players.GetPlayerName(APClient.CurrentSession.ConnectionInfo.Slot)}");
@@ -381,6 +416,14 @@ public partial class App : Application
     {
         Log.Logger.Information("Disconnected from Archipelago");
         // Avoid ongoing timers affecting a new game.
+        if (_startMMLTimer != null)
+        {
+            _startMMLTimer.Enabled = false;
+        }
+        if (_gameLoopTimer != null)
+        {
+            _gameLoopTimer.Enabled = false;
+        }
         _hasSubmittedGoal = false;
         return;
     }

@@ -1,4 +1,5 @@
 ﻿using Archipelago.Core.Models;
+using Archipelago.MultiClient.Net.Models;
 using MMLAP.Models;
 using System.Collections.Generic;
 using static MMLAP.Models.MMLEnums;
@@ -182,7 +183,7 @@ namespace MMLAP.Helpers
         
         public static ItemData GetZennyItemData(uint quantity, bool isFiller=false)
         {
-            string name = quantity.ToString() + " Zenny";
+            string name = (10*quantity).ToString() + " Zenny";
             return new(ItemCategory.Zenny, name, quantity, null, null, isFiller);
         }
         

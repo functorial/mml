@@ -363,7 +363,6 @@ namespace MMLAP.Helpers
                 { 0x8230, GetZennyItemData(0x230) },
                 { 0x839C, GetZennyItemData(0x39C) },
                 { 0x83E8, GetZennyItemData(0x3E8) }
-                // TODO: Add filler items
             };
             return itemDataDict;
         }
@@ -465,7 +464,37 @@ namespace MMLAP.Helpers
                 { 89, new LocationData(89, "Old City Sub-City, Chest", LocationCategory.Container, levelDataDict[0x1D03], itemDataDict[0x0237], new AddressData(0xBE404, 4, null), null, false, 0x9F114, 0x8C735) },
                 { 90, new LocationData(90, "Downtown Sub-City, Chest", LocationCategory.Container, levelDataDict[0x1D04], itemDataDict[0x0238], new AddressData(0xBE404, 3, null), null, false, 0x9F114, 0x8C735) },
                 { 91, new LocationData(91, "Uptown Sub-City, Chest", LocationCategory.Container, levelDataDict[0x1D05], itemDataDict[0x0239], new AddressData(0xBE404, 0, null), null, false, 0x9F114, 0x8C735) },
-                { 92, new LocationData(92, "Flutter, Study chest", LocationCategory.Hole, levelDataDict[0x1B05], itemDataDict[0x0261], new AddressData(0xBE3E1, 5, null), null, false, null, 0x15333F) }
+                { 92, new LocationData(92, "Flutter, Study chest", LocationCategory.Hole, levelDataDict[0x1B05], itemDataDict[0x0261], new AddressData(0xBE3E1, 5, null), null, false, null, 0x15333F) },
+                { 93, new LocationData(93, "Damaged Hanmuru Doll defeated", LocationCategory.Hole, null, null, new AddressData(0xBE3E8, 4, null), null, false, null, null) },
+                { 94, new LocationData(94, "Ferdinand defeated", LocationCategory.Hole, null, null, new AddressData(0xBE383, 6, null), null, false, null, null) },
+                { 95, new LocationData(95, "Bon Bonne defeated", LocationCategory.Hole, null, null, new AddressData(0xBE382, 6, null), null, false, null, null) },
+                { 96, new LocationData(96, "Marlwolf defeated", LocationCategory.Hole, null, null, new AddressData(0xBE37A, 7, null), null, false, null, null) },
+                { 97, new LocationData(97, "Balkon Gerät defeated", LocationCategory.Hole, null, null, new AddressData(0xBE37B, 2, null), null, false, null, null) },
+                { 98, new LocationData(98, "Garudoriten defeated", LocationCategory.Hole, null, null, new AddressData(0xBE382, 7, null), null, false, null, null) },
+                { 99, new LocationData(99, "Karumuna Bash Trio defeated", LocationCategory.Hole, null, null, new AddressData(0xBE382, 4, null), null, false, null, null) },
+                { 100, new LocationData(100, "Focke-Wulf defeated", LocationCategory.Hole, null, null, new AddressData(0xBE37D, 5, null), null, false, null, null) },
+                { 101, new LocationData(101, "Theodore Bruno defeated", LocationCategory.Hole, null, null, new AddressData(0xBE382, 5, null), null, false, null, null) },
+                { 102, new LocationData(102, "Rescue the shop owner's husband", LocationCategory.Hole, null, null, new AddressData(0xBE3D6, 4, null), null, false, null) },
+                { 103, new LocationData(103, "Race Technical Course Rank A", LocationCategory.Hole, null, null, new AddressData(0xBE3B8, 4, null), null, false, null, 0x153BC3) },
+                { 104, new LocationData(104, "Beast Hunter Rank A", LocationCategory.Hole, null, null, new AddressData(0xBE3DA, 3, null), null, false, null, 0x1535B3) },
+                { 105, new LocationData(105, "Race Straight Course Rank A", LocationCategory.Hole, null, null, new AddressData(0xBE3B8, 6, null), null, false, null, 0x153BC3) },
+                { 106, new LocationData(106, "Baloon Fantasy Rank A", LocationCategory.Hole, null, null, new AddressData(0xBE3DA, 2, null), null, false, null, 0x153CAB) },
+                { 107, new LocationData(107, "Race Left Curve Course Rank A", LocationCategory.Hole, null, null, new AddressData(0xBE3B8, 5, null), null, false, null, 0x153BC3) },
+                { 108, new LocationData(108, "Save the missing woman", LocationCategory.Hole, null, null, new AddressData(0xBE3BE, 7, null), null, false, null, 0x15332D) },
+                { 109, new LocationData(109, "Cure Ira's illness", LocationCategory.Hole, null, null, new AddressData(0xBE427, 7, null), null, false, null, 0x154657) },
+                { 112, new LocationData(112, "Museum donation, Old Bone", LocationCategory.Hole, null, null, new AddressData(0xBE37F, 7, null), null, false, null, null) },
+                { 113, new LocationData(113, "Museum donation, Old Heater", LocationCategory.Hole, null, null, new AddressData(0xBE37F, 6, null), null, false, null, null) },
+                { 114, new LocationData(114, "Museum donation, Old Doll", LocationCategory.Hole, null, null, new AddressData(0xBE37F, 5, null), null, false, null, null) },
+                { 115, new LocationData(115, "Museum donation, Antique Bell", LocationCategory.Hole, null, null, new AddressData(0xBE37F, 4, null), null, false, null, null) },
+                { 116, new LocationData(116, "Museum donation, Giant Horn", LocationCategory.Hole, null, null, new AddressData(0xBE37F, 3, null), null, false, null, null) },
+                { 117, new LocationData(117, "Museum donation, Shiny Object", LocationCategory.Hole, null, null, new AddressData(0xBE37F, 2, null), null, false, null, null) },
+                { 118, new LocationData(118, "Museum donation, Old Shield", LocationCategory.Hole, null, null, new AddressData(0xBE37F, 1, null), null, false, null, null) },
+                { 119, new LocationData(119, "Museum donation, Shiny Red Stone", LocationCategory.Hole, null, null, new AddressData(0xBE37F, 0, null), null, false, null, null) },
+                { 120, new LocationData(120, "Complete the Museum exhibit", LocationCategory.Hole, null, null, new AddressData(0xBE37F, null, null), null, false, null, null) },
+                { 121, new LocationData(121, "Take dangerous object from museum visitor", LocationCategory.Hole, null, null, new AddressData(0xBE37D, 0, null), null, false, null, 0x155387) },
+                { 122, new LocationData(122, "Give Flower to Roll", LocationCategory.Hole, null, null, new AddressData(0xBE3B4, 7, null), null, false, null, null) },
+                { 123, new LocationData(123, "Give Music Box to Roll", LocationCategory.Hole, null, null, new AddressData(0xBE3B4, 6, null), null, false, null, null) },
+                { 124, new LocationData(124, "Give Ring to Roll", LocationCategory.Hole, null, null, new AddressData(0xBE3B4, 5, null), null, false, null, null) }
             };
             return locationDataDict;
         }

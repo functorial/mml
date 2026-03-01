@@ -1,188 +1,120 @@
 from __future__ import annotations
-
-from typing import TYPE_CHECKING
-
 from BaseClasses import Item, ItemClassification
-from worlds.apquest.items import DEFAULT_ITEM_CLASSIFICATIONS, ITEM_NAME_TO_ID
+from typing import TYPE_CHECKING, NamedTuple
 
 if TYPE_CHECKING:
     from .world import MMLWorld
 
-ITEM_NAME_TO_ID = {
-    "Nothing":                              0x00FF,
-    "Power Raiser":                         0x020D,
-    "Buster Max":                           0x0210,
-    "Power Stream":                         0x0211,
-    "Blaster Unit R":                       0x0212,
-    "Buster Unit Omega":                    0x0213,
-    "Rapid Striker":                        0x0217,
-    "Buster Unit":                          0x021E,
-    "Rapid Fire":                           0x021F,
-    "Lake Jyun Sub-Gate Starter Key 1":     0x0231,
-    "Lake Jyun Sub-Gate Starter Key 2":     0x0232,
-    "Lake Jyun Sub-Gate Starter Key 3":     0x0233,
-    "Clozer Woods Sub-Gate Key 1":          0x0234,
-    "Clozer Woods Sub-Gate Key 2":          0x0235,
-    "Clozer Woods Sub-Gate Key 3":          0x0236,
-    "Watcher' Key":                         0x0237,
-    "Sleeper' Key":                         0x0238,
-    "Dreamer' Key":                         0x0239,
-    "Bag":                                  0x0245,
-    "Saw":                                  0x0248,
-    "Old Bone":                             0x024B,
-    "Old Doll":                             0x024D,
-    "Antique Bell":                         0x024E,
-    "Shiny Object":                         0x0250,
-    "Old Shield":                           0x0251,
-    "Shiny Red Stone":                      0x0252,
-    "Ring":                                 0x0256,
-    "Cannon Kit":                           0x0259,
-    "Grenade Kit":                          0x025A,
-    "Blumebear Parts":                      0x025B,
-    "Broken Motor":                         0x025E,
-    "Broken Propeller":                     0x025F,
-    "Broken Cleaner":                       0x0260,
-    "Bomb Schematic":                       0x0261,
-    "Blunted Drill":                        0x0262,
-    "Guidance Unit":                        0x0263,
-    "Pen Light":                            0x0265,
-    "Old Launcher":                         0x0266,
-    "Ancient Book":                         0x0267,
-    "Weapon Plans":                         0x026A,
-    "Spring Set":                           0x026C,
-    "Safety Helmet":                        0x026D,
-    "Rollerboard":                          0x026E,
-    "Old Hoverjets":                        0x026F,
-    "Joint Plug":                           0x0270,
-    "Main Core Shard":                      0x0272,
-    "Rapidfire Barrel":                     0x0274,
-    "Gatling Part":                         0x0277,
-    "Autofire Barrel":                      0x0279,
-    "Generator Part":                       0x027A,
-    "Target Sensor":                        0x027B,
-    "Tele-lens":                            0x027C,
-    "10 Zenny":                             0x8001,
-    "20 Zenny":                             0x8002,
-    "30 Zenny":                             0x8003,
-    "50 Zenny":                             0x8005,
-    "100 Zenny":                            0x800A,
-    "200 Zenny":                            0x8014,
-    "220 Zenny":                            0x8016,
-    "300 Zenny":                            0x801E,
-    "450 Zenny":                            0x802D,
-    "560 Zenny":                            0x8038,
-    "660 Zenny":                            0x8042,
-    "780 Zenny":                            0x804E,
-    "820 Zenny":                            0x8052,
-    "920 Zenny":                            0x805C,
-    "1180 Zenny":                           0x8076,
-    "1200 Zenny":                           0x8078,
-    "1240 Zenny":                           0x807C,
-    "1510 Zenny":                           0x8097,
-    "1620 Zenny":                           0x80A2,
-    "1780 Zenny":                           0x80B2,
-    "1840 Zenny":                           0x80B8,
-    "2170 Zenny":                           0x80D9,
-    "2280 Zenny":                           0x80E4,
-    "2300 Zenny":                           0x80E6,
-    "2600 Zenny":                           0x8104,
-    "2840 Zenny":                           0x811C,
-    "4520 Zenny":                           0x81C4,
-    "5130 Zenny":                           0x8201,
-    "5600 Zenny":                           0x8230,
-    "9240 Zenny":                           0x839C,
-    "10000 Zenny":                          0x83E8
-}
-
-#TODO map every item to a classification of progressive,useful,filler,etc
-DEFAULT_ITEM_CLASSIFICATIONS = {
-    "Nothing":                              ItemClassification.filler, 
-    "Power Raiser":                         ItemClassification.filler,
-    "Buster Max":                           ItemClassification.useful,
-    "Power Stream":                         ItemClassification.filler, 
-    "Blaster Unit R":                       ItemClassification.filler, 
-    "Buster Unit Omega":                    ItemClassification.filler, 
-    "Rapid Striker":                        ItemClassification.filler, 
-    "Buster Unit":                          ItemClassification.filler, 
-    "Rapid Fire":                           ItemClassification.filler, 
-    "Lake Jyun Sub-Gate Starter Key 1":     ItemClassification.filler, 
-    "Lake Jyun Sub-Gate Starter Key 2":     ItemClassification.filler, 
-    "Lake Jyun Sub-Gate Starter Key 3":     ItemClassification.filler, 
-    "Clozer Woods Sub-Gate Key 1":          ItemClassification.filler, 
-    "Clozer Woods Sub-Gate Key 2":          ItemClassification.filler, 
-    "Clozer Woods Sub-Gate Key 3":          ItemClassification.filler, 
-    "Watcher' Key":                         ItemClassification.filler, 
-    "Sleeper' Key":                         ItemClassification.filler, 
-    "Dreamer' Key":                         ItemClassification.filler,
-    "Bag":                                  ItemClassification.filler,
-    "Saw":                                  ItemClassification.filler,
-    "Old Bone":                             ItemClassification.filler, 
-    "Old Doll":                             ItemClassification.filler, 
-    "Antique Bell":                         ItemClassification.filler, 
-    "Shiny Object":                         ItemClassification.filler, 
-    "Old Shield":                           ItemClassification.filler, 
-    "Shiny Red Stone":                      ItemClassification.filler, 
-    "Ring":                                 ItemClassification.filler, 
-    "Cannon Kit":                           ItemClassification.filler, 
-    "Grenade Kit":                          ItemClassification.filler, 
-    "Blumebear Parts":                      ItemClassification.filler, 
-    "Broken Motor":                         ItemClassification.filler, 
-    "Broken Propeller":                     ItemClassification.filler, 
-    "Broken Cleaner":                       ItemClassification.filler, 
-    "Bomb Schematic":                       ItemClassification.filler, 
-    "Blunted Drill":                        ItemClassification.filler, 
-    "Guidance Unit":                        ItemClassification.filler, 
-    "Pen Light":                            ItemClassification.filler, 
-    "Old Launcher":                         ItemClassification.filler, 
-    "Ancient Book":                         ItemClassification.filler, 
-    "Weapon Plans":                         ItemClassification.filler, 
-    "Spring Set":                           ItemClassification.filler, 
-    "Safety Helmet":                        ItemClassification.filler, 
-    "Rollerboard":                          ItemClassification.filler, 
-    "Old Hoverjets":                        ItemClassification.filler, 
-    "Joint Plug":                           ItemClassification.filler, 
-    "Main Core Shard":                      ItemClassification.filler, 
-    "Rapidfire Barrel":                     ItemClassification.filler, 
-    "Gatling Part":                         ItemClassification.filler, 
-    "Autofire Barrel":                      ItemClassification.filler, 
-    "Generator Part":                       ItemClassification.filler, 
-    "Target Sensor":                        ItemClassification.filler, 
-    "Tele-lens":                            ItemClassification.filler, 
-    "10 Zenny":                             ItemClassification.filler, 
-    "20 Zenny":                             ItemClassification.filler, 
-    "30 Zenny":                             ItemClassification.filler, 
-    "50 Zenny":                             ItemClassification.filler, 
-    "100 Zenny":                            ItemClassification.filler, 
-    "200 Zenny":                            ItemClassification.filler, 
-    "220 Zenny":                            ItemClassification.filler, 
-    "300 Zenny":                            ItemClassification.filler, 
-    "450 Zenny":                            ItemClassification.filler, 
-    "560 Zenny":                            ItemClassification.filler, 
-    "660 Zenny":                            ItemClassification.filler, 
-    "780 Zenny":                            ItemClassification.filler, 
-    "820 Zenny":                            ItemClassification.filler, 
-    "920 Zenny":                            ItemClassification.filler, 
-    "1180 Zenny":                           ItemClassification.filler, 
-    "1200 Zenny":                           ItemClassification.filler, 
-    "1240 Zenny":                           ItemClassification.filler, 
-    "1510 Zenny":                           ItemClassification.filler, 
-    "1620 Zenny":                           ItemClassification.filler, 
-    "1780 Zenny":                           ItemClassification.filler, 
-    "1840 Zenny":                           ItemClassification.filler, 
-    "2170 Zenny":                           ItemClassification.filler, 
-    "2280 Zenny":                           ItemClassification.filler, 
-    "2300 Zenny":                           ItemClassification.filler, 
-    "2600 Zenny":                           ItemClassification.filler, 
-    "2840 Zenny":                           ItemClassification.filler, 
-    "4520 Zenny":                           ItemClassification.filler, 
-    "5130 Zenny":                           ItemClassification.filler, 
-    "5600 Zenny":                           ItemClassification.filler, 
-    "9240 Zenny":                           ItemClassification.filler, 
-    "10000 Zenny":                          ItemClassification.filler
-}
-
 class MMLItem(Item):
     game = "Mega Man Legends"
+
+class MMLItemData(NamedTuple):
+    # Keeping this in case we need to add more members
+    name: str
+    itemClassification: ItemClassification
+    id: int
+
+_all_itemDatas = [
+    MMLItemData("Nothing",                             ItemClassification.filler,                                  0x00FF),
+    MMLItemData("Power Raiser",                        ItemClassification.filler,                                  0x020D),
+    MMLItemData("Buster Max",                          ItemClassification.useful,                                  0x0210), # strong buster part -> useful
+    MMLItemData("Power Stream",                        ItemClassification.useful,                                  0x0211), # strong buster part -> useful
+    MMLItemData("Blaster Unit R",                      ItemClassification.useful,                                  0x0212), # strong buster part -> useful
+    MMLItemData("Buster Unit Omega",                   ItemClassification.useful,                                  0x0213), # strong buster part -> useful
+    MMLItemData("Rapid Striker",                       ItemClassification.filler,                                  0x0217),
+    MMLItemData("Omni-Unit",                           ItemClassification.filler,                                  0x0219),
+    MMLItemData("Buster Unit",                         ItemClassification.filler,                                  0x021E),
+    MMLItemData("Rapid Fire",                          ItemClassification.filler,                                  0x021F),
+  # MMLItemData("Cardon Forest Sub-Gate Key 1",        ItemClassification.progression,                             0x022E), # progresses main story -> progression
+  # MMLItemData("Cardon Forest Sub-Gate Key 2",        ItemClassification.progression,                             0x022F), # progresses main story -> progression
+  # MMLItemData("Cardon Forest Sub-Gate Key 3",        ItemClassification.progression,                             0x0230), # progresses main story -> progression
+    MMLItemData("Lake Jyun Sub-Gate Starter Key 1",    ItemClassification.progression,                             0x0231), # progresses main story -> progression
+    MMLItemData("Lake Jyun Sub-Gate Starter Key 2",    ItemClassification.progression,                             0x0232), # progresses main story -> progression
+    MMLItemData("Lake Jyun Sub-Gate Starter Key 3",    ItemClassification.progression,                             0x0233), # progresses main story -> progression
+    MMLItemData("Clozer Woods Sub-Gate Key 1",         ItemClassification.progression,                             0x0234), # progresses main story -> progression
+    MMLItemData("Clozer Woods Sub-Gate Key 2",         ItemClassification.progression,                             0x0235), # progresses main story -> progression
+    MMLItemData("Clozer Woods Sub-Gate Key 3",         ItemClassification.progression,                             0x0236), # progresses main story -> progression
+    MMLItemData("Watcher' Key",                        ItemClassification.progression,                             0x0237), # progresses main story -> progression
+    MMLItemData("Sleeper' Key",                        ItemClassification.progression,                             0x0238), # progresses main story -> progression
+    MMLItemData("Dreamer' Key",                        ItemClassification.progression,                             0x0239), # progresses main story -> progression
+    MMLItemData("Bag",                                 ItemClassification.filler,                                  0x0245),
+    MMLItemData("Saw",                                 ItemClassification.filler,                                  0x0248),
+    MMLItemData("Music Box",                           ItemClassification.progression,                             0x024A), # give to roll -> progression
+    MMLItemData("Old Bone",                            ItemClassification.progression,                             0x024B), # progresses museum -> progression
+  # MMLItemData("Old Heater",                          ItemClassification.progression,                             0x024C), # progresses museum -> progression
+    MMLItemData("Old Doll",                            ItemClassification.progression,                             0x024D), # progresses museum -> progression
+    MMLItemData("Antique Bell",                        ItemClassification.progression,                             0x024E), # progresses museum -> progression
+    MMLItemData("Giant Horn",                          ItemClassification.progression,                             0x024F), # progresses museum -> progression
+    MMLItemData("Shiny Object",                        ItemClassification.progression,                             0x0250), # progresses museum -> progression
+    MMLItemData("Old Shield",                          ItemClassification.progression,                             0x0251), # progresses museum -> progression
+    MMLItemData("Shiny Red Stone",                     ItemClassification.progression,                             0x0252), # progresses museum -> progression
+    MMLItemData("Ring",                                ItemClassification.progression,                             0x0256), # give to roll -> progression
+    MMLItemData("Mine Parts Kit",                      ItemClassification.filler,                                  0x0258),
+    MMLItemData("Cannon Kit",                          ItemClassification.filler,                                  0x0259),
+    MMLItemData("Grenade Kit",                         ItemClassification.filler,                                  0x025A),
+    MMLItemData("Blumebear Parts",                     ItemClassification.useful,                                  0x025B), # strong special weapon -> useful
+    MMLItemData("Mystic Orb",                          ItemClassification.filler,                                  0x025C),
+    MMLItemData("Broken Motor",                        ItemClassification.filler,                                  0x025E),
+    MMLItemData("Broken Propeller",                    ItemClassification.filler,                                  0x025F),
+    MMLItemData("Broken Cleaner",                      ItemClassification.filler,                                  0x0260),
+    MMLItemData("Bomb Schematic",                      ItemClassification.progression,                             0x0261), # breaks walls -> progression
+    MMLItemData("Blunted Drill",                       ItemClassification.progression,                             0x0262), # breaks walls -> progression
+    MMLItemData("Guidance Unit",                       ItemClassification.useful,                                  0x0263), # strong special weapon -> useful
+    MMLItemData("Zetsabre",                            ItemClassification.filler,                                  0x0264),
+    MMLItemData("Pen Light",                           ItemClassification.filler,                                  0x0265),
+    MMLItemData("Old Launcher",                        ItemClassification.filler,                                  0x0266),
+    MMLItemData("Ancient Book",                        ItemClassification.filler,                                  0x0267),
+    MMLItemData("Weapon Plans",                        ItemClassification.useful,                                  0x026A),
+    MMLItemData("Prism Crystal",                       ItemClassification.useful,                                  0x026B),
+    MMLItemData("Spring Set",                          ItemClassification.progression | ItemClassification.useful, 0x026C), # powerup / convenience special items -> useful
+    MMLItemData("Safety Helmet",                       ItemClassification.useful,                                  0x026D), # powerup / convenience special items -> useful
+    MMLItemData("Rollerboard",                         ItemClassification.progression | ItemClassification.useful, 0x026E), # powerup / convenience special items -> useful
+    MMLItemData("Old Hoverjets",                       ItemClassification.progression | ItemClassification.useful, 0x026F), # powerup / convenience special items -> useful
+    MMLItemData("Joint Plug",                          ItemClassification.useful,                                  0x0270), # powerup / convenience special items -> useful
+    MMLItemData("Main Core Shard",                     ItemClassification.filler,                                  0x0272),
+    MMLItemData("Sun-light",                           ItemClassification.filler,                                  0x0273),
+    MMLItemData("Rapidfire Barrel",                    ItemClassification.filler,                                  0x0274),
+    MMLItemData("Gatling Part",                        ItemClassification.filler,                                  0x0277),
+    MMLItemData("Flower Pearl",                        ItemClassification.filler,                                  0x0278),
+    MMLItemData("Autofire Barrel",                     ItemClassification.filler,                                  0x0279),
+    MMLItemData("Generator Part",                      ItemClassification.filler,                                  0x027A),
+    MMLItemData("Target Sensor",                       ItemClassification.filler,                                  0x027B),
+    MMLItemData("Tele-lens",                           ItemClassification.filler,                                  0x027C),
+    MMLItemData("10 Zenny",                            ItemClassification.filler,                                  0x8001),
+    MMLItemData("20 Zenny",                            ItemClassification.filler,                                  0x8002),
+    MMLItemData("30 Zenny",                            ItemClassification.filler,                                  0x8003),
+    MMLItemData("50 Zenny",                            ItemClassification.filler,                                  0x8005),
+    MMLItemData("100 Zenny",                           ItemClassification.filler,                                  0x800A),
+    MMLItemData("200 Zenny",                           ItemClassification.filler,                                  0x8014),
+    MMLItemData("220 Zenny",                           ItemClassification.filler,                                  0x8016),
+    MMLItemData("300 Zenny",                           ItemClassification.filler,                                  0x801E),
+    MMLItemData("450 Zenny",                           ItemClassification.filler,                                  0x802D),
+    MMLItemData("560 Zenny",                           ItemClassification.filler,                                  0x8038),
+    MMLItemData("660 Zenny",                           ItemClassification.filler,                                  0x8042),
+    MMLItemData("780 Zenny",                           ItemClassification.filler,                                  0x804E),
+    MMLItemData("820 Zenny",                           ItemClassification.filler,                                  0x8052),
+    MMLItemData("920 Zenny",                           ItemClassification.filler,                                  0x805C),
+    MMLItemData("1180 Zenny",                          ItemClassification.filler,                                  0x8076),
+    MMLItemData("1200 Zenny",                          ItemClassification.filler,                                  0x8078),
+    MMLItemData("1240 Zenny",                          ItemClassification.filler,                                  0x807C),
+    MMLItemData("1510 Zenny",                          ItemClassification.filler,                                  0x8097),
+    MMLItemData("1620 Zenny",                          ItemClassification.filler,                                  0x80A2),
+    MMLItemData("1780 Zenny",                          ItemClassification.filler,                                  0x80B2),
+    MMLItemData("1840 Zenny",                          ItemClassification.filler,                                  0x80B8),
+    MMLItemData("2170 Zenny",                          ItemClassification.filler,                                  0x80D9),
+    MMLItemData("2280 Zenny",                          ItemClassification.filler,                                  0x80E4),
+    MMLItemData("2300 Zenny",                          ItemClassification.filler,                                  0x80E6),
+    MMLItemData("2600 Zenny",                          ItemClassification.filler,                                  0x8104),
+    MMLItemData("2840 Zenny",                          ItemClassification.filler,                                  0x811C),
+    MMLItemData("4520 Zenny",                          ItemClassification.filler,                                  0x81C4),
+    MMLItemData("5130 Zenny",                          ItemClassification.filler,                                  0x8201),
+    MMLItemData("5600 Zenny",                          ItemClassification.filler,                                  0x8230),
+    MMLItemData("9240 Zenny",                          ItemClassification.useful,                                  0x839C), # Large amount of zenny -> useful
+    MMLItemData("10000 Zenny",                         ItemClassification.useful,                                  0x83E8)  # Large amount of zenny -> useful
+]
+
+ITEM_NAME_TO_ID = {itemData.name: itemData.id for itemData in _all_itemDatas}
+DEFAULT_ITEM_CLASSIFICATIONS = {itemData.name: itemData.itemClassification for itemData in _all_itemDatas}
 
 def get_random_filler_item_name(world: MMLWorld) -> str:
     return "100 Zenny"
@@ -192,107 +124,29 @@ def create_item_with_correct_classification(world: MMLWorld, name: str) -> MMLIt
     return MMLItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
 
 def create_all_items(world: MMLWorld) -> None:
-    #TODO
-
-    itemPool: list[MMLItem] = [
-        world.create_item("Nothing"),
-        world.create_item("Nothing"),
-        world.create_item("Nothing"),
-        world.create_item("Nothing"),
-        world.create_item("Nothing"),
-        world.create_item("10 Zenny"),
-        world.create_item("10 Zenny"),
-        world.create_item("20 Zenny"),
-        world.create_item("20 Zenny"),
-        world.create_item("30 Zenny"),
-        world.create_item("50 Zenny"),
-        world.create_item("100 Zenny"),
-        world.create_item("200 Zenny"),
-        world.create_item("220 Zenny"),
-        world.create_item("300 Zenny"),
-        world.create_item("450 Zenny"),
-        world.create_item("560 Zenny"),
-        world.create_item("660 Zenny"),
-        world.create_item("780 Zenny"),
-        world.create_item("820 Zenny"),
-        world.create_item("920 Zenny"),
-        world.create_item("920 Zenny"),
-        world.create_item("1180 Zenny"),
-        world.create_item("1200 Zenny"),
-        world.create_item("1240 Zenny"),
-        world.create_item("1510 Zenny"),
-        world.create_item("1620 Zenny"),
-        world.create_item("1780 Zenny"),
-        world.create_item("1840 Zenny"),
-        world.create_item("2170 Zenny"),
-        world.create_item("2280 Zenny"),
-        world.create_item("2300 Zenny"),
-        world.create_item("2600 Zenny"),
-        world.create_item("2840 Zenny"),
-        world.create_item("4520 Zenny"),
-        world.create_item("5130 Zenny"),
-        world.create_item("5600 Zenny"),
-        world.create_item("9240 Zenny"),
-        world.create_item("10000 Zenny"),
-        world.create_item("Power Raiser"),
-        world.create_item("Power Stream"),
-        world.create_item("Blaster Unit R"),
-        world.create_item("Buster Unit Omega"),
-        world.create_item("Rapid Striker"),
-        world.create_item("Buster Unit"),
-        world.create_item("Rapid Fire"),
-        world.create_item("Lake Jyun Sub-Gate Starter Key 1"),
-        world.create_item("Lake Jyun Sub-Gate Starter Key 2"),
-        world.create_item("Lake Jyun Sub-Gate Starter Key 3"),
-        world.create_item("Clozer Woods Sub-Gate Key 1"),
-        world.create_item("Clozer Woods Sub-Gate Key 2"),
-        world.create_item("Clozer Woods Sub-Gate Key 3"),
-        world.create_item("Watcher' Key"),
-        world.create_item("Sleeper' Key"),
-        world.create_item("Dreamer' Key"),
-        world.create_item("Bag"),
-        world.create_item("Saw"),
-        world.create_item("Old Bone"),
-        world.create_item("Old Doll"),
-        world.create_item("Antique Bell"),
-        world.create_item("Shiny Object"),
-        world.create_item("Old Shield"),
-        world.create_item("Shiny Red Stone"),
-        world.create_item("Ring"),
-        world.create_item("Cannon Kit"),
-        world.create_item("Grenade Kit"),
-        world.create_item("Blumebear Parts"),
-        world.create_item("Broken Motor"),
-        world.create_item("Broken Propeller"),
-        world.create_item("Broken Cleaner"),
-        world.create_item("Bomb Schematic"),
-        world.create_item("Blunted Drill"),
-        world.create_item("Guidance Unit"),
-        world.create_item("Pen Light"),
-        world.create_item("Old Launcher"),
-        world.create_item("Ancient Book"),
-        world.create_item("Weapon Plans"),
-        world.create_item("Spring Set"),
-        world.create_item("Safety Helmet"),
-        world.create_item("Rollerboard"),
-        world.create_item("Old Hoverjets"),
-        world.create_item("Joint Plug"),
-        world.create_item("Main Core Shard"),
-        world.create_item("Rapidfire Barrel"),
-        world.create_item("Gatling Part"),
-        world.create_item("Autofire Barrel"),
-        world.create_item("Generator Part"),
-        world.create_item("Target Sensor"),
-        world.create_item("Tele-lens")
-    ]
+    itemPool: list[MMLItem] = []
+    for mmlItemData in _all_itemDatas:
+        match mmlItemData.name:
+            case "Nothing":
+                for _ in range(5):
+                    itemPool.append(world.create_item(mmlItemData.name))
+            case "10 Zenny":
+                for _ in range(2):
+                    itemPool.append(world.create_item(mmlItemData.name))
+            case "20 Zenny":
+                for _ in range(2):
+                    itemPool.append(world.create_item(mmlItemData.name))
+            case "920 Zenny":
+                for _ in range(2):
+                    itemPool.append(world.create_item(mmlItemData.name))
+            case "Buster Max":
+                pass
+            case _:
+                itemPool.append(world.create_item(mmlItemData.name))
 
     number_of_items = len(itemPool)
-
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
-
     needed_number_of_filler_items = number_of_unfilled_locations - number_of_items
-
     itemPool += [world.create_filler() for _ in range(needed_number_of_filler_items)]
-
     world.multiworld.itempool += itemPool
-
+    return None

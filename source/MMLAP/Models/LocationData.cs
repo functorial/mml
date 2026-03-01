@@ -18,7 +18,7 @@ namespace MMLAP.Models
         public int Id { get; set; } = id;
         public string Name { get; set; } = name;
         public LocationCategory Category { get; set; } = category;
-        public LevelData LevelData { get; set; } = levelData;
+        public LevelData? LevelData { get; set; } = levelData;
         public ItemData DefaultItemData { get; set; } = defaultItemData;
         public AddressData CheckAddressData { get; set; } = checkAddressData;
         public byte? CheckByteValue { get; set; } = checkByteValue;
